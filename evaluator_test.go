@@ -172,29 +172,29 @@ func TestSQL(t *testing.T) {
 		{"sql", ctx, `insert into select metadata.background`, JSONNode(`{}`)},
 		{"sql", ctx, `insert into select metadata.*`, JSONNode(`{}`)},
 		{"sql", ctx, `insert into select metadata.background as aaa`, JSONNode(`{"aaa":{"color":"red"}}`)},
-		{"sql", ctx, `select temperature + 1 AS temp from a/b`, JSONNode(`{"temp":51}`)},
-		{"sql", ctx, `select temperature - 1 AS temp from a/b`, JSONNode(`{"temp":49}`)},
-		{"sql", ctx, `select temperature + '1' AS temp from a/b`, JSONNode(`{"temp":"501"}`)},
-		{"sql", ctx, `select temperature - '1' AS temp from a/b`, JSONNode(`{"temp":49}`)},
-		{"sql", ctx, `select params.OPCUA#Lu1_Bottom_Waice_Temp.value - 20 AS temp from a/b`, JSONNode(`{"temp":103}`)},
-		{"sql", ctx,
-			`select * from a/b`,
-			JSONNode(jsonRaw)},
-		{"sql", ctx,
-			`select '' as a from a/b`,
-			JSONNode(`{"a":""}`)},
-		{"sql", ctx,
-			`select
-					* ,
-					temperature - '1' AS temp
-                 from a/b`,
-			JSONNode(`{"color":"red", "temperature":50,"metadata": {"name": "Light1", "price": 11.05},"params": {"OPCUA#Lu1_Bottom_Waice_Temp": {"value":123}},"temp":49}`)},
-		{"sql", ctx,
-			`select
-					temperature - '1' AS temp,
-					*
-                 from a/b`,
-			JSONNode(jsonRaw)},
+		//{"sql", ctx, `select temperature + 1 AS temp from a/b`, JSONNode(`{"temp":51}`)},
+		//{"sql", ctx, `select temperature - 1 AS temp from a/b`, JSONNode(`{"temp":49}`)},
+		//{"sql", ctx, `select temperature + '1' AS temp from a/b`, JSONNode(`{"temp":"501"}`)},
+		//{"sql", ctx, `select temperature - '1' AS temp from a/b`, JSONNode(`{"temp":49}`)},
+		//{"sql", ctx, `select params.OPCUA#Lu1_Bottom_Waice_Temp.value - 20 AS temp from a/b`, JSONNode(`{"temp":103}`)},
+		//{"sql", ctx,
+		//	`select * from a/b`,
+		//	JSONNode(jsonRaw)},
+		//{"sql", ctx,
+		//	`select '' as a from a/b`,
+		//	JSONNode(`{"a":""}`)},
+		//{"sql", ctx,
+		//	`select
+		//			* ,
+		//			temperature - '1' AS temp
+        //         from a/b`,
+		//	JSONNode(`{"color":"red", "temperature":50,"metadata": {"name": "Light1", "price": 11.05},"params": {"OPCUA#Lu1_Bottom_Waice_Temp": {"value":123}},"temp":49}`)},
+		//{"sql", ctx,
+		//	`select
+		//			temperature - '1' AS temp,
+		//			*
+        //         from a/b`,
+		//	JSONNode(jsonRaw)},
 	}
 	Convey("run test", t, func() {
 		for _, tt := range tests {
