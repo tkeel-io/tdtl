@@ -172,9 +172,11 @@ func evalFieldListExpr(ctx Context, list FieldsExpr) Node {
 	v := JSONNode("{}")
 	for _, expr := range list {
 		ret := eval(ctx, expr.exp)
-		val, err := v.Update(expr.alias, ret)
-		if err == nil {
-			v = JSONNode(val)
+		if expr.alias!= ""{
+			val, err := v.Update(expr.alias, ret)
+			if err == nil {
+				v = JSONNode(val)
+			}
 		}
 	}
 	return v

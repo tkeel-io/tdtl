@@ -103,10 +103,10 @@ func (l *QingQLListener) ExitXpathField(c *parser.XpathFieldContext) {
 	//fmt.Println("ExitXpathField")
 	var alias string
 	xpath := c.GetText()
-	if xpath != "*" {
-		arr := strings.Split(xpath, ".")
-		alias = arr[len(arr)-1]
-	}
+	//if xpath != "*" {
+	//	arr := strings.Split(xpath, ".")
+	//	alias = arr[len(arr)-1]
+	//}
 	l.push(&FieldExpr{
 		exp: &JSONPathExpr{
 			xpath,
