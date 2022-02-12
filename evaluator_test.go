@@ -161,7 +161,7 @@ func TestBoolExpr(t *testing.T) {
 }
 
 func TestSQL(t *testing.T) {
-	jsonRaw := `{"color":"red", "temperature":50,"metadata": {"background":{"color":"red"},name": "Light1", "price": 11.05},"params": {"OPCUA#Lu1_Bottom_Waice_Temp": {"value":123}}}`
+	jsonRaw := `{"entity1":{"color":"red", "temperature":50,{name": "Light1", "price": 11.05},"params": {"OPCUA#Lu1_Bottom_Waice_Temp": {"value":123}}}`
 	ctx := NewJSONContext(jsonRaw)
 	tests := []struct {
 		name string
@@ -169,28 +169,28 @@ func TestSQL(t *testing.T) {
 		expr string
 		want interface{}
 	}{
-		{"sql", ctx, `insert into select metadata.background`, JSONNode(`{}`)},
-		{"sql", ctx, `insert into select metadata.*`, JSONNode(`{}`)},
-		{"sql", ctx, `insert into select metadata.background as aaa`, JSONNode(`{"aaa":{"color":"red"}}`)},
-		//{"sql", ctx, `select temperature + 1 AS temp from a/b`, JSONNode(`{"temp":51}`)},
-		//{"sql", ctx, `select temperature - 1 AS temp from a/b`, JSONNode(`{"temp":49}`)},
-		//{"sql", ctx, `select temperature + '1' AS temp from a/b`, JSONNode(`{"temp":"501"}`)},
-		//{"sql", ctx, `select temperature - '1' AS temp from a/b`, JSONNode(`{"temp":49}`)},
-		//{"sql", ctx, `select params.OPCUA#Lu1_Bottom_Waice_Temp.value - 20 AS temp from a/b`, JSONNode(`{"temp":103}`)},
+		{"sql", ctx, `insert into select entity1.color`, JSONNode(`{}`)},
+		{"sql", ctx, `insert into select entity1.*`, JSONNode(`{}`)},
+		{"sql", ctx, `insert into select entity1.color as aaa`, JSONNode(`{"aaa":"red"}`)},
+		{"sql", ctx, `insert into select entity1.temperature + 1 AS temp`, JSONNode(`{"temp":51}`)},
+		{"sql", ctx, `insert into select entity1.temperature - 1 AS temp from a/b`, JSONNode(`{"temp":49}`)},
+		{"sql", ctx, `insert into select entity1.temperature + '1' AS temp from a/b`, JSONNode(`{"temp":"501"}`)},
+		{"sql", ctx, `insert into select entity1.temperature - '1' AS temp from a/b`, JSONNode(`{"temp":49}`)},
+		//{"sql", ctx, `insert into select entity1.params.OPCUA#Lu1_Bottom_Waice_Temp.value - 20 AS temp`, JSONNode(`{"temp":103}`)},
 		//{"sql", ctx,
-		//	`select * from a/b`,
+		//	`insert into select * from a/b`,
 		//	JSONNode(jsonRaw)},
 		//{"sql", ctx,
 		//	`select '' as a from a/b`,
 		//	JSONNode(`{"a":""}`)},
 		//{"sql", ctx,
-		//	`select
+		//	`insert into select
 		//			* ,
 		//			temperature - '1' AS temp
         //         from a/b`,
 		//	JSONNode(`{"color":"red", "temperature":50,"metadata": {"name": "Light1", "price": 11.05},"params": {"OPCUA#Lu1_Bottom_Waice_Temp": {"value":123}},"temp":49}`)},
 		//{"sql", ctx,
-		//	`select
+		//	`insert into select
 		//			temperature - '1' AS temp,
 		//			*
         //         from a/b`,
