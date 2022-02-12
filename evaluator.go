@@ -64,30 +64,6 @@ func HasDimensions(expr Expr) bool {
 	}
 	return false
 }
-func EvalDimensions(ctx Context, expr Expr) string {
-	if expr == nil {
-		return ""
-	}
-	switch expr := expr.(type) {
-	case *SelectStatementExpr:
-		if expr.dimensions == nil {
-			return ""
-		}
-		node := evalDimensions(ctx, expr.dimensions.exprs)
-		switch node := node.(type) {
-		case StringNode:
-			return string(node)
-		}
-	case *DimensionsExpr:
-		node := evalDimensions(ctx, expr.exprs)
-		switch node := node.(type) {
-		case StringNode:
-			return string(node)
-		}
-	default:
-	}
-	return ""
-}
 
 func evalRuleQL(ctx Context, expr Expr) Node {
 	if expr == nil {
