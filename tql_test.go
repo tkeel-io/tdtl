@@ -18,6 +18,7 @@ package ruleql
 
 import (
 	"fmt"
+	"github.com/tkeel-io/core/pkg/constraint"
 	"testing"
 )
 
@@ -25,15 +26,42 @@ func TestQL(t *testing.T) {
 	tqlString := `
 insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3
 `
-	tql := NewTKQL(tqlString)
+	tql, _ := NewTKQL(tqlString)
 	fmt.Println(tql.Target())
 	//
 }
 
+func TestExec3(t *testing.T) {
+	tqlString := `insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`
+
+	tqlInst, err := NewTKQL(tqlString)
+	if nil != err {
+		t.Fatal("err:", err)
+	}
+
+	t.Log(err)
+
+	t.Log("target: ", tqlInst.Target())
+	t.Log("sources: ", tqlInst.Entities())
+	for _, tentacle := range tqlInst.Tentacles() {
+		t.Log("tentacle: ", tentacle)
+	}
+
+	result, err := tqlInst.Exec(map[string]constraint.Node{
+		"0074c68f-679c-4290-a2be-3878c8fb75f6.sysField._spacePath": constraint.NewNode("test"),
+		"entity1.property1":      constraint.NewNode("123"),
+		"entity2.property2.name": constraint.NewNode("g123"),
+		"entity2.property3": constraint.NewNode("d123"),
+	})
+
+	t.Log(err)
+	t.Log(result)
+	//map[property1: property2: property3:]
+}
 
 func Example_TQL() {
 	tqlString := `insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`
-	expr,_ := Parse(tqlString)
+	expr, _ := Parse(tqlString)
 	Dump(expr)
 	//OUTPUT:
 	//0  Root {
@@ -57,7 +85,6 @@ func Example_TQL() {
 	//    18  .  }
 	//    19  }
 }
-
 
 //func TestExec3(t *testing.T) {
 //	tqlString := `insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`

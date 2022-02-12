@@ -22,11 +22,12 @@ import (
 )
 
 var _ tql.TQL = (*tkql)(nil)
+
 type tkql struct {
 }
 
-func NewTKQL(sql string) tql.TQL {
-	return &tkql{}
+func NewTKQL(sql string) (tql.TQL, error) {
+	return &tkql{}, nil
 }
 
 func (Q *tkql) Target() string {
@@ -44,4 +45,3 @@ func (Q *tkql) Tentacles() []tql.TentacleConfig {
 func (Q *tkql) Exec(input map[string]constraint.Node) (map[string]constraint.Node, error) {
 	panic("implement me")
 }
-
