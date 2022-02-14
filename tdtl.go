@@ -21,30 +21,30 @@ import (
 	"github.com/tkeel-io/core/pkg/tql"
 )
 
-var _ TQL = (*tkql)(nil)
+var _ TDTL = (*tdtl)(nil)
 
-type tkql struct {
+type tdtl struct {
 	target    string
 	sources   map[string][]string
 	tentacles []tql.TentacleConfig
 	listener  *TDTLListener
 }
 
-type TQL interface {
+type TDTL interface {
 	Target() string
 	Entities() map[string][]string
 	Tentacles() []tql.TentacleConfig
 	Exec(map[string]Node) (map[string]Node, error)
 }
 
-func NewTKQL(sql string) (TQL, error) {
+func NewTDTL(sql string) (TDTL, error) {
 	parse, listener := parse(sql)
 	antlr.ParseTreeWalkerDefault.Walk(listener, parse.Root())
 	err := listener.error()
 	if err != nil {
 		return nil, err
 	}
-	return &tkql{
+	return &tdtl{
 		listener: listener,
 		target:   listener.target,
 		sources:  listener.sources,
@@ -53,23 +53,23 @@ func NewTKQL(sql string) (TQL, error) {
 	}, nil
 }
 
-func (Q *tkql) Target() string {
+func (Q *tdtl) Target() string {
 	return Q.target
 }
 
-func (Q *tkql) Entities() map[string][]string {
+func (Q *tdtl) Entities() map[string][]string {
 	return Q.sources
 }
 
-func (Q *tkql) Tentacles() []tql.TentacleConfig {
+func (Q *tdtl) Tentacles() []tql.TentacleConfig {
 	return Q.tentacles
 }
 
-func (Q *tkql) expr() Expr {
+func (Q *tdtl) expr() Expr {
 	return Q.listener.Expr()
 }
 
-func (Q *tkql) Exec(input map[string]Node) (map[string]Node, error) {
+func (Q *tdtl) Exec(input map[string]Node) (map[string]Node, error) {
 	ctx := NewMapContext(input, map[string]ContextFunc{})
 	result := EvalRuleQL(ctx, Q.expr())
 	retCtx := NewJSONContext(result.String())
