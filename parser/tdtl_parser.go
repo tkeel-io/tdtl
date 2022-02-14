@@ -1,6 +1,6 @@
-// Generated from QingQL.g4 by ANTLR 4.7.
+// Generated from TDTL.g4 by ANTLR 4.7.
 
-package parser // QingQL
+package parser // TDTL
 
 import (
 	"fmt"
@@ -151,12 +151,12 @@ func init() {
 	}
 }
 
-type QingQLParser struct {
+type TDTLParser struct {
 	*antlr.BaseParser
 }
 
-func NewQingQLParser(input antlr.TokenStream) *QingQLParser {
-	this := new(QingQLParser)
+func NewTDTLParser(input antlr.TokenStream) *TDTLParser {
+	this := new(TDTLParser)
 
 	this.BaseParser = antlr.NewBaseParser(input)
 
@@ -164,86 +164,86 @@ func NewQingQLParser(input antlr.TokenStream) *QingQLParser {
 	this.RuleNames = ruleNames
 	this.LiteralNames = literalNames
 	this.SymbolicNames = symbolicNames
-	this.GrammarFileName = "QingQL.g4"
+	this.GrammarFileName = "TDTL.g4"
 
 	return this
 }
 
-// QingQLParser tokens.
+// TDTLParser tokens.
 const (
-	QingQLParserEOF         = antlr.TokenEOF
-	QingQLParserT__0        = 1
-	QingQLParserT__1        = 2
-	QingQLParserT__2        = 3
-	QingQLParserT__3        = 4
-	QingQLParserT__4        = 5
-	QingQLParserT__5        = 6
-	QingQLParserT__6        = 7
-	QingQLParserT__7        = 8
-	QingQLParserT__8        = 9
-	QingQLParserINSERT      = 10
-	QingQLParserINTO        = 11
-	QingQLParserAS          = 12
-	QingQLParserAND         = 13
-	QingQLParserCASE        = 14
-	QingQLParserELSE        = 15
-	QingQLParserEND         = 16
-	QingQLParserEQ          = 17
-	QingQLParserFROM        = 18
-	QingQLParserGT          = 19
-	QingQLParserGTE         = 20
-	QingQLParserLT          = 21
-	QingQLParserLTE         = 22
-	QingQLParserNE          = 23
-	QingQLParserNOT         = 24
-	QingQLParserNULL        = 25
-	QingQLParserOR          = 26
-	QingQLParserSELECT      = 27
-	QingQLParserTHEN        = 28
-	QingQLParserWHERE       = 29
-	QingQLParserWHEN        = 30
-	QingQLParserMUL         = 31
-	QingQLParserDIV         = 32
-	QingQLParserMOD         = 33
-	QingQLParserADD         = 34
-	QingQLParserSUB         = 35
-	QingQLParserDOT         = 36
-	QingQLParserTRUE        = 37
-	QingQLParserFALSE       = 38
-	QingQLParserINDENTIFIER = 39
-	QingQLParserNUMBER      = 40
-	QingQLParserINTEGER     = 41
-	QingQLParserFLOAT       = 42
-	QingQLParserTOPICITEM   = 43
-	QingQLParserPATHITEM    = 44
-	QingQLParserARRAYITEM   = 45
-	QingQLParserSTRING      = 46
-	QingQLParserWHITESPACE  = 47
+	TDTLParserEOF         = antlr.TokenEOF
+	TDTLParserT__0        = 1
+	TDTLParserT__1        = 2
+	TDTLParserT__2        = 3
+	TDTLParserT__3        = 4
+	TDTLParserT__4        = 5
+	TDTLParserT__5        = 6
+	TDTLParserT__6        = 7
+	TDTLParserT__7        = 8
+	TDTLParserT__8        = 9
+	TDTLParserINSERT      = 10
+	TDTLParserINTO        = 11
+	TDTLParserAS          = 12
+	TDTLParserAND         = 13
+	TDTLParserCASE        = 14
+	TDTLParserELSE        = 15
+	TDTLParserEND         = 16
+	TDTLParserEQ          = 17
+	TDTLParserFROM        = 18
+	TDTLParserGT          = 19
+	TDTLParserGTE         = 20
+	TDTLParserLT          = 21
+	TDTLParserLTE         = 22
+	TDTLParserNE          = 23
+	TDTLParserNOT         = 24
+	TDTLParserNULL        = 25
+	TDTLParserOR          = 26
+	TDTLParserSELECT      = 27
+	TDTLParserTHEN        = 28
+	TDTLParserWHERE       = 29
+	TDTLParserWHEN        = 30
+	TDTLParserMUL         = 31
+	TDTLParserDIV         = 32
+	TDTLParserMOD         = 33
+	TDTLParserADD         = 34
+	TDTLParserSUB         = 35
+	TDTLParserDOT         = 36
+	TDTLParserTRUE        = 37
+	TDTLParserFALSE       = 38
+	TDTLParserINDENTIFIER = 39
+	TDTLParserNUMBER      = 40
+	TDTLParserINTEGER     = 41
+	TDTLParserFLOAT       = 42
+	TDTLParserTOPICITEM   = 43
+	TDTLParserPATHITEM    = 44
+	TDTLParserARRAYITEM   = 45
+	TDTLParserSTRING      = 46
+	TDTLParserWHITESPACE  = 47
 )
 
-// QingQLParser rules.
+// TDTLParser rules.
 const (
-	QingQLParserRULE_root                    = 0
-	QingQLParserRULE_target                  = 1
-	QingQLParserRULE_fields                  = 2
-	QingQLParserRULE_field_elem              = 3
-	QingQLParserRULE_field_elem_with_as      = 4
-	QingQLParserRULE_filter                  = 5
-	QingQLParserRULE_filter_condition        = 6
-	QingQLParserRULE_filter_condition_or     = 7
-	QingQLParserRULE_filter_condition_not    = 8
-	QingQLParserRULE_expr                    = 9
-	QingQLParserRULE_sourceEntity            = 10
-	QingQLParserRULE_propertyEntity          = 11
-	QingQLParserRULE_constant                = 12
-	QingQLParserRULE_switch_stmt             = 13
-	QingQLParserRULE_call_expr               = 14
-	QingQLParserRULE_asterisk                = 15
-	QingQLParserRULE_xpath_name              = 16
-	QingQLParserRULE_target_name             = 17
-	QingQLParserRULE_dotnotation             = 18
-	QingQLParserRULE_identifierWithTOPICITEM = 19
-	QingQLParserRULE_identifierWithQualifier = 20
+	TDTLParserRULE_root                    = 0
+	TDTLParserRULE_target                  = 1
+	TDTLParserRULE_fields                  = 2
+	TDTLParserRULE_field_elem              = 3
+	TDTLParserRULE_field_elem_with_as      = 4
+	TDTLParserRULE_filter                  = 5
+	TDTLParserRULE_filter_condition        = 6
+	TDTLParserRULE_filter_condition_or     = 7
+	TDTLParserRULE_filter_condition_not    = 8
+	TDTLParserRULE_expr                    = 9
+	TDTLParserRULE_sourceEntity            = 10
+	TDTLParserRULE_propertyEntity          = 11
+	TDTLParserRULE_constant                = 12
+	TDTLParserRULE_switch_stmt             = 13
+	TDTLParserRULE_call_expr               = 14
+	TDTLParserRULE_asterisk                = 15
+	TDTLParserRULE_xpath_name              = 16
+	TDTLParserRULE_target_name             = 17
+	TDTLParserRULE_dotnotation             = 18
+	TDTLParserRULE_identifierWithTOPICITEM = 19
+	TDTLParserRULE_identifierWithQualifier = 20
 )
 
 // IRootContext is an interface to support dynamic dispatch.
@@ -265,7 +265,7 @@ type RootContext struct {
 func NewEmptyRootContext() *RootContext {
 	var p = new(RootContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_root
+	p.RuleIndex = TDTLParserRULE_root
 	return p
 }
 
@@ -277,7 +277,7 @@ func NewRootContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokin
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_root
+	p.RuleIndex = TDTLParserRULE_root
 
 	return p
 }
@@ -285,11 +285,11 @@ func NewRootContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokin
 func (s *RootContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *RootContext) INSERT() antlr.TerminalNode {
-	return s.GetToken(QingQLParserINSERT, 0)
+	return s.GetToken(TDTLParserINSERT, 0)
 }
 
 func (s *RootContext) INTO() antlr.TerminalNode {
-	return s.GetToken(QingQLParserINTO, 0)
+	return s.GetToken(TDTLParserINTO, 0)
 }
 
 func (s *RootContext) Target() ITargetContext {
@@ -303,7 +303,7 @@ func (s *RootContext) Target() ITargetContext {
 }
 
 func (s *RootContext) SELECT() antlr.TerminalNode {
-	return s.GetToken(QingQLParserSELECT, 0)
+	return s.GetToken(TDTLParserSELECT, 0)
 }
 
 func (s *RootContext) Fields() IFieldsContext {
@@ -317,7 +317,7 @@ func (s *RootContext) Fields() IFieldsContext {
 }
 
 func (s *RootContext) EOF() antlr.TerminalNode {
-	return s.GetToken(QingQLParserEOF, 0)
+	return s.GetToken(TDTLParserEOF, 0)
 }
 
 func (s *RootContext) GetRuleContext() antlr.RuleContext {
@@ -329,20 +329,20 @@ func (s *RootContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 }
 
 func (s *RootContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterRoot(s)
 	}
 }
 
 func (s *RootContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitRoot(s)
 	}
 }
 
-func (p *QingQLParser) Root() (localctx IRootContext) {
+func (p *TDTLParser) Root() (localctx IRootContext) {
 	localctx = NewRootContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 0, QingQLParserRULE_root)
+	p.EnterRule(localctx, 0, TDTLParserRULE_root)
 
 	defer func() {
 		p.ExitRule()
@@ -363,11 +363,11 @@ func (p *QingQLParser) Root() (localctx IRootContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(42)
-		p.Match(QingQLParserINSERT)
+		p.Match(TDTLParserINSERT)
 	}
 	{
 		p.SetState(43)
-		p.Match(QingQLParserINTO)
+		p.Match(TDTLParserINTO)
 	}
 	{
 		p.SetState(44)
@@ -375,7 +375,7 @@ func (p *QingQLParser) Root() (localctx IRootContext) {
 	}
 	{
 		p.SetState(45)
-		p.Match(QingQLParserSELECT)
+		p.Match(TDTLParserSELECT)
 	}
 	{
 		p.SetState(46)
@@ -383,7 +383,7 @@ func (p *QingQLParser) Root() (localctx IRootContext) {
 	}
 	{
 		p.SetState(47)
-		p.Match(QingQLParserEOF)
+		p.Match(TDTLParserEOF)
 	}
 
 	return localctx
@@ -408,7 +408,7 @@ type TargetContext struct {
 func NewEmptyTargetContext() *TargetContext {
 	var p = new(TargetContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_target
+	p.RuleIndex = TDTLParserRULE_target
 	return p
 }
 
@@ -420,7 +420,7 @@ func NewTargetContext(parser antlr.Parser, parent antlr.ParserRuleContext, invok
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_target
+	p.RuleIndex = TDTLParserRULE_target
 
 	return p
 }
@@ -428,7 +428,7 @@ func NewTargetContext(parser antlr.Parser, parent antlr.ParserRuleContext, invok
 func (s *TargetContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *TargetContext) INDENTIFIER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserINDENTIFIER, 0)
+	return s.GetToken(TDTLParserINDENTIFIER, 0)
 }
 
 func (s *TargetContext) GetRuleContext() antlr.RuleContext {
@@ -440,20 +440,20 @@ func (s *TargetContext) ToStringTree(ruleNames []string, recog antlr.Recognizer)
 }
 
 func (s *TargetContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterTarget(s)
 	}
 }
 
 func (s *TargetContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitTarget(s)
 	}
 }
 
-func (p *QingQLParser) Target() (localctx ITargetContext) {
+func (p *TDTLParser) Target() (localctx ITargetContext) {
 	localctx = NewTargetContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 2, QingQLParserRULE_target)
+	p.EnterRule(localctx, 2, TDTLParserRULE_target)
 
 	defer func() {
 		p.ExitRule()
@@ -474,7 +474,7 @@ func (p *QingQLParser) Target() (localctx ITargetContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(49)
-		p.Match(QingQLParserINDENTIFIER)
+		p.Match(TDTLParserINDENTIFIER)
 	}
 
 	return localctx
@@ -499,7 +499,7 @@ type FieldsContext struct {
 func NewEmptyFieldsContext() *FieldsContext {
 	var p = new(FieldsContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_fields
+	p.RuleIndex = TDTLParserRULE_fields
 	return p
 }
 
@@ -511,7 +511,7 @@ func NewFieldsContext(parser antlr.Parser, parent antlr.ParserRuleContext, invok
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_fields
+	p.RuleIndex = TDTLParserRULE_fields
 
 	return p
 }
@@ -550,20 +550,20 @@ func (s *FieldsContext) ToStringTree(ruleNames []string, recog antlr.Recognizer)
 }
 
 func (s *FieldsContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFields(s)
 	}
 }
 
 func (s *FieldsContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFields(s)
 	}
 }
 
-func (p *QingQLParser) Fields() (localctx IFieldsContext) {
+func (p *TDTLParser) Fields() (localctx IFieldsContext) {
 	localctx = NewFieldsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 4, QingQLParserRULE_fields)
+	p.EnterRule(localctx, 4, TDTLParserRULE_fields)
 	var _la int
 
 	defer func() {
@@ -591,10 +591,10 @@ func (p *QingQLParser) Fields() (localctx IFieldsContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == QingQLParserT__0 {
+	for _la == TDTLParserT__0 {
 		{
 			p.SetState(52)
-			p.Match(QingQLParserT__0)
+			p.Match(TDTLParserT__0)
 		}
 		{
 			p.SetState(53)
@@ -628,7 +628,7 @@ type Field_elemContext struct {
 func NewEmptyField_elemContext() *Field_elemContext {
 	var p = new(Field_elemContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_field_elem
+	p.RuleIndex = TDTLParserRULE_field_elem
 	return p
 }
 
@@ -640,7 +640,7 @@ func NewField_elemContext(parser antlr.Parser, parent antlr.ParserRuleContext, i
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_field_elem
+	p.RuleIndex = TDTLParserRULE_field_elem
 
 	return p
 }
@@ -688,13 +688,13 @@ func (s *FieldElemExprContext) Expr() IExprContext {
 }
 
 func (s *FieldElemExprContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFieldElemExpr(s)
 	}
 }
 
 func (s *FieldElemExprContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFieldElemExpr(s)
 	}
 }
@@ -738,13 +738,13 @@ func (s *FieldElemSourceContext) Asterisk() IAsteriskContext {
 }
 
 func (s *FieldElemSourceContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFieldElemSource(s)
 	}
 }
 
 func (s *FieldElemSourceContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFieldElemSource(s)
 	}
 }
@@ -778,20 +778,20 @@ func (s *FieldElemAsContext) Field_elem_with_as() IField_elem_with_asContext {
 }
 
 func (s *FieldElemAsContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFieldElemAs(s)
 	}
 }
 
 func (s *FieldElemAsContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFieldElemAs(s)
 	}
 }
 
-func (p *QingQLParser) Field_elem() (localctx IField_elemContext) {
+func (p *TDTLParser) Field_elem() (localctx IField_elemContext) {
 	localctx = NewField_elemContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 6, QingQLParserRULE_field_elem)
+	p.EnterRule(localctx, 6, TDTLParserRULE_field_elem)
 
 	defer func() {
 		p.ExitRule()
@@ -829,7 +829,7 @@ func (p *QingQLParser) Field_elem() (localctx IField_elemContext) {
 		}
 		{
 			p.SetState(61)
-			p.Match(QingQLParserDOT)
+			p.Match(TDTLParserDOT)
 		}
 		{
 			p.SetState(62)
@@ -868,7 +868,7 @@ type Field_elem_with_asContext struct {
 func NewEmptyField_elem_with_asContext() *Field_elem_with_asContext {
 	var p = new(Field_elem_with_asContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_field_elem_with_as
+	p.RuleIndex = TDTLParserRULE_field_elem_with_as
 	return p
 }
 
@@ -880,7 +880,7 @@ func NewField_elem_with_asContext(parser antlr.Parser, parent antlr.ParserRuleCo
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_field_elem_with_as
+	p.RuleIndex = TDTLParserRULE_field_elem_with_as
 
 	return p
 }
@@ -928,7 +928,7 @@ func (s *TargetAsElemContext) Expr() IExprContext {
 }
 
 func (s *TargetAsElemContext) AS() antlr.TerminalNode {
-	return s.GetToken(QingQLParserAS, 0)
+	return s.GetToken(TDTLParserAS, 0)
 }
 
 func (s *TargetAsElemContext) Target_name() ITarget_nameContext {
@@ -942,20 +942,20 @@ func (s *TargetAsElemContext) Target_name() ITarget_nameContext {
 }
 
 func (s *TargetAsElemContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterTargetAsElem(s)
 	}
 }
 
 func (s *TargetAsElemContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitTargetAsElem(s)
 	}
 }
 
-func (p *QingQLParser) Field_elem_with_as() (localctx IField_elem_with_asContext) {
+func (p *TDTLParser) Field_elem_with_as() (localctx IField_elem_with_asContext) {
 	localctx = NewField_elem_with_asContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 8, QingQLParserRULE_field_elem_with_as)
+	p.EnterRule(localctx, 8, TDTLParserRULE_field_elem_with_as)
 
 	defer func() {
 		p.ExitRule()
@@ -981,7 +981,7 @@ func (p *QingQLParser) Field_elem_with_as() (localctx IField_elem_with_asContext
 	}
 	{
 		p.SetState(68)
-		p.Match(QingQLParserAS)
+		p.Match(TDTLParserAS)
 	}
 	{
 		p.SetState(69)
@@ -1010,7 +1010,7 @@ type FilterContext struct {
 func NewEmptyFilterContext() *FilterContext {
 	var p = new(FilterContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_filter
+	p.RuleIndex = TDTLParserRULE_filter
 	return p
 }
 
@@ -1022,7 +1022,7 @@ func NewFilterContext(parser antlr.Parser, parent antlr.ParserRuleContext, invok
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_filter
+	p.RuleIndex = TDTLParserRULE_filter
 
 	return p
 }
@@ -1048,20 +1048,20 @@ func (s *FilterContext) ToStringTree(ruleNames []string, recog antlr.Recognizer)
 }
 
 func (s *FilterContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFilter(s)
 	}
 }
 
 func (s *FilterContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFilter(s)
 	}
 }
 
-func (p *QingQLParser) Filter() (localctx IFilterContext) {
+func (p *TDTLParser) Filter() (localctx IFilterContext) {
 	localctx = NewFilterContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 10, QingQLParserRULE_filter)
+	p.EnterRule(localctx, 10, TDTLParserRULE_filter)
 
 	defer func() {
 		p.ExitRule()
@@ -1107,7 +1107,7 @@ type Filter_conditionContext struct {
 func NewEmptyFilter_conditionContext() *Filter_conditionContext {
 	var p = new(Filter_conditionContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_filter_condition
+	p.RuleIndex = TDTLParserRULE_filter_condition
 	return p
 }
 
@@ -1119,7 +1119,7 @@ func NewFilter_conditionContext(parser antlr.Parser, parent antlr.ParserRuleCont
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_filter_condition
+	p.RuleIndex = TDTLParserRULE_filter_condition
 
 	return p
 }
@@ -1150,11 +1150,11 @@ func (s *Filter_conditionContext) Filter_condition_or(i int) IFilter_condition_o
 }
 
 func (s *Filter_conditionContext) AllAND() []antlr.TerminalNode {
-	return s.GetTokens(QingQLParserAND)
+	return s.GetTokens(TDTLParserAND)
 }
 
 func (s *Filter_conditionContext) AND(i int) antlr.TerminalNode {
-	return s.GetToken(QingQLParserAND, i)
+	return s.GetToken(TDTLParserAND, i)
 }
 
 func (s *Filter_conditionContext) GetRuleContext() antlr.RuleContext {
@@ -1166,20 +1166,20 @@ func (s *Filter_conditionContext) ToStringTree(ruleNames []string, recog antlr.R
 }
 
 func (s *Filter_conditionContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFilter_condition(s)
 	}
 }
 
 func (s *Filter_conditionContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFilter_condition(s)
 	}
 }
 
-func (p *QingQLParser) Filter_condition() (localctx IFilter_conditionContext) {
+func (p *TDTLParser) Filter_condition() (localctx IFilter_conditionContext) {
 	localctx = NewFilter_conditionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 12, QingQLParserRULE_filter_condition)
+	p.EnterRule(localctx, 12, TDTLParserRULE_filter_condition)
 	var _la int
 
 	defer func() {
@@ -1207,10 +1207,10 @@ func (p *QingQLParser) Filter_condition() (localctx IFilter_conditionContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == QingQLParserAND {
+	for _la == TDTLParserAND {
 		{
 			p.SetState(74)
-			p.Match(QingQLParserAND)
+			p.Match(TDTLParserAND)
 		}
 		{
 			p.SetState(75)
@@ -1244,7 +1244,7 @@ type Filter_condition_orContext struct {
 func NewEmptyFilter_condition_orContext() *Filter_condition_orContext {
 	var p = new(Filter_condition_orContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_filter_condition_or
+	p.RuleIndex = TDTLParserRULE_filter_condition_or
 	return p
 }
 
@@ -1256,7 +1256,7 @@ func NewFilter_condition_orContext(parser antlr.Parser, parent antlr.ParserRuleC
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_filter_condition_or
+	p.RuleIndex = TDTLParserRULE_filter_condition_or
 
 	return p
 }
@@ -1287,11 +1287,11 @@ func (s *Filter_condition_orContext) Filter_condition_not(i int) IFilter_conditi
 }
 
 func (s *Filter_condition_orContext) AllOR() []antlr.TerminalNode {
-	return s.GetTokens(QingQLParserOR)
+	return s.GetTokens(TDTLParserOR)
 }
 
 func (s *Filter_condition_orContext) OR(i int) antlr.TerminalNode {
-	return s.GetToken(QingQLParserOR, i)
+	return s.GetToken(TDTLParserOR, i)
 }
 
 func (s *Filter_condition_orContext) GetRuleContext() antlr.RuleContext {
@@ -1303,20 +1303,20 @@ func (s *Filter_condition_orContext) ToStringTree(ruleNames []string, recog antl
 }
 
 func (s *Filter_condition_orContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFilter_condition_or(s)
 	}
 }
 
 func (s *Filter_condition_orContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFilter_condition_or(s)
 	}
 }
 
-func (p *QingQLParser) Filter_condition_or() (localctx IFilter_condition_orContext) {
+func (p *TDTLParser) Filter_condition_or() (localctx IFilter_condition_orContext) {
 	localctx = NewFilter_condition_orContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 14, QingQLParserRULE_filter_condition_or)
+	p.EnterRule(localctx, 14, TDTLParserRULE_filter_condition_or)
 	var _la int
 
 	defer func() {
@@ -1344,10 +1344,10 @@ func (p *QingQLParser) Filter_condition_or() (localctx IFilter_condition_orConte
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == QingQLParserOR {
+	for _la == TDTLParserOR {
 		{
 			p.SetState(82)
-			p.Match(QingQLParserOR)
+			p.Match(TDTLParserOR)
 		}
 		{
 			p.SetState(83)
@@ -1381,7 +1381,7 @@ type Filter_condition_notContext struct {
 func NewEmptyFilter_condition_notContext() *Filter_condition_notContext {
 	var p = new(Filter_condition_notContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_filter_condition_not
+	p.RuleIndex = TDTLParserRULE_filter_condition_not
 	return p
 }
 
@@ -1393,7 +1393,7 @@ func NewFilter_condition_notContext(parser antlr.Parser, parent antlr.ParserRule
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_filter_condition_not
+	p.RuleIndex = TDTLParserRULE_filter_condition_not
 
 	return p
 }
@@ -1411,7 +1411,7 @@ func (s *Filter_condition_notContext) Expr() IExprContext {
 }
 
 func (s *Filter_condition_notContext) NOT() antlr.TerminalNode {
-	return s.GetToken(QingQLParserNOT, 0)
+	return s.GetToken(TDTLParserNOT, 0)
 }
 
 func (s *Filter_condition_notContext) GetRuleContext() antlr.RuleContext {
@@ -1423,20 +1423,20 @@ func (s *Filter_condition_notContext) ToStringTree(ruleNames []string, recog ant
 }
 
 func (s *Filter_condition_notContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFilter_condition_not(s)
 	}
 }
 
 func (s *Filter_condition_notContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFilter_condition_not(s)
 	}
 }
 
-func (p *QingQLParser) Filter_condition_not() (localctx IFilter_condition_notContext) {
+func (p *TDTLParser) Filter_condition_not() (localctx IFilter_condition_notContext) {
 	localctx = NewFilter_condition_notContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 16, QingQLParserRULE_filter_condition_not)
+	p.EnterRule(localctx, 16, TDTLParserRULE_filter_condition_not)
 	var _la int
 
 	defer func() {
@@ -1460,10 +1460,10 @@ func (p *QingQLParser) Filter_condition_not() (localctx IFilter_condition_notCon
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	if _la == QingQLParserNOT {
+	if _la == TDTLParserNOT {
 		{
 			p.SetState(89)
-			p.Match(QingQLParserNOT)
+			p.Match(TDTLParserNOT)
 		}
 
 	}
@@ -1494,7 +1494,7 @@ type ExprContext struct {
 func NewEmptyExprContext() *ExprContext {
 	var p = new(ExprContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_expr
+	p.RuleIndex = TDTLParserRULE_expr
 	return p
 }
 
@@ -1506,7 +1506,7 @@ func NewExprContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokin
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_expr
+	p.RuleIndex = TDTLParserRULE_expr
 
 	return p
 }
@@ -1554,13 +1554,13 @@ func (s *FunctionContext) Call_expr() ICall_exprContext {
 }
 
 func (s *FunctionContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFunction(s)
 	}
 }
 
 func (s *FunctionContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFunction(s)
 	}
 }
@@ -1604,13 +1604,13 @@ func (s *BracesContext) Expr() IExprContext {
 }
 
 func (s *BracesContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterBraces(s)
 	}
 }
 
 func (s *BracesContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitBraces(s)
 	}
 }
@@ -1644,13 +1644,13 @@ func (s *SwitchContext) Switch_stmt() ISwitch_stmtContext {
 }
 
 func (s *SwitchContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterSwitch(s)
 	}
 }
 
 func (s *SwitchContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitSwitch(s)
 	}
 }
@@ -1702,53 +1702,53 @@ func (s *BinaryContext) Expr(i int) IExprContext {
 }
 
 func (s *BinaryContext) EQ() antlr.TerminalNode {
-	return s.GetToken(QingQLParserEQ, 0)
+	return s.GetToken(TDTLParserEQ, 0)
 }
 
 func (s *BinaryContext) GT() antlr.TerminalNode {
-	return s.GetToken(QingQLParserGT, 0)
+	return s.GetToken(TDTLParserGT, 0)
 }
 
 func (s *BinaryContext) LT() antlr.TerminalNode {
-	return s.GetToken(QingQLParserLT, 0)
+	return s.GetToken(TDTLParserLT, 0)
 }
 
 func (s *BinaryContext) GTE() antlr.TerminalNode {
-	return s.GetToken(QingQLParserGTE, 0)
+	return s.GetToken(TDTLParserGTE, 0)
 }
 
 func (s *BinaryContext) LTE() antlr.TerminalNode {
-	return s.GetToken(QingQLParserLTE, 0)
+	return s.GetToken(TDTLParserLTE, 0)
 }
 
 func (s *BinaryContext) NE() antlr.TerminalNode {
-	return s.GetToken(QingQLParserNE, 0)
+	return s.GetToken(TDTLParserNE, 0)
 }
 
 func (s *BinaryContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterBinary(s)
 	}
 }
 
 func (s *BinaryContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitBinary(s)
 	}
 }
 
-func (p *QingQLParser) Expr() (localctx IExprContext) {
+func (p *TDTLParser) Expr() (localctx IExprContext) {
 	return p.expr(0)
 }
 
-func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
+func (p *TDTLParser) expr(_p int) (localctx IExprContext) {
 	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
 	_parentState := p.GetState()
 	localctx = NewExprContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IExprContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
 	_startState := 18
-	p.EnterRecursionRule(localctx, 18, QingQLParserRULE_expr, _p)
+	p.EnterRecursionRule(localctx, 18, TDTLParserRULE_expr, _p)
 	var _la int
 
 	defer func() {
@@ -1789,7 +1789,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 		_prevctx = localctx
 		{
 			p.SetState(96)
-			p.Match(QingQLParserT__1)
+			p.Match(TDTLParserT__1)
 		}
 		{
 			p.SetState(97)
@@ -1797,7 +1797,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 		}
 		{
 			p.SetState(98)
-			p.Match(QingQLParserT__2)
+			p.Match(TDTLParserT__2)
 		}
 
 	case 3:
@@ -1835,7 +1835,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewBinaryContext(p, NewExprContext(p, _parentctx, _parentState))
-				p.PushNewRecursionContext(localctx, _startState, QingQLParserRULE_expr)
+				p.PushNewRecursionContext(localctx, _startState, TDTLParserRULE_expr)
 				p.SetState(104)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
@@ -1849,7 +1849,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 
 				_la = p.GetTokenStream().LA(1)
 
-				if !(((_la-31)&-(0x1f+1)) == 0 && ((1<<uint((_la-31)))&((1<<(QingQLParserMUL-31))|(1<<(QingQLParserDIV-31))|(1<<(QingQLParserMOD-31)))) != 0) {
+				if !(((_la-31)&-(0x1f+1)) == 0 && ((1<<uint((_la-31)))&((1<<(TDTLParserMUL-31))|(1<<(TDTLParserDIV-31))|(1<<(TDTLParserMOD-31)))) != 0) {
 					var _ri = p.GetErrorHandler().RecoverInline(p)
 
 					localctx.(*BinaryContext).op = _ri
@@ -1864,7 +1864,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 
 			case 2:
 				localctx = NewBinaryContext(p, NewExprContext(p, _parentctx, _parentState))
-				p.PushNewRecursionContext(localctx, _startState, QingQLParserRULE_expr)
+				p.PushNewRecursionContext(localctx, _startState, TDTLParserRULE_expr)
 				p.SetState(107)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
@@ -1878,7 +1878,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 
 				_la = p.GetTokenStream().LA(1)
 
-				if !(_la == QingQLParserADD || _la == QingQLParserSUB) {
+				if !(_la == TDTLParserADD || _la == TDTLParserSUB) {
 					var _ri = p.GetErrorHandler().RecoverInline(p)
 
 					localctx.(*BinaryContext).op = _ri
@@ -1893,7 +1893,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 
 			case 3:
 				localctx = NewBinaryContext(p, NewExprContext(p, _parentctx, _parentState))
-				p.PushNewRecursionContext(localctx, _startState, QingQLParserRULE_expr)
+				p.PushNewRecursionContext(localctx, _startState, TDTLParserRULE_expr)
 				p.SetState(110)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
@@ -1907,7 +1907,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 
 				_la = p.GetTokenStream().LA(1)
 
-				if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QingQLParserEQ)|(1<<QingQLParserGT)|(1<<QingQLParserGTE)|(1<<QingQLParserLT)|(1<<QingQLParserLTE)|(1<<QingQLParserNE))) != 0) {
+				if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<TDTLParserEQ)|(1<<TDTLParserGT)|(1<<TDTLParserGTE)|(1<<TDTLParserLT)|(1<<TDTLParserLTE)|(1<<TDTLParserNE))) != 0) {
 					var _ri = p.GetErrorHandler().RecoverInline(p)
 
 					localctx.(*BinaryContext).op = _ri
@@ -1950,7 +1950,7 @@ type SourceEntityContext struct {
 func NewEmptySourceEntityContext() *SourceEntityContext {
 	var p = new(SourceEntityContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_sourceEntity
+	p.RuleIndex = TDTLParserRULE_sourceEntity
 	return p
 }
 
@@ -1962,7 +1962,7 @@ func NewSourceEntityContext(parser antlr.Parser, parent antlr.ParserRuleContext,
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_sourceEntity
+	p.RuleIndex = TDTLParserRULE_sourceEntity
 
 	return p
 }
@@ -1970,7 +1970,7 @@ func NewSourceEntityContext(parser antlr.Parser, parent antlr.ParserRuleContext,
 func (s *SourceEntityContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *SourceEntityContext) INDENTIFIER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserINDENTIFIER, 0)
+	return s.GetToken(TDTLParserINDENTIFIER, 0)
 }
 
 func (s *SourceEntityContext) GetRuleContext() antlr.RuleContext {
@@ -1982,20 +1982,20 @@ func (s *SourceEntityContext) ToStringTree(ruleNames []string, recog antlr.Recog
 }
 
 func (s *SourceEntityContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterSourceEntity(s)
 	}
 }
 
 func (s *SourceEntityContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitSourceEntity(s)
 	}
 }
 
-func (p *QingQLParser) SourceEntity() (localctx ISourceEntityContext) {
+func (p *TDTLParser) SourceEntity() (localctx ISourceEntityContext) {
 	localctx = NewSourceEntityContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 20, QingQLParserRULE_sourceEntity)
+	p.EnterRule(localctx, 20, TDTLParserRULE_sourceEntity)
 
 	defer func() {
 		p.ExitRule()
@@ -2016,7 +2016,7 @@ func (p *QingQLParser) SourceEntity() (localctx ISourceEntityContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(118)
-		p.Match(QingQLParserINDENTIFIER)
+		p.Match(TDTLParserINDENTIFIER)
 	}
 
 	return localctx
@@ -2041,7 +2041,7 @@ type PropertyEntityContext struct {
 func NewEmptyPropertyEntityContext() *PropertyEntityContext {
 	var p = new(PropertyEntityContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_propertyEntity
+	p.RuleIndex = TDTLParserRULE_propertyEntity
 	return p
 }
 
@@ -2053,7 +2053,7 @@ func NewPropertyEntityContext(parser antlr.Parser, parent antlr.ParserRuleContex
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_propertyEntity
+	p.RuleIndex = TDTLParserRULE_propertyEntity
 
 	return p
 }
@@ -2061,11 +2061,11 @@ func NewPropertyEntityContext(parser antlr.Parser, parent antlr.ParserRuleContex
 func (s *PropertyEntityContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *PropertyEntityContext) AllINDENTIFIER() []antlr.TerminalNode {
-	return s.GetTokens(QingQLParserINDENTIFIER)
+	return s.GetTokens(TDTLParserINDENTIFIER)
 }
 
 func (s *PropertyEntityContext) INDENTIFIER(i int) antlr.TerminalNode {
-	return s.GetToken(QingQLParserINDENTIFIER, i)
+	return s.GetToken(TDTLParserINDENTIFIER, i)
 }
 
 func (s *PropertyEntityContext) GetRuleContext() antlr.RuleContext {
@@ -2077,20 +2077,20 @@ func (s *PropertyEntityContext) ToStringTree(ruleNames []string, recog antlr.Rec
 }
 
 func (s *PropertyEntityContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterPropertyEntity(s)
 	}
 }
 
 func (s *PropertyEntityContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitPropertyEntity(s)
 	}
 }
 
-func (p *QingQLParser) PropertyEntity() (localctx IPropertyEntityContext) {
+func (p *TDTLParser) PropertyEntity() (localctx IPropertyEntityContext) {
 	localctx = NewPropertyEntityContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 22, QingQLParserRULE_propertyEntity)
+	p.EnterRule(localctx, 22, TDTLParserRULE_propertyEntity)
 	var _la int
 
 	defer func() {
@@ -2114,14 +2114,14 @@ func (p *QingQLParser) PropertyEntity() (localctx IPropertyEntityContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for ok := true; ok; ok = _la == QingQLParserDOT {
+	for ok := true; ok; ok = _la == TDTLParserDOT {
 		{
 			p.SetState(120)
-			p.Match(QingQLParserDOT)
+			p.Match(TDTLParserDOT)
 		}
 		{
 			p.SetState(121)
-			p.Match(QingQLParserINDENTIFIER)
+			p.Match(TDTLParserINDENTIFIER)
 		}
 
 		p.SetState(124)
@@ -2151,7 +2151,7 @@ type ConstantContext struct {
 func NewEmptyConstantContext() *ConstantContext {
 	var p = new(ConstantContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_constant
+	p.RuleIndex = TDTLParserRULE_constant
 	return p
 }
 
@@ -2163,7 +2163,7 @@ func NewConstantContext(parser antlr.Parser, parent antlr.ParserRuleContext, inv
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_constant
+	p.RuleIndex = TDTLParserRULE_constant
 
 	return p
 }
@@ -2201,21 +2201,21 @@ func (s *IntegerContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *IntegerContext) NUMBER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserNUMBER, 0)
+	return s.GetToken(TDTLParserNUMBER, 0)
 }
 
 func (s *IntegerContext) INTEGER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserINTEGER, 0)
+	return s.GetToken(TDTLParserINTEGER, 0)
 }
 
 func (s *IntegerContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterInteger(s)
 	}
 }
 
 func (s *IntegerContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitInteger(s)
 	}
 }
@@ -2239,17 +2239,17 @@ func (s *FloatContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *FloatContext) FLOAT() antlr.TerminalNode {
-	return s.GetToken(QingQLParserFLOAT, 0)
+	return s.GetToken(TDTLParserFLOAT, 0)
 }
 
 func (s *FloatContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterFloat(s)
 	}
 }
 
 func (s *FloatContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitFloat(s)
 	}
 }
@@ -2273,17 +2273,17 @@ func (s *StringContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *StringContext) STRING() antlr.TerminalNode {
-	return s.GetToken(QingQLParserSTRING, 0)
+	return s.GetToken(TDTLParserSTRING, 0)
 }
 
 func (s *StringContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterString(s)
 	}
 }
 
 func (s *StringContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitString(s)
 	}
 }
@@ -2307,21 +2307,21 @@ func (s *BooleanContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *BooleanContext) TRUE() antlr.TerminalNode {
-	return s.GetToken(QingQLParserTRUE, 0)
+	return s.GetToken(TDTLParserTRUE, 0)
 }
 
 func (s *BooleanContext) FALSE() antlr.TerminalNode {
-	return s.GetToken(QingQLParserFALSE, 0)
+	return s.GetToken(TDTLParserFALSE, 0)
 }
 
 func (s *BooleanContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterBoolean(s)
 	}
 }
 
 func (s *BooleanContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitBoolean(s)
 	}
 }
@@ -2355,20 +2355,20 @@ func (s *SourceContext) Xpath_name() IXpath_nameContext {
 }
 
 func (s *SourceContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterSource(s)
 	}
 }
 
 func (s *SourceContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitSource(s)
 	}
 }
 
-func (p *QingQLParser) Constant() (localctx IConstantContext) {
+func (p *TDTLParser) Constant() (localctx IConstantContext) {
 	localctx = NewConstantContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 24, QingQLParserRULE_constant)
+	p.EnterRule(localctx, 24, TDTLParserRULE_constant)
 
 	defer func() {
 		p.ExitRule()
@@ -2390,55 +2390,55 @@ func (p *QingQLParser) Constant() (localctx IConstantContext) {
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case QingQLParserTRUE:
+	case TDTLParserTRUE:
 		localctx = NewBooleanContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(126)
-			p.Match(QingQLParserTRUE)
+			p.Match(TDTLParserTRUE)
 		}
 
-	case QingQLParserFALSE:
+	case TDTLParserFALSE:
 		localctx = NewBooleanContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(127)
-			p.Match(QingQLParserFALSE)
+			p.Match(TDTLParserFALSE)
 		}
 
-	case QingQLParserNUMBER:
+	case TDTLParserNUMBER:
 		localctx = NewIntegerContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
 			p.SetState(128)
-			p.Match(QingQLParserNUMBER)
+			p.Match(TDTLParserNUMBER)
 		}
 
-	case QingQLParserINTEGER:
+	case TDTLParserINTEGER:
 		localctx = NewIntegerContext(p, localctx)
 		p.EnterOuterAlt(localctx, 4)
 		{
 			p.SetState(129)
-			p.Match(QingQLParserINTEGER)
+			p.Match(TDTLParserINTEGER)
 		}
 
-	case QingQLParserFLOAT:
+	case TDTLParserFLOAT:
 		localctx = NewFloatContext(p, localctx)
 		p.EnterOuterAlt(localctx, 5)
 		{
 			p.SetState(130)
-			p.Match(QingQLParserFLOAT)
+			p.Match(TDTLParserFLOAT)
 		}
 
-	case QingQLParserSTRING:
+	case TDTLParserSTRING:
 		localctx = NewStringContext(p, localctx)
 		p.EnterOuterAlt(localctx, 6)
 		{
 			p.SetState(131)
-			p.Match(QingQLParserSTRING)
+			p.Match(TDTLParserSTRING)
 		}
 
-	case QingQLParserT__3, QingQLParserINDENTIFIER, QingQLParserPATHITEM:
+	case TDTLParserT__3, TDTLParserINDENTIFIER, TDTLParserPATHITEM:
 		localctx = NewSourceContext(p, localctx)
 		p.EnterOuterAlt(localctx, 7)
 		{
@@ -2472,7 +2472,7 @@ type Switch_stmtContext struct {
 func NewEmptySwitch_stmtContext() *Switch_stmtContext {
 	var p = new(Switch_stmtContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_switch_stmt
+	p.RuleIndex = TDTLParserRULE_switch_stmt
 	return p
 }
 
@@ -2484,7 +2484,7 @@ func NewSwitch_stmtContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_switch_stmt
+	p.RuleIndex = TDTLParserRULE_switch_stmt
 
 	return p
 }
@@ -2492,7 +2492,7 @@ func NewSwitch_stmtContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 func (s *Switch_stmtContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *Switch_stmtContext) CASE() antlr.TerminalNode {
-	return s.GetToken(QingQLParserCASE, 0)
+	return s.GetToken(TDTLParserCASE, 0)
 }
 
 func (s *Switch_stmtContext) AllExpr() []IExprContext {
@@ -2519,23 +2519,23 @@ func (s *Switch_stmtContext) Expr(i int) IExprContext {
 }
 
 func (s *Switch_stmtContext) AllWHEN() []antlr.TerminalNode {
-	return s.GetTokens(QingQLParserWHEN)
+	return s.GetTokens(TDTLParserWHEN)
 }
 
 func (s *Switch_stmtContext) WHEN(i int) antlr.TerminalNode {
-	return s.GetToken(QingQLParserWHEN, i)
+	return s.GetToken(TDTLParserWHEN, i)
 }
 
 func (s *Switch_stmtContext) AllTHEN() []antlr.TerminalNode {
-	return s.GetTokens(QingQLParserTHEN)
+	return s.GetTokens(TDTLParserTHEN)
 }
 
 func (s *Switch_stmtContext) THEN(i int) antlr.TerminalNode {
-	return s.GetToken(QingQLParserTHEN, i)
+	return s.GetToken(TDTLParserTHEN, i)
 }
 
 func (s *Switch_stmtContext) ELSE() antlr.TerminalNode {
-	return s.GetToken(QingQLParserELSE, 0)
+	return s.GetToken(TDTLParserELSE, 0)
 }
 
 func (s *Switch_stmtContext) GetRuleContext() antlr.RuleContext {
@@ -2547,20 +2547,20 @@ func (s *Switch_stmtContext) ToStringTree(ruleNames []string, recog antlr.Recogn
 }
 
 func (s *Switch_stmtContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterSwitch_stmt(s)
 	}
 }
 
 func (s *Switch_stmtContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitSwitch_stmt(s)
 	}
 }
 
-func (p *QingQLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
+func (p *TDTLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
 	localctx = NewSwitch_stmtContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 26, QingQLParserRULE_switch_stmt)
+	p.EnterRule(localctx, 26, TDTLParserRULE_switch_stmt)
 
 	defer func() {
 		p.ExitRule()
@@ -2583,7 +2583,7 @@ func (p *QingQLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(135)
-		p.Match(QingQLParserCASE)
+		p.Match(TDTLParserCASE)
 	}
 	{
 		p.SetState(136)
@@ -2591,7 +2591,7 @@ func (p *QingQLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
 	}
 	{
 		p.SetState(137)
-		p.Match(QingQLParserWHEN)
+		p.Match(TDTLParserWHEN)
 	}
 	{
 		p.SetState(138)
@@ -2599,7 +2599,7 @@ func (p *QingQLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
 	}
 	{
 		p.SetState(139)
-		p.Match(QingQLParserTHEN)
+		p.Match(TDTLParserTHEN)
 	}
 	{
 		p.SetState(140)
@@ -2613,7 +2613,7 @@ func (p *QingQLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
 		if _alt == 1 {
 			{
 				p.SetState(141)
-				p.Match(QingQLParserWHEN)
+				p.Match(TDTLParserWHEN)
 			}
 			{
 				p.SetState(142)
@@ -2621,7 +2621,7 @@ func (p *QingQLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
 			}
 			{
 				p.SetState(143)
-				p.Match(QingQLParserTHEN)
+				p.Match(TDTLParserTHEN)
 			}
 			{
 				p.SetState(144)
@@ -2639,7 +2639,7 @@ func (p *QingQLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
 	if p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext()) == 1 {
 		{
 			p.SetState(151)
-			p.Match(QingQLParserELSE)
+			p.Match(TDTLParserELSE)
 		}
 		{
 			p.SetState(152)
@@ -2677,7 +2677,7 @@ type Call_exprContext struct {
 func NewEmptyCall_exprContext() *Call_exprContext {
 	var p = new(Call_exprContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_call_expr
+	p.RuleIndex = TDTLParserRULE_call_expr
 	return p
 }
 
@@ -2689,7 +2689,7 @@ func NewCall_exprContext(parser antlr.Parser, parent antlr.ParserRuleContext, in
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_call_expr
+	p.RuleIndex = TDTLParserRULE_call_expr
 
 	return p
 }
@@ -2701,7 +2701,7 @@ func (s *Call_exprContext) GetKey() antlr.Token { return s.key }
 func (s *Call_exprContext) SetKey(v antlr.Token) { s.key = v }
 
 func (s *Call_exprContext) INDENTIFIER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserINDENTIFIER, 0)
+	return s.GetToken(TDTLParserINDENTIFIER, 0)
 }
 
 func (s *Call_exprContext) AllExpr() []IExprContext {
@@ -2736,20 +2736,20 @@ func (s *Call_exprContext) ToStringTree(ruleNames []string, recog antlr.Recogniz
 }
 
 func (s *Call_exprContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterCall_expr(s)
 	}
 }
 
 func (s *Call_exprContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitCall_expr(s)
 	}
 }
 
-func (p *QingQLParser) Call_expr() (localctx ICall_exprContext) {
+func (p *TDTLParser) Call_expr() (localctx ICall_exprContext) {
 	localctx = NewCall_exprContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 28, QingQLParserRULE_call_expr)
+	p.EnterRule(localctx, 28, TDTLParserRULE_call_expr)
 	var _la int
 
 	defer func() {
@@ -2772,19 +2772,19 @@ func (p *QingQLParser) Call_expr() (localctx ICall_exprContext) {
 	{
 		p.SetState(155)
 
-		var _m = p.Match(QingQLParserINDENTIFIER)
+		var _m = p.Match(TDTLParserINDENTIFIER)
 
 		localctx.(*Call_exprContext).key = _m
 	}
 	{
 		p.SetState(156)
-		p.Match(QingQLParserT__1)
+		p.Match(TDTLParserT__1)
 	}
 	p.SetState(165)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QingQLParserT__1)|(1<<QingQLParserT__3)|(1<<QingQLParserCASE))) != 0) || (((_la-37)&-(0x1f+1)) == 0 && ((1<<uint((_la-37)))&((1<<(QingQLParserTRUE-37))|(1<<(QingQLParserFALSE-37))|(1<<(QingQLParserINDENTIFIER-37))|(1<<(QingQLParserNUMBER-37))|(1<<(QingQLParserINTEGER-37))|(1<<(QingQLParserFLOAT-37))|(1<<(QingQLParserPATHITEM-37))|(1<<(QingQLParserSTRING-37)))) != 0) {
+	if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<TDTLParserT__1)|(1<<TDTLParserT__3)|(1<<TDTLParserCASE))) != 0) || (((_la-37)&-(0x1f+1)) == 0 && ((1<<uint((_la-37)))&((1<<(TDTLParserTRUE-37))|(1<<(TDTLParserFALSE-37))|(1<<(TDTLParserINDENTIFIER-37))|(1<<(TDTLParserNUMBER-37))|(1<<(TDTLParserINTEGER-37))|(1<<(TDTLParserFLOAT-37))|(1<<(TDTLParserPATHITEM-37))|(1<<(TDTLParserSTRING-37)))) != 0) {
 		{
 			p.SetState(157)
 			p.expr(0)
@@ -2793,10 +2793,10 @@ func (p *QingQLParser) Call_expr() (localctx ICall_exprContext) {
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		for _la == QingQLParserT__0 {
+		for _la == TDTLParserT__0 {
 			{
 				p.SetState(158)
-				p.Match(QingQLParserT__0)
+				p.Match(TDTLParserT__0)
 			}
 			{
 				p.SetState(159)
@@ -2811,7 +2811,7 @@ func (p *QingQLParser) Call_expr() (localctx ICall_exprContext) {
 	}
 	{
 		p.SetState(167)
-		p.Match(QingQLParserT__2)
+		p.Match(TDTLParserT__2)
 	}
 
 	return localctx
@@ -2836,7 +2836,7 @@ type AsteriskContext struct {
 func NewEmptyAsteriskContext() *AsteriskContext {
 	var p = new(AsteriskContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_asterisk
+	p.RuleIndex = TDTLParserRULE_asterisk
 	return p
 }
 
@@ -2848,7 +2848,7 @@ func NewAsteriskContext(parser antlr.Parser, parent antlr.ParserRuleContext, inv
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_asterisk
+	p.RuleIndex = TDTLParserRULE_asterisk
 
 	return p
 }
@@ -2863,20 +2863,20 @@ func (s *AsteriskContext) ToStringTree(ruleNames []string, recog antlr.Recognize
 }
 
 func (s *AsteriskContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterAsterisk(s)
 	}
 }
 
 func (s *AsteriskContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitAsterisk(s)
 	}
 }
 
-func (p *QingQLParser) Asterisk() (localctx IAsteriskContext) {
+func (p *TDTLParser) Asterisk() (localctx IAsteriskContext) {
 	localctx = NewAsteriskContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 30, QingQLParserRULE_asterisk)
+	p.EnterRule(localctx, 30, TDTLParserRULE_asterisk)
 
 	defer func() {
 		p.ExitRule()
@@ -2897,7 +2897,7 @@ func (p *QingQLParser) Asterisk() (localctx IAsteriskContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(169)
-		p.Match(QingQLParserMUL)
+		p.Match(TDTLParserMUL)
 	}
 
 	return localctx
@@ -2922,7 +2922,7 @@ type Xpath_nameContext struct {
 func NewEmptyXpath_nameContext() *Xpath_nameContext {
 	var p = new(Xpath_nameContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_xpath_name
+	p.RuleIndex = TDTLParserRULE_xpath_name
 	return p
 }
 
@@ -2934,7 +2934,7 @@ func NewXpath_nameContext(parser antlr.Parser, parent antlr.ParserRuleContext, i
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_xpath_name
+	p.RuleIndex = TDTLParserRULE_xpath_name
 
 	return p
 }
@@ -2973,20 +2973,20 @@ func (s *Xpath_nameContext) ToStringTree(ruleNames []string, recog antlr.Recogni
 }
 
 func (s *Xpath_nameContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterXpath_name(s)
 	}
 }
 
 func (s *Xpath_nameContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitXpath_name(s)
 	}
 }
 
-func (p *QingQLParser) Xpath_name() (localctx IXpath_nameContext) {
+func (p *TDTLParser) Xpath_name() (localctx IXpath_nameContext) {
 	localctx = NewXpath_nameContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 32, QingQLParserRULE_xpath_name)
+	p.EnterRule(localctx, 32, TDTLParserRULE_xpath_name)
 	var _la int
 
 	defer func() {
@@ -3009,23 +3009,23 @@ func (p *QingQLParser) Xpath_name() (localctx IXpath_nameContext) {
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case QingQLParserINDENTIFIER, QingQLParserPATHITEM:
+	case TDTLParserINDENTIFIER, TDTLParserPATHITEM:
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(171)
 			p.Dotnotation()
 		}
 
-	case QingQLParserT__3:
+	case TDTLParserT__3:
 		p.EnterOuterAlt(localctx, 2)
 		p.SetState(173)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		for ok := true; ok; ok = _la == QingQLParserT__3 {
+		for ok := true; ok; ok = _la == TDTLParserT__3 {
 			{
 				p.SetState(172)
-				p.Match(QingQLParserT__3)
+				p.Match(TDTLParserT__3)
 			}
 
 			p.SetState(175)
@@ -3036,7 +3036,7 @@ func (p *QingQLParser) Xpath_name() (localctx IXpath_nameContext) {
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		for ok := true; ok; ok = _la == QingQLParserINDENTIFIER || _la == QingQLParserPATHITEM {
+		for ok := true; ok; ok = _la == TDTLParserINDENTIFIER || _la == TDTLParserPATHITEM {
 			{
 				p.SetState(177)
 				p.Dotnotation()
@@ -3048,7 +3048,7 @@ func (p *QingQLParser) Xpath_name() (localctx IXpath_nameContext) {
 		}
 		{
 			p.SetState(182)
-			p.Match(QingQLParserT__3)
+			p.Match(TDTLParserT__3)
 		}
 
 	default:
@@ -3077,7 +3077,7 @@ type Target_nameContext struct {
 func NewEmptyTarget_nameContext() *Target_nameContext {
 	var p = new(Target_nameContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_target_name
+	p.RuleIndex = TDTLParserRULE_target_name
 	return p
 }
 
@@ -3089,7 +3089,7 @@ func NewTarget_nameContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_target_name
+	p.RuleIndex = TDTLParserRULE_target_name
 
 	return p
 }
@@ -3128,20 +3128,20 @@ func (s *Target_nameContext) ToStringTree(ruleNames []string, recog antlr.Recogn
 }
 
 func (s *Target_nameContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterTarget_name(s)
 	}
 }
 
 func (s *Target_nameContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitTarget_name(s)
 	}
 }
 
-func (p *QingQLParser) Target_name() (localctx ITarget_nameContext) {
+func (p *TDTLParser) Target_name() (localctx ITarget_nameContext) {
 	localctx = NewTarget_nameContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 34, QingQLParserRULE_target_name)
+	p.EnterRule(localctx, 34, TDTLParserRULE_target_name)
 	var _la int
 
 	defer func() {
@@ -3164,23 +3164,23 @@ func (p *QingQLParser) Target_name() (localctx ITarget_nameContext) {
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case QingQLParserINDENTIFIER, QingQLParserPATHITEM:
+	case TDTLParserINDENTIFIER, TDTLParserPATHITEM:
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(186)
 			p.Dotnotation()
 		}
 
-	case QingQLParserT__3:
+	case TDTLParserT__3:
 		p.EnterOuterAlt(localctx, 2)
 		p.SetState(188)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		for ok := true; ok; ok = _la == QingQLParserT__3 {
+		for ok := true; ok; ok = _la == TDTLParserT__3 {
 			{
 				p.SetState(187)
-				p.Match(QingQLParserT__3)
+				p.Match(TDTLParserT__3)
 			}
 
 			p.SetState(190)
@@ -3191,7 +3191,7 @@ func (p *QingQLParser) Target_name() (localctx ITarget_nameContext) {
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-		for ok := true; ok; ok = _la == QingQLParserINDENTIFIER || _la == QingQLParserPATHITEM {
+		for ok := true; ok; ok = _la == TDTLParserINDENTIFIER || _la == TDTLParserPATHITEM {
 			{
 				p.SetState(192)
 				p.Dotnotation()
@@ -3203,7 +3203,7 @@ func (p *QingQLParser) Target_name() (localctx ITarget_nameContext) {
 		}
 		{
 			p.SetState(197)
-			p.Match(QingQLParserT__3)
+			p.Match(TDTLParserT__3)
 		}
 
 	default:
@@ -3232,7 +3232,7 @@ type DotnotationContext struct {
 func NewEmptyDotnotationContext() *DotnotationContext {
 	var p = new(DotnotationContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_dotnotation
+	p.RuleIndex = TDTLParserRULE_dotnotation
 	return p
 }
 
@@ -3244,7 +3244,7 @@ func NewDotnotationContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_dotnotation
+	p.RuleIndex = TDTLParserRULE_dotnotation
 
 	return p
 }
@@ -3252,11 +3252,11 @@ func NewDotnotationContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 func (s *DotnotationContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *DotnotationContext) INDENTIFIER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserINDENTIFIER, 0)
+	return s.GetToken(TDTLParserINDENTIFIER, 0)
 }
 
 func (s *DotnotationContext) PATHITEM() antlr.TerminalNode {
-	return s.GetToken(QingQLParserPATHITEM, 0)
+	return s.GetToken(TDTLParserPATHITEM, 0)
 }
 
 func (s *DotnotationContext) GetRuleContext() antlr.RuleContext {
@@ -3268,20 +3268,20 @@ func (s *DotnotationContext) ToStringTree(ruleNames []string, recog antlr.Recogn
 }
 
 func (s *DotnotationContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterDotnotation(s)
 	}
 }
 
 func (s *DotnotationContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitDotnotation(s)
 	}
 }
 
-func (p *QingQLParser) Dotnotation() (localctx IDotnotationContext) {
+func (p *TDTLParser) Dotnotation() (localctx IDotnotationContext) {
 	localctx = NewDotnotationContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 36, QingQLParserRULE_dotnotation)
+	p.EnterRule(localctx, 36, TDTLParserRULE_dotnotation)
 	var _la int
 
 	defer func() {
@@ -3304,7 +3304,7 @@ func (p *QingQLParser) Dotnotation() (localctx IDotnotationContext) {
 	p.SetState(201)
 	_la = p.GetTokenStream().LA(1)
 
-	if !(_la == QingQLParserINDENTIFIER || _la == QingQLParserPATHITEM) {
+	if !(_la == TDTLParserINDENTIFIER || _la == TDTLParserPATHITEM) {
 		p.GetErrorHandler().RecoverInline(p)
 	} else {
 		p.GetErrorHandler().ReportMatch(p)
@@ -3333,7 +3333,7 @@ type IdentifierWithTOPICITEMContext struct {
 func NewEmptyIdentifierWithTOPICITEMContext() *IdentifierWithTOPICITEMContext {
 	var p = new(IdentifierWithTOPICITEMContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_identifierWithTOPICITEM
+	p.RuleIndex = TDTLParserRULE_identifierWithTOPICITEM
 	return p
 }
 
@@ -3345,7 +3345,7 @@ func NewIdentifierWithTOPICITEMContext(parser antlr.Parser, parent antlr.ParserR
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_identifierWithTOPICITEM
+	p.RuleIndex = TDTLParserRULE_identifierWithTOPICITEM
 
 	return p
 }
@@ -3353,15 +3353,15 @@ func NewIdentifierWithTOPICITEMContext(parser antlr.Parser, parent antlr.ParserR
 func (s *IdentifierWithTOPICITEMContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *IdentifierWithTOPICITEMContext) PATHITEM() antlr.TerminalNode {
-	return s.GetToken(QingQLParserPATHITEM, 0)
+	return s.GetToken(TDTLParserPATHITEM, 0)
 }
 
 func (s *IdentifierWithTOPICITEMContext) NUMBER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserNUMBER, 0)
+	return s.GetToken(TDTLParserNUMBER, 0)
 }
 
 func (s *IdentifierWithTOPICITEMContext) FLOAT() antlr.TerminalNode {
-	return s.GetToken(QingQLParserFLOAT, 0)
+	return s.GetToken(TDTLParserFLOAT, 0)
 }
 
 func (s *IdentifierWithTOPICITEMContext) GetRuleContext() antlr.RuleContext {
@@ -3373,20 +3373,20 @@ func (s *IdentifierWithTOPICITEMContext) ToStringTree(ruleNames []string, recog 
 }
 
 func (s *IdentifierWithTOPICITEMContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterIdentifierWithTOPICITEM(s)
 	}
 }
 
 func (s *IdentifierWithTOPICITEMContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitIdentifierWithTOPICITEM(s)
 	}
 }
 
-func (p *QingQLParser) IdentifierWithTOPICITEM() (localctx IIdentifierWithTOPICITEMContext) {
+func (p *TDTLParser) IdentifierWithTOPICITEM() (localctx IIdentifierWithTOPICITEMContext) {
 	localctx = NewIdentifierWithTOPICITEMContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 38, QingQLParserRULE_identifierWithTOPICITEM)
+	p.EnterRule(localctx, 38, TDTLParserRULE_identifierWithTOPICITEM)
 
 	defer func() {
 		p.ExitRule()
@@ -3411,67 +3411,67 @@ func (p *QingQLParser) IdentifierWithTOPICITEM() (localctx IIdentifierWithTOPICI
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(203)
-			p.Match(QingQLParserPATHITEM)
+			p.Match(TDTLParserPATHITEM)
 		}
 		{
 			p.SetState(204)
-			p.Match(QingQLParserT__4)
+			p.Match(TDTLParserT__4)
 		}
 		{
 			p.SetState(205)
-			p.Match(QingQLParserT__5)
+			p.Match(TDTLParserT__5)
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(206)
-			p.Match(QingQLParserPATHITEM)
+			p.Match(TDTLParserPATHITEM)
 		}
 		{
 			p.SetState(207)
-			p.Match(QingQLParserT__4)
+			p.Match(TDTLParserT__4)
 		}
 		{
 			p.SetState(208)
-			p.Match(QingQLParserNUMBER)
+			p.Match(TDTLParserNUMBER)
 		}
 		{
 			p.SetState(209)
-			p.Match(QingQLParserT__5)
+			p.Match(TDTLParserT__5)
 		}
 
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
 			p.SetState(210)
-			p.Match(QingQLParserPATHITEM)
+			p.Match(TDTLParserPATHITEM)
 		}
 		{
 			p.SetState(211)
-			p.Match(QingQLParserT__4)
+			p.Match(TDTLParserT__4)
 		}
 		{
 			p.SetState(212)
-			p.Match(QingQLParserT__6)
+			p.Match(TDTLParserT__6)
 		}
 		{
 			p.SetState(213)
-			p.Match(QingQLParserT__5)
+			p.Match(TDTLParserT__5)
 		}
 
 	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
 			p.SetState(214)
-			p.Match(QingQLParserPATHITEM)
+			p.Match(TDTLParserPATHITEM)
 		}
 
 	case 5:
 		p.EnterOuterAlt(localctx, 5)
 		{
 			p.SetState(215)
-			p.Match(QingQLParserFLOAT)
+			p.Match(TDTLParserFLOAT)
 		}
 
 	}
@@ -3498,7 +3498,7 @@ type IdentifierWithQualifierContext struct {
 func NewEmptyIdentifierWithQualifierContext() *IdentifierWithQualifierContext {
 	var p = new(IdentifierWithQualifierContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_identifierWithQualifier
+	p.RuleIndex = TDTLParserRULE_identifierWithQualifier
 	return p
 }
 
@@ -3510,7 +3510,7 @@ func NewIdentifierWithQualifierContext(parser antlr.Parser, parent antlr.ParserR
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_identifierWithQualifier
+	p.RuleIndex = TDTLParserRULE_identifierWithQualifier
 
 	return p
 }
@@ -3518,11 +3518,11 @@ func NewIdentifierWithQualifierContext(parser antlr.Parser, parent antlr.ParserR
 func (s *IdentifierWithQualifierContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *IdentifierWithQualifierContext) INDENTIFIER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserINDENTIFIER, 0)
+	return s.GetToken(TDTLParserINDENTIFIER, 0)
 }
 
 func (s *IdentifierWithQualifierContext) NUMBER() antlr.TerminalNode {
-	return s.GetToken(QingQLParserNUMBER, 0)
+	return s.GetToken(TDTLParserNUMBER, 0)
 }
 
 func (s *IdentifierWithQualifierContext) GetRuleContext() antlr.RuleContext {
@@ -3534,20 +3534,20 @@ func (s *IdentifierWithQualifierContext) ToStringTree(ruleNames []string, recog 
 }
 
 func (s *IdentifierWithQualifierContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.EnterIdentifierWithQualifier(s)
 	}
 }
 
 func (s *IdentifierWithQualifierContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
+	if listenerT, ok := listener.(TDTLListener); ok {
 		listenerT.ExitIdentifierWithQualifier(s)
 	}
 }
 
-func (p *QingQLParser) IdentifierWithQualifier() (localctx IIdentifierWithQualifierContext) {
+func (p *TDTLParser) IdentifierWithQualifier() (localctx IIdentifierWithQualifierContext) {
 	localctx = NewIdentifierWithQualifierContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 40, QingQLParserRULE_identifierWithQualifier)
+	p.EnterRule(localctx, 40, TDTLParserRULE_identifierWithQualifier)
 
 	defer func() {
 		p.ExitRule()
@@ -3572,48 +3572,48 @@ func (p *QingQLParser) IdentifierWithQualifier() (localctx IIdentifierWithQualif
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(218)
-			p.Match(QingQLParserINDENTIFIER)
+			p.Match(TDTLParserINDENTIFIER)
 		}
 		{
 			p.SetState(219)
-			p.Match(QingQLParserT__7)
+			p.Match(TDTLParserT__7)
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(220)
-			p.Match(QingQLParserINDENTIFIER)
+			p.Match(TDTLParserINDENTIFIER)
 		}
 		{
 			p.SetState(221)
-			p.Match(QingQLParserT__4)
+			p.Match(TDTLParserT__4)
 		}
 		{
 			p.SetState(222)
-			p.Match(QingQLParserNUMBER)
+			p.Match(TDTLParserNUMBER)
 		}
 		{
 			p.SetState(223)
-			p.Match(QingQLParserT__5)
+			p.Match(TDTLParserT__5)
 		}
 
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
 			p.SetState(224)
-			p.Match(QingQLParserINDENTIFIER)
+			p.Match(TDTLParserINDENTIFIER)
 		}
 		{
 			p.SetState(225)
-			p.Match(QingQLParserT__8)
+			p.Match(TDTLParserT__8)
 		}
 
 	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
 			p.SetState(226)
-			p.Match(QingQLParserINDENTIFIER)
+			p.Match(TDTLParserINDENTIFIER)
 		}
 
 	}
@@ -3621,7 +3621,7 @@ func (p *QingQLParser) IdentifierWithQualifier() (localctx IIdentifierWithQualif
 	return localctx
 }
 
-func (p *QingQLParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
+func (p *TDTLParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
 	switch ruleIndex {
 	case 9:
 		var t *ExprContext = nil
@@ -3635,7 +3635,7 @@ func (p *QingQLParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex 
 	}
 }
 
-func (p *QingQLParser) Expr_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+func (p *TDTLParser) Expr_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 0:
 		return p.Precpred(p.GetParserRuleContext(), 5)

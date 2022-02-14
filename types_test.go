@@ -1,4 +1,4 @@
-package ruleql
+package tdtl
 
 import (
 	"testing"

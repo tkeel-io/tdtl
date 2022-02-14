@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package ruleql
+package tdtl
 
 import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
@@ -27,7 +27,7 @@ type tkql struct {
 	target    string
 	sources   map[string][]string
 	tentacles []tql.TentacleConfig
-	listener  *QingQLListener
+	listener  *TDTLListener
 }
 
 type TQL interface {

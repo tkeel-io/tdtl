@@ -1,26 +1,25 @@
 /*
- * Copyright (C) 2019 Yunify, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this work except in compliance with the License.
- * You may obtain a copy of the License in the LICENSE file, or at:
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+Copyright 2021 The tKeel Authors.
 
-package ruleql
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+package tdtl
 
 import (
 	"fmt"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/tkeel-io/tql/json/jsonparser"
-	"github.com/tkeel-io/tql/parser"
+	"github.com/tkeel-io/tdtl/json/jsonparser"
+	"github.com/tkeel-io/tdtl/parser"
 	"strings"
 )
 
@@ -59,21 +58,21 @@ func ParseExpr(expr string) (Expr, error) {
 	return listener.Expr(), listener.error()
 }
 
-func parse(expr string) (*parser.QingQLParser, *QingQLListener) {
+func parse(expr string) (*parser.TDTLParser, *TDTLListener) {
 	//expr = strings.ReplaceAll(expr, "\n", " ")
 	// Setup the input
 	is := antlr.NewInputStream(expr)
 
 	// Create the Lexer
-	lexer := parser.NewQingQLLexer(is)
+	lexer := parser.NewTDTLLexer(is)
 	stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
 
 	// Create the Parser
-	parse := parser.NewQingQLParser(stream)
+	parse := parser.NewTDTLParser(stream)
 	parse.RemoveErrorListeners()
 
 	// Finally parseField the expression (by walking the tree)
-	var listener QingQLListener
+	var listener TDTLListener
 	parse.AddErrorListener(&listener)
 	return parse, &listener
 }

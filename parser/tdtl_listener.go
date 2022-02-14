@@ -1,11 +1,11 @@
-// Generated from QingQL.g4 by ANTLR 4.7.
+// Generated from TDTL.g4 by ANTLR 4.7.
 
-package parser // QingQL
+package parser // TDTL
 
 import "github.com/antlr/antlr4/runtime/Go/antlr"
 
-// QingQLListener is a complete listener for a parse tree produced by QingQLParser.
-type QingQLListener interface {
+// TDTLListener is a complete listener for a parse tree produced by TDTLParser.
+type TDTLListener interface {
 	antlr.ParseTreeListener
 
 	// EnterRoot is called when entering the root production.

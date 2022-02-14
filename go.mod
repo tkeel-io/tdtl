@@ -1,4 +1,4 @@
-module github.com/tkeel-io/tql
+module github.com/tkeel-io/tdtl
 
 go 1.17
 

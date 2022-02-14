@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package ruleql
+package tdtl
 
 import (
 	"fmt"
@@ -31,7 +31,9 @@ insert into entity3 select entity1.property1 as property1, entity2.property2.nam
 }
 
 func TestExec3(t *testing.T) {
-	tqlString := `insert into entity3 select entity1.property1 as target1.uuu, entity2.property2.name as target2, entity1.property1 + entity2.property3 as target3`
+	tqlString := `insert into entity3 
+	select entity4.*,entity1.property1, entity1.property1 as target1.uuu, 
+			entity2.property2.name as target2, entity1.property1 + '/' + entity2.property3 as target3`
 
 	tqlInst, err := NewTKQL(tqlString)
 	if nil != err {
@@ -39,7 +41,7 @@ func TestExec3(t *testing.T) {
 	}
 
 	t.Log(err)
-
+	t.Log(tqlString)
 	t.Log("target: ", tqlInst.Target())
 	t.Log("sources: ", tqlInst.Entities())
 	for _, tentacle := range tqlInst.Tentacles() {

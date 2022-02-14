@@ -1,23 +1,22 @@
 /*
- * Copyright (C) 2019 Yunify, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this work except in compliance with the License.
- * You may obtain a copy of the License in the LICENSE file, or at:
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+Copyright 2021 The tKeel Authors.
 
-package ruleql
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+package tdtl
 
 import (
-	"github.com/tkeel-io/tql/parser"
+	"github.com/tkeel-io/tdtl/parser"
 	"math"
 	"strings"
 )
@@ -196,7 +195,7 @@ func evalBinaryExpr(ctx Context, expr *BinaryExpr) Node {
 func evalBinaryOverload(op int, lhs, rhs Node) Node {
 	// overload '+'
 	switch op {
-	case parser.QingQLParserADD:
+	case parser.TDTLParserADD:
 		switch lhs := lhs.(type) {
 		case StringNode:
 			switch rhs := rhs.(type) {
@@ -299,17 +298,17 @@ func evalBinaryString(op int, lhs, rhs StringNode) Node {
 	// The result will be 0 if a==b, -1 if a < b, and +1 if a > b.
 	ret := strings.Compare(string(lhs), string(rhs))
 	switch op {
-	case parser.QingQLLexerEQ:
+	case parser.TDTLLexerEQ:
 		return BoolNode(ret == 0)
-	case parser.QingQLLexerLT:
+	case parser.TDTLLexerLT:
 		return BoolNode(ret < 0)
-	case parser.QingQLLexerLTE:
+	case parser.TDTLLexerLTE:
 		return BoolNode(ret <= 0)
-	case parser.QingQLLexerGT:
+	case parser.TDTLLexerGT:
 		return BoolNode(ret > 0)
-	case parser.QingQLLexerGTE:
+	case parser.TDTLLexerGTE:
 		return BoolNode(ret >= 0)
-	case parser.QingQLLexerNE:
+	case parser.TDTLLexerNE:
 		return BoolNode(ret != 0)
 	}
 	return UNDEFINED_RESULT
@@ -317,30 +316,30 @@ func evalBinaryString(op int, lhs, rhs StringNode) Node {
 
 func evalBinaryInt(op int, lhs, rhs IntNode) Node {
 	switch op {
-	case parser.QingQLParserADD:
+	case parser.TDTLParserADD:
 		return lhs + rhs
-	case parser.QingQLParserSUB:
+	case parser.TDTLParserSUB:
 		return lhs - rhs
-	case parser.QingQLParserMUL:
+	case parser.TDTLParserMUL:
 		return lhs * rhs
-	case parser.QingQLParserDIV:
+	case parser.TDTLParserDIV:
 		if rhs == 0 {
 			return UNDEFINED_RESULT
 		}
 		return lhs / rhs
-	case parser.QingQLParserMOD:
+	case parser.TDTLParserMOD:
 		return lhs % rhs
-	case parser.QingQLLexerEQ:
+	case parser.TDTLLexerEQ:
 		return BoolNode(lhs == rhs)
-	case parser.QingQLLexerNE:
+	case parser.TDTLLexerNE:
 		return BoolNode(lhs != rhs)
-	case parser.QingQLLexerLT:
+	case parser.TDTLLexerLT:
 		return BoolNode(lhs < rhs)
-	case parser.QingQLLexerLTE:
+	case parser.TDTLLexerLTE:
 		return BoolNode(lhs <= rhs)
-	case parser.QingQLLexerGT:
+	case parser.TDTLLexerGT:
 		return BoolNode(lhs > rhs)
-	case parser.QingQLLexerGTE:
+	case parser.TDTLLexerGTE:
 		return BoolNode(lhs >= rhs)
 	}
 	return UNDEFINED_RESULT
@@ -348,30 +347,30 @@ func evalBinaryInt(op int, lhs, rhs IntNode) Node {
 
 func evalBinaryFloat(op int, lhs, rhs FloatNode) Node {
 	switch op {
-	case parser.QingQLParserADD:
+	case parser.TDTLParserADD:
 		return lhs + rhs
-	case parser.QingQLParserSUB:
+	case parser.TDTLParserSUB:
 		return lhs - rhs
-	case parser.QingQLParserMUL:
+	case parser.TDTLParserMUL:
 		return lhs * rhs
-	case parser.QingQLParserDIV:
+	case parser.TDTLParserDIV:
 		if rhs == 0 {
 			return UNDEFINED_RESULT
 		}
 		return lhs / rhs
-	case parser.QingQLParserMOD:
+	case parser.TDTLParserMOD:
 		return FloatNode(math.Mod(float64(lhs), float64(rhs)))
-	case parser.QingQLLexerEQ:
+	case parser.TDTLLexerEQ:
 		return BoolNode(lhs == rhs)
-	case parser.QingQLLexerNE:
+	case parser.TDTLLexerNE:
 		return BoolNode(lhs != rhs)
-	case parser.QingQLLexerLT:
+	case parser.TDTLLexerLT:
 		return BoolNode(lhs < rhs)
-	case parser.QingQLLexerLTE:
+	case parser.TDTLLexerLTE:
 		return BoolNode(lhs <= rhs)
-	case parser.QingQLLexerGT:
+	case parser.TDTLLexerGT:
 		return BoolNode(lhs > rhs)
-	case parser.QingQLLexerGTE:
+	case parser.TDTLLexerGTE:
 		return BoolNode(lhs >= rhs)
 	}
 	return UNDEFINED_RESULT
@@ -379,15 +378,15 @@ func evalBinaryFloat(op int, lhs, rhs FloatNode) Node {
 
 func evalBinaryBool(op int, lhs, rhs BoolNode) Node {
 	switch op {
-	case parser.QingQLParserAND:
+	case parser.TDTLParserAND:
 		return BoolNode(lhs && rhs)
-	case parser.QingQLParserOR:
+	case parser.TDTLParserOR:
 		return BoolNode(lhs || rhs)
-	case parser.QingQLParserEQ:
+	case parser.TDTLParserEQ:
 		return BoolNode(lhs == rhs)
-	case parser.QingQLParserNE:
+	case parser.TDTLParserNE:
 		return BoolNode(lhs != rhs)
-	case parser.QingQLParserNOT:
+	case parser.TDTLParserNOT:
 		return !rhs
 	}
 	return UNDEFINED_RESULT
@@ -432,11 +431,11 @@ func evalJSONExpr(ctx Context, expr *JSONPathExpr) Node {
 
 func isBooleanOP(op int) bool {
 	switch op {
-	case parser.QingQLParserEQ,
-		parser.QingQLParserGT,
-		parser.QingQLParserLT,
-		parser.QingQLParserGTE,
-		parser.QingQLParserLTE:
+	case parser.TDTLParserEQ,
+		parser.TDTLParserGT,
+		parser.TDTLParserLT,
+		parser.TDTLParserGTE,
+		parser.TDTLParserLTE:
 		return true
 	}
 	return false
@@ -444,9 +443,9 @@ func isBooleanOP(op int) bool {
 
 func isLogicOP(op int) bool {
 	switch op {
-	case parser.QingQLParserAND,
-		parser.QingQLParserOR,
-		parser.QingQLParserNOT:
+	case parser.TDTLParserAND,
+		parser.TDTLParserOR,
+		parser.TDTLParserNOT:
 		return true
 	}
 	return false

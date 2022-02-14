@@ -1,4 +1,4 @@
-// Generated from QingQL.g4 by ANTLR 4.7.
+// Generated from TDTL.g4 by ANTLR 4.7.
 
 package parser
 
@@ -274,7 +274,7 @@ var lexerRuleNames = []string{
 	"M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "STUFF",
 }
 
-type QingQLLexer struct {
+type TDTLLexer struct {
 	*antlr.BaseLexer
 	channelNames []string
 	modeNames    []string
@@ -289,9 +289,9 @@ func init() {
 	}
 }
 
-func NewQingQLLexer(input antlr.CharStream) *QingQLLexer {
+func NewTDTLLexer(input antlr.CharStream) *TDTLLexer {
 
-	l := new(QingQLLexer)
+	l := new(TDTLLexer)
 
 	l.BaseLexer = antlr.NewBaseLexer(input)
 	l.Interpreter = antlr.NewLexerATNSimulator(l, lexerAtn, lexerDecisionToDFA, antlr.NewPredictionContextCache())
@@ -301,59 +301,59 @@ func NewQingQLLexer(input antlr.CharStream) *QingQLLexer {
 	l.RuleNames = lexerRuleNames
 	l.LiteralNames = lexerLiteralNames
 	l.SymbolicNames = lexerSymbolicNames
-	l.GrammarFileName = "QingQL.g4"
+	l.GrammarFileName = "TDTL.g4"
 	// TODO: l.EOF = antlr.TokenEOF
 
 	return l
 }
 
-// QingQLLexer tokens.
+// TDTLLexer tokens.
 const (
-	QingQLLexerT__0        = 1
-	QingQLLexerT__1        = 2
-	QingQLLexerT__2        = 3
-	QingQLLexerT__3        = 4
-	QingQLLexerT__4        = 5
-	QingQLLexerT__5        = 6
-	QingQLLexerT__6        = 7
-	QingQLLexerT__7        = 8
-	QingQLLexerT__8        = 9
-	QingQLLexerINSERT      = 10
-	QingQLLexerINTO        = 11
-	QingQLLexerAS          = 12
-	QingQLLexerAND         = 13
-	QingQLLexerCASE        = 14
-	QingQLLexerELSE        = 15
-	QingQLLexerEND         = 16
-	QingQLLexerEQ          = 17
-	QingQLLexerFROM        = 18
-	QingQLLexerGT          = 19
-	QingQLLexerGTE         = 20
-	QingQLLexerLT          = 21
-	QingQLLexerLTE         = 22
-	QingQLLexerNE          = 23
-	QingQLLexerNOT         = 24
-	QingQLLexerNULL        = 25
-	QingQLLexerOR          = 26
-	QingQLLexerSELECT      = 27
-	QingQLLexerTHEN        = 28
-	QingQLLexerWHERE       = 29
-	QingQLLexerWHEN        = 30
-	QingQLLexerMUL         = 31
-	QingQLLexerDIV         = 32
-	QingQLLexerMOD         = 33
-	QingQLLexerADD         = 34
-	QingQLLexerSUB         = 35
-	QingQLLexerDOT         = 36
-	QingQLLexerTRUE        = 37
-	QingQLLexerFALSE       = 38
-	QingQLLexerINDENTIFIER = 39
-	QingQLLexerNUMBER      = 40
-	QingQLLexerINTEGER     = 41
-	QingQLLexerFLOAT       = 42
-	QingQLLexerTOPICITEM   = 43
-	QingQLLexerPATHITEM    = 44
-	QingQLLexerARRAYITEM   = 45
-	QingQLLexerSTRING      = 46
-	QingQLLexerWHITESPACE  = 47
+	TDTLLexerT__0        = 1
+	TDTLLexerT__1        = 2
+	TDTLLexerT__2        = 3
+	TDTLLexerT__3        = 4
+	TDTLLexerT__4        = 5
+	TDTLLexerT__5        = 6
+	TDTLLexerT__6        = 7
+	TDTLLexerT__7        = 8
+	TDTLLexerT__8        = 9
+	TDTLLexerINSERT      = 10
+	TDTLLexerINTO        = 11
+	TDTLLexerAS          = 12
+	TDTLLexerAND         = 13
+	TDTLLexerCASE        = 14
+	TDTLLexerELSE        = 15
+	TDTLLexerEND         = 16
+	TDTLLexerEQ          = 17
+	TDTLLexerFROM        = 18
+	TDTLLexerGT          = 19
+	TDTLLexerGTE         = 20
+	TDTLLexerLT          = 21
+	TDTLLexerLTE         = 22
+	TDTLLexerNE          = 23
+	TDTLLexerNOT         = 24
+	TDTLLexerNULL        = 25
+	TDTLLexerOR          = 26
+	TDTLLexerSELECT      = 27
+	TDTLLexerTHEN        = 28
+	TDTLLexerWHERE       = 29
+	TDTLLexerWHEN        = 30
+	TDTLLexerMUL         = 31
+	TDTLLexerDIV         = 32
+	TDTLLexerMOD         = 33
+	TDTLLexerADD         = 34
+	TDTLLexerSUB         = 35
+	TDTLLexerDOT         = 36
+	TDTLLexerTRUE        = 37
+	TDTLLexerFALSE       = 38
+	TDTLLexerINDENTIFIER = 39
+	TDTLLexerNUMBER      = 40
+	TDTLLexerINTEGER     = 41
+	TDTLLexerFLOAT       = 42
+	TDTLLexerTOPICITEM   = 43
+	TDTLLexerPATHITEM    = 44
+	TDTLLexerARRAYITEM   = 45
+	TDTLLexerSTRING      = 46
+	TDTLLexerWHITESPACE  = 47
 )

@@ -1,35 +1,34 @@
 /*
- * Copyright (C) 2019 Yunify, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this work except in compliance with the License.
- * You may obtain a copy of the License in the LICENSE file, or at:
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+Copyright 2021 The tKeel Authors.
 
-package ruleql
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+package tdtl
 
 import (
 	"context"
 	"errors"
 	"fmt"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/tkeel-io/tql/parser"
+	"github.com/tkeel-io/tdtl/parser"
 	"strconv"
 	"strings"
 )
 
-//QingQLListener construct expr
-type QingQLListener struct {
+//TDTLListener construct expr
+type TDTLListener struct {
 	ctx context.Context
-	*parser.BaseQingQLListener
+	*parser.BaseTDTLListener
 	stack   []Expr
 	target  string
 	sources map[string][]string
@@ -40,11 +39,11 @@ type QingQLListener struct {
 	errors []string
 }
 
-func (l *QingQLListener) setTarget(target string) {
+func (l *TDTLListener) setTarget(target string) {
 	l.target = target
 }
 
-func (l *QingQLListener) addSource(source string, expr string) {
+func (l *TDTLListener) addSource(source string, expr string) {
 	if l.sources == nil {
 		l.sources = map[string][]string{}
 	}
@@ -55,22 +54,22 @@ func (l *QingQLListener) addSource(source string, expr string) {
 	l.sources[source] = append(l.sources[source], expr)
 }
 
-func (l *QingQLListener) addFields(alias string, expr string) {
+func (l *TDTLListener) addFields(alias string, expr string) {
 	if l.fields == nil {
 		l.fields = map[string]string{}
 	}
 	l.fields[alias] = expr
 }
 
-func (l *QingQLListener) appendErrorf(format string, a ...interface{}) {
+func (l *TDTLListener) appendErrorf(format string, a ...interface{}) {
 	l.errors = append(l.errors, fmt.Sprintf(format, a...))
 }
 
-func (l *QingQLListener) push(i Expr) {
+func (l *TDTLListener) push(i Expr) {
 	l.stack = append(l.stack, i)
 }
 
-func (l *QingQLListener) pop() Expr {
+func (l *TDTLListener) pop() Expr {
 	if len(l.stack) < 1 {
 		//panic("stack is empty unable to pop")
 		return nil
@@ -86,11 +85,11 @@ func (l *QingQLListener) pop() Expr {
 }
 
 //Expr expr
-func (l *QingQLListener) Expr() Expr {
+func (l *TDTLListener) Expr() Expr {
 	return l.stack[len(l.stack)-1]
 }
 
-func (l *QingQLListener) ExitRoot(c *parser.RootContext) {
+func (l *TDTLListener) ExitRoot(c *parser.RootContext) {
 	//fmt.Println("ExitRoot")
 	r := &SelectStatementExpr{
 		filter: &FilterExpr{},
@@ -108,13 +107,13 @@ func (l *QingQLListener) ExitRoot(c *parser.RootContext) {
 }
 
 //ExitTarget construct target entity from select statement
-func (l *QingQLListener) ExitTarget(c *parser.TargetContext) {
+func (l *TDTLListener) ExitTarget(c *parser.TargetContext) {
 	//fmt.Println("ExitTarget", c.GetText())
 	l.setTarget(c.GetText())
 }
 
 //ExitFields construct fields from select statement
-func (l *QingQLListener) ExitFields(c *parser.FieldsContext) {
+func (l *TDTLListener) ExitFields(c *parser.FieldsContext) {
 	//fmt.Println("ExitFields")
 	var (
 		size = len(c.AllField_elem())
@@ -133,26 +132,26 @@ func (l *QingQLListener) ExitFields(c *parser.FieldsContext) {
 }
 
 //ExitFieldElemExpr
-func (l *QingQLListener) ExitFieldElemExpr(c *parser.FieldElemExprContext) {
+func (l *TDTLListener) ExitFieldElemExpr(c *parser.FieldElemExprContext) {
 	//fmt.Println("ExitFieldElemExpr", c.GetText())
 
 }
 
-func (l *QingQLListener) ExitFieldElemAs(c *parser.FieldElemAsContext) {
+func (l *TDTLListener) ExitFieldElemAs(c *parser.FieldElemAsContext) {
 	//fmt.Println("ExitFieldElemAs", c.GetText())
 }
 
 //TODO
-//func (l *QingQLListener) ExitExprElemSource(c *parser.ExprElemSourceContext) {
+//func (l *TDTLListener) ExitExprElemSource(c *parser.ExprElemSourceContext) {
 //	//fmt.Println("ExitExprElemSource", c.GetText(), c.SourceEntity().GetText())
 //}
 
-func (l *QingQLListener) ExitFieldElemSource(c *parser.FieldElemSourceContext) {
+func (l *TDTLListener) ExitFieldElemSource(c *parser.FieldElemSourceContext) {
 	//fmt.Println("ExitFieldElemSource", c.GetText())
 	l.addSource(c.SourceEntity().GetText(), c.GetText())
 }
 
-func (l *QingQLListener) ExitTargetAsElem(c *parser.TargetAsElemContext) {
+func (l *TDTLListener) ExitTargetAsElem(c *parser.TargetAsElemContext) {
 	//fmt.Println("ExitTargetField", c.GetText(), c.Expr().GetText(), c.Target_name())
 	var alias string
 	expr := l.pop()
@@ -169,7 +168,7 @@ func (l *QingQLListener) ExitTargetAsElem(c *parser.TargetAsElemContext) {
 	}
 }
 
-func (l *QingQLListener) ExitBinary(c *parser.BinaryContext) {
+func (l *TDTLListener) ExitBinary(c *parser.BinaryContext) {
 	right, left := l.pop(), l.pop()
 	//fmt.Println("ExitBinary", c.GetText(), left, c.GetOp().GetText(), right)
 	l.push(&BinaryExpr{
@@ -179,7 +178,7 @@ func (l *QingQLListener) ExitBinary(c *parser.BinaryContext) {
 	})
 }
 
-func (l *QingQLListener) ExitString(c *parser.StringContext) {
+func (l *TDTLListener) ExitString(c *parser.StringContext) {
 	//fmt.Println("ExitString", c.GetText())
 	str := c.GetText()
 	if len(str) >= 2 &&
@@ -189,7 +188,7 @@ func (l *QingQLListener) ExitString(c *parser.StringContext) {
 	}
 }
 
-func (l *QingQLListener) ExitInteger(c *parser.IntegerContext) {
+func (l *TDTLListener) ExitInteger(c *parser.IntegerContext) {
 	//fmt.Println("ExitInteger", c.GetText())
 	i, err := strconv.ParseInt(c.GetText(), 10, 64)
 	if err != nil {
@@ -198,7 +197,7 @@ func (l *QingQLListener) ExitInteger(c *parser.IntegerContext) {
 	l.push(IntNode(i))
 }
 
-func (l *QingQLListener) ExitFloat(c *parser.FloatContext) {
+func (l *TDTLListener) ExitFloat(c *parser.FloatContext) {
 	//fmt.Println("ExitFloat", c.GetText())
 	i, err := strconv.ParseFloat(c.GetText(), 64)
 	if err != nil {
@@ -207,7 +206,7 @@ func (l *QingQLListener) ExitFloat(c *parser.FloatContext) {
 	l.push(FloatNode(i))
 }
 
-func (l *QingQLListener) ExitBoolean(c *parser.BooleanContext) {
+func (l *TDTLListener) ExitBoolean(c *parser.BooleanContext) {
 	//fmt.Println("ExitBoolean", c.GetText())
 	i, err := strconv.ParseBool(strings.ToLower(c.GetText()))
 	if err != nil {
@@ -216,7 +215,7 @@ func (l *QingQLListener) ExitBoolean(c *parser.BooleanContext) {
 	l.push(BoolNode(i))
 }
 
-func (l *QingQLListener) ExitXpath_name(c *parser.Xpath_nameContext) {
+func (l *TDTLListener) ExitXpath_name(c *parser.Xpath_nameContext) {
 	//fmt.Println("ExitXpath_name", c.GetText())
 	str := c.GetText()
 	expr := ""
@@ -237,7 +236,7 @@ func (l *QingQLListener) ExitXpath_name(c *parser.Xpath_nameContext) {
 	//error
 }
 
-func (l *QingQLListener) ExitCall_expr(c *parser.Call_exprContext) {
+func (l *TDTLListener) ExitCall_expr(c *parser.Call_exprContext) {
 	//fmt.Println("ExitCall_expr", c.GetText(), c.AllExpr())
 	n := len(c.AllExpr())
 	temp := make([]Expr, 0, n)
@@ -255,7 +254,7 @@ func (l *QingQLListener) ExitCall_expr(c *parser.Call_exprContext) {
 	})
 }
 
-func (l *QingQLListener) ExitSwitch_stmt(c *parser.Switch_stmtContext) {
+func (l *TDTLListener) ExitSwitch_stmt(c *parser.Switch_stmtContext) {
 	//fmt.Println("[-]ExitSwitch_stmt", c.GetText(), len(c.AllExpr()))
 	n := len(c.AllExpr())
 	expr := &SwitchExpr{
@@ -283,38 +282,38 @@ func (l *QingQLListener) ExitSwitch_stmt(c *parser.Switch_stmtContext) {
 	l.push(expr)
 }
 
-func (l *QingQLListener) ExitDotnotation(c *parser.DotnotationContext) {
+func (l *TDTLListener) ExitDotnotation(c *parser.DotnotationContext) {
 	//fmt.Println("ExitDotnotation", c.GetText())
 }
 
-func (l *QingQLListener) ExitIdentifierWithQualifier(c *parser.IdentifierWithQualifierContext) {
+func (l *TDTLListener) ExitIdentifierWithQualifier(c *parser.IdentifierWithQualifierContext) {
 	//fmt.Println("IdentifierWithQualifier", c.GetText())
 }
 
-func (l *QingQLListener) ExitIdentifierWithTOPICITEM(c *parser.IdentifierWithTOPICITEMContext) {
+func (l *TDTLListener) ExitIdentifierWithTOPICITEM(c *parser.IdentifierWithTOPICITEMContext) {
 	//fmt.Println("IdentifierWithTOPICITEM", c.GetText())
 }
 
-func (l *QingQLListener) SyntaxError(recognizer antlr.Recognizer, offendingSymbol interface{}, line, column int, msg string, e antlr.RecognitionException) {
+func (l *TDTLListener) SyntaxError(recognizer antlr.Recognizer, offendingSymbol interface{}, line, column int, msg string, e antlr.RecognitionException) {
 	//fmt.Println("SyntaxError", recognizer, offendingSymbol, line, column, msg, e)
 	l.errors = append(l.errors, fmt.Sprintf("[%d:%d]%s", line, column, msg))
 
 	return
 }
 
-func (l *QingQLListener) ReportAmbiguity(recognizer antlr.Parser, dfa *antlr.DFA, startIndex, stopIndex int, exact bool, ambigAlts *antlr.BitSet, configs antlr.ATNConfigSet) {
+func (l *TDTLListener) ReportAmbiguity(recognizer antlr.Parser, dfa *antlr.DFA, startIndex, stopIndex int, exact bool, ambigAlts *antlr.BitSet, configs antlr.ATNConfigSet) {
 	//fmt.Println("ReportAmbiguity", recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs)
 }
 
-func (l *QingQLListener) ReportAttemptingFullContext(recognizer antlr.Parser, dfa *antlr.DFA, startIndex, stopIndex int, conflictingAlts *antlr.BitSet, configs antlr.ATNConfigSet) {
+func (l *TDTLListener) ReportAttemptingFullContext(recognizer antlr.Parser, dfa *antlr.DFA, startIndex, stopIndex int, conflictingAlts *antlr.BitSet, configs antlr.ATNConfigSet) {
 	//fmt.Println("ReportAttemptingFullContext", recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs)
 }
 
-func (l *QingQLListener) ReportContextSensitivity(recognizer antlr.Parser, dfa *antlr.DFA, startIndex, stopIndex, prediction int, configs antlr.ATNConfigSet) {
+func (l *TDTLListener) ReportContextSensitivity(recognizer antlr.Parser, dfa *antlr.DFA, startIndex, stopIndex, prediction int, configs antlr.ATNConfigSet) {
 	//fmt.Println("ReportContextSensitivity", recognizer, dfa, startIndex, stopIndex, prediction, configs)
 }
 
-func (l *QingQLListener) error() error {
+func (l *TDTLListener) error() error {
 	if len(l.errors) == 0 {
 		return nil
 	}

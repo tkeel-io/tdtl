@@ -21,7 +21,7 @@
  * 4. 支持action模板
  */
 
-grammar QingQL;
+grammar TDTL;
 
 // 1. Tokens & KeyWord
 // 1.1 KeyWord

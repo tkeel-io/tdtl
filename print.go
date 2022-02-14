@@ -4,11 +4,11 @@
 
 // This file contains printing support for ASTs.
 
-package ruleql
+package tdtl
 
 import (
 	"fmt"
-	"github.com/tkeel-io/tql/parser"
+	"github.com/tkeel-io/tdtl/parser"
 	"go/token"
 	"io"
 	"os"
@@ -19,7 +19,7 @@ import (
 var SymbolicNames []string
 
 func init() {
-	ps := parser.NewQingQLParser(nil)
+	ps := parser.NewTDTLParser(nil)
 	SymbolicNames = ps.SymbolicNames
 }
 
