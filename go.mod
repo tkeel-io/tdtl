@@ -18,6 +18,9 @@ require (
 	github.com/tidwall/match v1.1.1
 	github.com/tidwall/pretty v1.2.0
 	github.com/tkeel-io/core v0.3.0
+)
+
+require (
 	github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/jtolds/gls v4.20.0+incompatible // indirect

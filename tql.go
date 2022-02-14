@@ -17,31 +17,65 @@ limitations under the License.
 package ruleql
 
 import (
-	"github.com/tkeel-io/core/pkg/constraint"
+	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"github.com/tkeel-io/core/pkg/tql"
 )
 
-var _ tql.TQL = (*tkql)(nil)
+var _ TQL = (*tkql)(nil)
 
 type tkql struct {
+	target    string
+	sources   map[string][]string
+	tentacles []tql.TentacleConfig
+	listener  *QingQLListener
 }
 
-func NewTKQL(sql string) (tql.TQL, error) {
-	return &tkql{}, nil
+type TQL interface {
+	Target() string
+	Entities() map[string][]string
+	Tentacles() []tql.TentacleConfig
+	Exec(map[string]Node) (map[string]Node, error)
+}
+
+func NewTKQL(sql string) (TQL, error) {
+	parse, listener := parse(sql)
+	antlr.ParseTreeWalkerDefault.Walk(listener, parse.Root())
+	err := listener.error()
+	if err != nil {
+		return nil, err
+	}
+	return &tkql{
+		listener: listener,
+		target:   listener.target,
+		sources:  listener.sources,
+		//fields:    listener.fields,
+		tentacles: nil,
+	}, nil
 }
 
 func (Q *tkql) Target() string {
-	return "implement me"
+	return Q.target
 }
 
-func (Q *tkql) Entities() []string {
-	panic("implement me")
+func (Q *tkql) Entities() map[string][]string {
+	return Q.sources
 }
 
 func (Q *tkql) Tentacles() []tql.TentacleConfig {
-	panic("implement me")
+	return Q.tentacles
 }
 
-func (Q *tkql) Exec(input map[string]constraint.Node) (map[string]constraint.Node, error) {
-	panic("implement me")
+func (Q *tkql) expr() Expr {
+	return Q.listener.Expr()
+}
+
+func (Q *tkql) Exec(input map[string]Node) (map[string]Node, error) {
+	ctx := NewMapContext(input, map[string]ContextFunc{})
+	result := EvalRuleQL(ctx, Q.expr())
+	retCtx := NewJSONContext(result.String())
+	ret := map[string]Node{}
+	for k, _ := range Q.listener.fields {
+		ret[k] = retCtx.Value(k)
+	}
+	return ret, nil
 }

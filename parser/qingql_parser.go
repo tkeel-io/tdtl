@@ -16,103 +16,109 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 49, 219,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 49, 232,
 	4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7,
 	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12, 4, 13,
 	9, 13, 4, 14, 9, 14, 4, 15, 9, 15, 4, 16, 9, 16, 4, 17, 9, 17, 4, 18, 9,
-	18, 4, 19, 9, 19, 4, 20, 9, 20, 4, 21, 9, 21, 3, 2, 3, 2, 3, 2, 3, 2, 3,
-	2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 7, 4, 55, 10, 4, 12, 4, 14,
-	4, 58, 11, 4, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 5,
-	5, 69, 10, 5, 3, 6, 3, 6, 3, 7, 3, 7, 3, 7, 7, 7, 76, 10, 7, 12, 7, 14,
-	7, 79, 11, 7, 3, 8, 3, 8, 3, 8, 7, 8, 84, 10, 8, 12, 8, 14, 8, 87, 11,
-	8, 3, 9, 5, 9, 90, 10, 9, 3, 9, 3, 9, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10,
-	3, 10, 3, 10, 3, 10, 3, 10, 5, 10, 103, 10, 10, 3, 10, 3, 10, 3, 10, 3,
-	10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 7, 10, 114, 10, 10, 12, 10, 14,
-	10, 117, 11, 10, 3, 11, 3, 11, 3, 11, 3, 12, 3, 12, 3, 13, 3, 13, 6, 13,
-	126, 10, 13, 13, 13, 14, 13, 127, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14, 3,
-	14, 3, 14, 5, 14, 137, 10, 14, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15,
-	3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 7, 15, 150, 10, 15, 12, 15, 14, 15,
-	153, 11, 15, 3, 15, 3, 15, 5, 15, 157, 10, 15, 3, 16, 3, 16, 3, 16, 3,
-	16, 3, 16, 7, 16, 164, 10, 16, 12, 16, 14, 16, 167, 11, 16, 5, 16, 169,
-	10, 16, 3, 16, 3, 16, 3, 17, 3, 17, 3, 18, 3, 18, 3, 18, 6, 18, 178, 10,
-	18, 13, 18, 14, 18, 179, 3, 18, 6, 18, 183, 10, 18, 13, 18, 14, 18, 184,
-	3, 18, 3, 18, 5, 18, 189, 10, 18, 3, 19, 3, 19, 3, 20, 3, 20, 3, 20, 3,
-	20, 3, 20, 3, 20, 3, 20, 3, 20, 3, 20, 3, 20, 3, 20, 3, 20, 3, 20, 5, 20,
-	206, 10, 20, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3,
-	21, 5, 21, 217, 10, 21, 3, 21, 2, 3, 18, 22, 2, 4, 6, 8, 10, 12, 14, 16,
-	18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 2, 6, 3, 2, 33, 35, 3,
-	2, 36, 37, 4, 2, 19, 19, 21, 25, 4, 2, 41, 41, 46, 46, 2, 233, 2, 42, 3,
-	2, 2, 2, 4, 49, 3, 2, 2, 2, 6, 51, 3, 2, 2, 2, 8, 68, 3, 2, 2, 2, 10, 70,
-	3, 2, 2, 2, 12, 72, 3, 2, 2, 2, 14, 80, 3, 2, 2, 2, 16, 89, 3, 2, 2, 2,
-	18, 102, 3, 2, 2, 2, 20, 118, 3, 2, 2, 2, 22, 121, 3, 2, 2, 2, 24, 125,
-	3, 2, 2, 2, 26, 136, 3, 2, 2, 2, 28, 138, 3, 2, 2, 2, 30, 158, 3, 2, 2,
-	2, 32, 172, 3, 2, 2, 2, 34, 188, 3, 2, 2, 2, 36, 190, 3, 2, 2, 2, 38, 205,
-	3, 2, 2, 2, 40, 216, 3, 2, 2, 2, 42, 43, 7, 12, 2, 2, 43, 44, 7, 13, 2,
-	2, 44, 45, 5, 4, 3, 2, 45, 46, 7, 29, 2, 2, 46, 47, 5, 6, 4, 2, 47, 48,
-	7, 2, 2, 3, 48, 3, 3, 2, 2, 2, 49, 50, 7, 41, 2, 2, 50, 5, 3, 2, 2, 2,
-	51, 56, 5, 8, 5, 2, 52, 53, 7, 3, 2, 2, 53, 55, 5, 8, 5, 2, 54, 52, 3,
-	2, 2, 2, 55, 58, 3, 2, 2, 2, 56, 54, 3, 2, 2, 2, 56, 57, 3, 2, 2, 2, 57,
-	7, 3, 2, 2, 2, 58, 56, 3, 2, 2, 2, 59, 60, 5, 18, 10, 2, 60, 61, 7, 14,
-	2, 2, 61, 62, 5, 34, 18, 2, 62, 69, 3, 2, 2, 2, 63, 64, 5, 22, 12, 2, 64,
-	65, 7, 38, 2, 2, 65, 66, 5, 32, 17, 2, 66, 69, 3, 2, 2, 2, 67, 69, 5, 34,
-	18, 2, 68, 59, 3, 2, 2, 2, 68, 63, 3, 2, 2, 2, 68, 67, 3, 2, 2, 2, 69,
-	9, 3, 2, 2, 2, 70, 71, 5, 12, 7, 2, 71, 11, 3, 2, 2, 2, 72, 77, 5, 14,
-	8, 2, 73, 74, 7, 15, 2, 2, 74, 76, 5, 14, 8, 2, 75, 73, 3, 2, 2, 2, 76,
-	79, 3, 2, 2, 2, 77, 75, 3, 2, 2, 2, 77, 78, 3, 2, 2, 2, 78, 13, 3, 2, 2,
-	2, 79, 77, 3, 2, 2, 2, 80, 85, 5, 16, 9, 2, 81, 82, 7, 28, 2, 2, 82, 84,
-	5, 16, 9, 2, 83, 81, 3, 2, 2, 2, 84, 87, 3, 2, 2, 2, 85, 83, 3, 2, 2, 2,
-	85, 86, 3, 2, 2, 2, 86, 15, 3, 2, 2, 2, 87, 85, 3, 2, 2, 2, 88, 90, 7,
-	26, 2, 2, 89, 88, 3, 2, 2, 2, 89, 90, 3, 2, 2, 2, 90, 91, 3, 2, 2, 2, 91,
-	92, 5, 18, 10, 2, 92, 17, 3, 2, 2, 2, 93, 94, 8, 10, 1, 2, 94, 103, 5,
-	26, 14, 2, 95, 96, 7, 4, 2, 2, 96, 97, 5, 18, 10, 2, 97, 98, 7, 5, 2, 2,
-	98, 103, 3, 2, 2, 2, 99, 103, 5, 30, 16, 2, 100, 103, 5, 28, 15, 2, 101,
-	103, 5, 20, 11, 2, 102, 93, 3, 2, 2, 2, 102, 95, 3, 2, 2, 2, 102, 99, 3,
-	2, 2, 2, 102, 100, 3, 2, 2, 2, 102, 101, 3, 2, 2, 2, 103, 115, 3, 2, 2,
-	2, 104, 105, 12, 8, 2, 2, 105, 106, 9, 2, 2, 2, 106, 114, 5, 18, 10, 9,
-	107, 108, 12, 7, 2, 2, 108, 109, 9, 3, 2, 2, 109, 114, 5, 18, 10, 8, 110,
-	111, 12, 6, 2, 2, 111, 112, 9, 4, 2, 2, 112, 114, 5, 18, 10, 7, 113, 104,
-	3, 2, 2, 2, 113, 107, 3, 2, 2, 2, 113, 110, 3, 2, 2, 2, 114, 117, 3, 2,
-	2, 2, 115, 113, 3, 2, 2, 2, 115, 116, 3, 2, 2, 2, 116, 19, 3, 2, 2, 2,
-	117, 115, 3, 2, 2, 2, 118, 119, 5, 22, 12, 2, 119, 120, 5, 24, 13, 2, 120,
-	21, 3, 2, 2, 2, 121, 122, 7, 41, 2, 2, 122, 23, 3, 2, 2, 2, 123, 124, 7,
-	38, 2, 2, 124, 126, 7, 41, 2, 2, 125, 123, 3, 2, 2, 2, 126, 127, 3, 2,
-	2, 2, 127, 125, 3, 2, 2, 2, 127, 128, 3, 2, 2, 2, 128, 25, 3, 2, 2, 2,
-	129, 137, 7, 39, 2, 2, 130, 137, 7, 40, 2, 2, 131, 137, 7, 42, 2, 2, 132,
-	137, 7, 43, 2, 2, 133, 137, 7, 44, 2, 2, 134, 137, 7, 48, 2, 2, 135, 137,
-	5, 34, 18, 2, 136, 129, 3, 2, 2, 2, 136, 130, 3, 2, 2, 2, 136, 131, 3,
-	2, 2, 2, 136, 132, 3, 2, 2, 2, 136, 133, 3, 2, 2, 2, 136, 134, 3, 2, 2,
-	2, 136, 135, 3, 2, 2, 2, 137, 27, 3, 2, 2, 2, 138, 139, 7, 16, 2, 2, 139,
-	140, 5, 18, 10, 2, 140, 141, 7, 32, 2, 2, 141, 142, 5, 18, 10, 2, 142,
-	143, 7, 30, 2, 2, 143, 151, 5, 18, 10, 2, 144, 145, 7, 32, 2, 2, 145, 146,
-	5, 18, 10, 2, 146, 147, 7, 30, 2, 2, 147, 148, 5, 18, 10, 2, 148, 150,
-	3, 2, 2, 2, 149, 144, 3, 2, 2, 2, 150, 153, 3, 2, 2, 2, 151, 149, 3, 2,
-	2, 2, 151, 152, 3, 2, 2, 2, 152, 156, 3, 2, 2, 2, 153, 151, 3, 2, 2, 2,
-	154, 155, 7, 17, 2, 2, 155, 157, 5, 18, 10, 2, 156, 154, 3, 2, 2, 2, 156,
-	157, 3, 2, 2, 2, 157, 29, 3, 2, 2, 2, 158, 159, 7, 41, 2, 2, 159, 168,
-	7, 4, 2, 2, 160, 165, 5, 18, 10, 2, 161, 162, 7, 3, 2, 2, 162, 164, 5,
-	18, 10, 2, 163, 161, 3, 2, 2, 2, 164, 167, 3, 2, 2, 2, 165, 163, 3, 2,
-	2, 2, 165, 166, 3, 2, 2, 2, 166, 169, 3, 2, 2, 2, 167, 165, 3, 2, 2, 2,
-	168, 160, 3, 2, 2, 2, 168, 169, 3, 2, 2, 2, 169, 170, 3, 2, 2, 2, 170,
-	171, 7, 5, 2, 2, 171, 31, 3, 2, 2, 2, 172, 173, 7, 33, 2, 2, 173, 33, 3,
-	2, 2, 2, 174, 189, 5, 32, 17, 2, 175, 189, 5, 36, 19, 2, 176, 178, 7, 6,
-	2, 2, 177, 176, 3, 2, 2, 2, 178, 179, 3, 2, 2, 2, 179, 177, 3, 2, 2, 2,
-	179, 180, 3, 2, 2, 2, 180, 182, 3, 2, 2, 2, 181, 183, 5, 36, 19, 2, 182,
-	181, 3, 2, 2, 2, 183, 184, 3, 2, 2, 2, 184, 182, 3, 2, 2, 2, 184, 185,
-	3, 2, 2, 2, 185, 186, 3, 2, 2, 2, 186, 187, 7, 6, 2, 2, 187, 189, 3, 2,
-	2, 2, 188, 174, 3, 2, 2, 2, 188, 175, 3, 2, 2, 2, 188, 177, 3, 2, 2, 2,
-	189, 35, 3, 2, 2, 2, 190, 191, 9, 5, 2, 2, 191, 37, 3, 2, 2, 2, 192, 193,
-	7, 46, 2, 2, 193, 194, 7, 7, 2, 2, 194, 206, 7, 8, 2, 2, 195, 196, 7, 46,
-	2, 2, 196, 197, 7, 7, 2, 2, 197, 198, 7, 42, 2, 2, 198, 206, 7, 8, 2, 2,
-	199, 200, 7, 46, 2, 2, 200, 201, 7, 7, 2, 2, 201, 202, 7, 9, 2, 2, 202,
-	206, 7, 8, 2, 2, 203, 206, 7, 46, 2, 2, 204, 206, 7, 44, 2, 2, 205, 192,
-	3, 2, 2, 2, 205, 195, 3, 2, 2, 2, 205, 199, 3, 2, 2, 2, 205, 203, 3, 2,
-	2, 2, 205, 204, 3, 2, 2, 2, 206, 39, 3, 2, 2, 2, 207, 208, 7, 41, 2, 2,
-	208, 217, 7, 10, 2, 2, 209, 210, 7, 41, 2, 2, 210, 211, 7, 7, 2, 2, 211,
-	212, 7, 42, 2, 2, 212, 217, 7, 8, 2, 2, 213, 214, 7, 41, 2, 2, 214, 217,
-	7, 11, 2, 2, 215, 217, 7, 41, 2, 2, 216, 207, 3, 2, 2, 2, 216, 209, 3,
-	2, 2, 2, 216, 213, 3, 2, 2, 2, 216, 215, 3, 2, 2, 2, 217, 41, 3, 2, 2,
-	2, 21, 56, 68, 77, 85, 89, 102, 113, 115, 127, 136, 151, 156, 165, 168,
-	179, 184, 188, 205, 216,
+	18, 4, 19, 9, 19, 4, 20, 9, 20, 4, 21, 9, 21, 4, 22, 9, 22, 3, 2, 3, 2,
+	3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 7, 4, 57, 10,
+	4, 12, 4, 14, 4, 60, 11, 4, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 5, 5, 68,
+	10, 5, 3, 6, 3, 6, 3, 6, 3, 6, 3, 7, 3, 7, 3, 8, 3, 8, 3, 8, 7, 8, 79,
+	10, 8, 12, 8, 14, 8, 82, 11, 8, 3, 9, 3, 9, 3, 9, 7, 9, 87, 10, 9, 12,
+	9, 14, 9, 90, 11, 9, 3, 10, 5, 10, 93, 10, 10, 3, 10, 3, 10, 3, 11, 3,
+	11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 5, 11, 105, 10, 11, 3, 11,
+	3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 7, 11, 116, 10,
+	11, 12, 11, 14, 11, 119, 11, 11, 3, 12, 3, 12, 3, 13, 3, 13, 6, 13, 125,
+	10, 13, 13, 13, 14, 13, 126, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14,
+	3, 14, 5, 14, 136, 10, 14, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3,
+	15, 3, 15, 3, 15, 3, 15, 3, 15, 7, 15, 149, 10, 15, 12, 15, 14, 15, 152,
+	11, 15, 3, 15, 3, 15, 5, 15, 156, 10, 15, 3, 16, 3, 16, 3, 16, 3, 16, 3,
+	16, 7, 16, 163, 10, 16, 12, 16, 14, 16, 166, 11, 16, 5, 16, 168, 10, 16,
+	3, 16, 3, 16, 3, 17, 3, 17, 3, 18, 3, 18, 6, 18, 176, 10, 18, 13, 18, 14,
+	18, 177, 3, 18, 6, 18, 181, 10, 18, 13, 18, 14, 18, 182, 3, 18, 3, 18,
+	5, 18, 187, 10, 18, 3, 19, 3, 19, 6, 19, 191, 10, 19, 13, 19, 14, 19, 192,
+	3, 19, 6, 19, 196, 10, 19, 13, 19, 14, 19, 197, 3, 19, 3, 19, 5, 19, 202,
+	10, 19, 3, 20, 3, 20, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21,
+	3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 5, 21, 219, 10, 21, 3, 22, 3,
+	22, 3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 5, 22, 230, 10, 22,
+	3, 22, 2, 3, 20, 23, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28,
+	30, 32, 34, 36, 38, 40, 42, 2, 6, 3, 2, 33, 35, 3, 2, 36, 37, 4, 2, 19,
+	19, 21, 25, 4, 2, 41, 41, 46, 46, 2, 246, 2, 44, 3, 2, 2, 2, 4, 51, 3,
+	2, 2, 2, 6, 53, 3, 2, 2, 2, 8, 67, 3, 2, 2, 2, 10, 69, 3, 2, 2, 2, 12,
+	73, 3, 2, 2, 2, 14, 75, 3, 2, 2, 2, 16, 83, 3, 2, 2, 2, 18, 92, 3, 2, 2,
+	2, 20, 104, 3, 2, 2, 2, 22, 120, 3, 2, 2, 2, 24, 124, 3, 2, 2, 2, 26, 135,
+	3, 2, 2, 2, 28, 137, 3, 2, 2, 2, 30, 157, 3, 2, 2, 2, 32, 171, 3, 2, 2,
+	2, 34, 186, 3, 2, 2, 2, 36, 201, 3, 2, 2, 2, 38, 203, 3, 2, 2, 2, 40, 218,
+	3, 2, 2, 2, 42, 229, 3, 2, 2, 2, 44, 45, 7, 12, 2, 2, 45, 46, 7, 13, 2,
+	2, 46, 47, 5, 4, 3, 2, 47, 48, 7, 29, 2, 2, 48, 49, 5, 6, 4, 2, 49, 50,
+	7, 2, 2, 3, 50, 3, 3, 2, 2, 2, 51, 52, 7, 41, 2, 2, 52, 5, 3, 2, 2, 2,
+	53, 58, 5, 8, 5, 2, 54, 55, 7, 3, 2, 2, 55, 57, 5, 8, 5, 2, 56, 54, 3,
+	2, 2, 2, 57, 60, 3, 2, 2, 2, 58, 56, 3, 2, 2, 2, 58, 59, 3, 2, 2, 2, 59,
+	7, 3, 2, 2, 2, 60, 58, 3, 2, 2, 2, 61, 68, 5, 10, 6, 2, 62, 63, 5, 22,
+	12, 2, 63, 64, 7, 38, 2, 2, 64, 65, 5, 32, 17, 2, 65, 68, 3, 2, 2, 2, 66,
+	68, 5, 20, 11, 2, 67, 61, 3, 2, 2, 2, 67, 62, 3, 2, 2, 2, 67, 66, 3, 2,
+	2, 2, 68, 9, 3, 2, 2, 2, 69, 70, 5, 20, 11, 2, 70, 71, 7, 14, 2, 2, 71,
+	72, 5, 36, 19, 2, 72, 11, 3, 2, 2, 2, 73, 74, 5, 14, 8, 2, 74, 13, 3, 2,
+	2, 2, 75, 80, 5, 16, 9, 2, 76, 77, 7, 15, 2, 2, 77, 79, 5, 16, 9, 2, 78,
+	76, 3, 2, 2, 2, 79, 82, 3, 2, 2, 2, 80, 78, 3, 2, 2, 2, 80, 81, 3, 2, 2,
+	2, 81, 15, 3, 2, 2, 2, 82, 80, 3, 2, 2, 2, 83, 88, 5, 18, 10, 2, 84, 85,
+	7, 28, 2, 2, 85, 87, 5, 18, 10, 2, 86, 84, 3, 2, 2, 2, 87, 90, 3, 2, 2,
+	2, 88, 86, 3, 2, 2, 2, 88, 89, 3, 2, 2, 2, 89, 17, 3, 2, 2, 2, 90, 88,
+	3, 2, 2, 2, 91, 93, 7, 26, 2, 2, 92, 91, 3, 2, 2, 2, 92, 93, 3, 2, 2, 2,
+	93, 94, 3, 2, 2, 2, 94, 95, 5, 20, 11, 2, 95, 19, 3, 2, 2, 2, 96, 97, 8,
+	11, 1, 2, 97, 105, 5, 26, 14, 2, 98, 99, 7, 4, 2, 2, 99, 100, 5, 20, 11,
+	2, 100, 101, 7, 5, 2, 2, 101, 105, 3, 2, 2, 2, 102, 105, 5, 30, 16, 2,
+	103, 105, 5, 28, 15, 2, 104, 96, 3, 2, 2, 2, 104, 98, 3, 2, 2, 2, 104,
+	102, 3, 2, 2, 2, 104, 103, 3, 2, 2, 2, 105, 117, 3, 2, 2, 2, 106, 107,
+	12, 7, 2, 2, 107, 108, 9, 2, 2, 2, 108, 116, 5, 20, 11, 8, 109, 110, 12,
+	6, 2, 2, 110, 111, 9, 3, 2, 2, 111, 116, 5, 20, 11, 7, 112, 113, 12, 5,
+	2, 2, 113, 114, 9, 4, 2, 2, 114, 116, 5, 20, 11, 6, 115, 106, 3, 2, 2,
+	2, 115, 109, 3, 2, 2, 2, 115, 112, 3, 2, 2, 2, 116, 119, 3, 2, 2, 2, 117,
+	115, 3, 2, 2, 2, 117, 118, 3, 2, 2, 2, 118, 21, 3, 2, 2, 2, 119, 117, 3,
+	2, 2, 2, 120, 121, 7, 41, 2, 2, 121, 23, 3, 2, 2, 2, 122, 123, 7, 38, 2,
+	2, 123, 125, 7, 41, 2, 2, 124, 122, 3, 2, 2, 2, 125, 126, 3, 2, 2, 2, 126,
+	124, 3, 2, 2, 2, 126, 127, 3, 2, 2, 2, 127, 25, 3, 2, 2, 2, 128, 136, 7,
+	39, 2, 2, 129, 136, 7, 40, 2, 2, 130, 136, 7, 42, 2, 2, 131, 136, 7, 43,
+	2, 2, 132, 136, 7, 44, 2, 2, 133, 136, 7, 48, 2, 2, 134, 136, 5, 34, 18,
+	2, 135, 128, 3, 2, 2, 2, 135, 129, 3, 2, 2, 2, 135, 130, 3, 2, 2, 2, 135,
+	131, 3, 2, 2, 2, 135, 132, 3, 2, 2, 2, 135, 133, 3, 2, 2, 2, 135, 134,
+	3, 2, 2, 2, 136, 27, 3, 2, 2, 2, 137, 138, 7, 16, 2, 2, 138, 139, 5, 20,
+	11, 2, 139, 140, 7, 32, 2, 2, 140, 141, 5, 20, 11, 2, 141, 142, 7, 30,
+	2, 2, 142, 150, 5, 20, 11, 2, 143, 144, 7, 32, 2, 2, 144, 145, 5, 20, 11,
+	2, 145, 146, 7, 30, 2, 2, 146, 147, 5, 20, 11, 2, 147, 149, 3, 2, 2, 2,
+	148, 143, 3, 2, 2, 2, 149, 152, 3, 2, 2, 2, 150, 148, 3, 2, 2, 2, 150,
+	151, 3, 2, 2, 2, 151, 155, 3, 2, 2, 2, 152, 150, 3, 2, 2, 2, 153, 154,
+	7, 17, 2, 2, 154, 156, 5, 20, 11, 2, 155, 153, 3, 2, 2, 2, 155, 156, 3,
+	2, 2, 2, 156, 29, 3, 2, 2, 2, 157, 158, 7, 41, 2, 2, 158, 167, 7, 4, 2,
+	2, 159, 164, 5, 20, 11, 2, 160, 161, 7, 3, 2, 2, 161, 163, 5, 20, 11, 2,
+	162, 160, 3, 2, 2, 2, 163, 166, 3, 2, 2, 2, 164, 162, 3, 2, 2, 2, 164,
+	165, 3, 2, 2, 2, 165, 168, 3, 2, 2, 2, 166, 164, 3, 2, 2, 2, 167, 159,
+	3, 2, 2, 2, 167, 168, 3, 2, 2, 2, 168, 169, 3, 2, 2, 2, 169, 170, 7, 5,
+	2, 2, 170, 31, 3, 2, 2, 2, 171, 172, 7, 33, 2, 2, 172, 33, 3, 2, 2, 2,
+	173, 187, 5, 38, 20, 2, 174, 176, 7, 6, 2, 2, 175, 174, 3, 2, 2, 2, 176,
+	177, 3, 2, 2, 2, 177, 175, 3, 2, 2, 2, 177, 178, 3, 2, 2, 2, 178, 180,
+	3, 2, 2, 2, 179, 181, 5, 38, 20, 2, 180, 179, 3, 2, 2, 2, 181, 182, 3,
+	2, 2, 2, 182, 180, 3, 2, 2, 2, 182, 183, 3, 2, 2, 2, 183, 184, 3, 2, 2,
+	2, 184, 185, 7, 6, 2, 2, 185, 187, 3, 2, 2, 2, 186, 173, 3, 2, 2, 2, 186,
+	175, 3, 2, 2, 2, 187, 35, 3, 2, 2, 2, 188, 202, 5, 38, 20, 2, 189, 191,
+	7, 6, 2, 2, 190, 189, 3, 2, 2, 2, 191, 192, 3, 2, 2, 2, 192, 190, 3, 2,
+	2, 2, 192, 193, 3, 2, 2, 2, 193, 195, 3, 2, 2, 2, 194, 196, 5, 38, 20,
+	2, 195, 194, 3, 2, 2, 2, 196, 197, 3, 2, 2, 2, 197, 195, 3, 2, 2, 2, 197,
+	198, 3, 2, 2, 2, 198, 199, 3, 2, 2, 2, 199, 200, 7, 6, 2, 2, 200, 202,
+	3, 2, 2, 2, 201, 188, 3, 2, 2, 2, 201, 190, 3, 2, 2, 2, 202, 37, 3, 2,
+	2, 2, 203, 204, 9, 5, 2, 2, 204, 39, 3, 2, 2, 2, 205, 206, 7, 46, 2, 2,
+	206, 207, 7, 7, 2, 2, 207, 219, 7, 8, 2, 2, 208, 209, 7, 46, 2, 2, 209,
+	210, 7, 7, 2, 2, 210, 211, 7, 42, 2, 2, 211, 219, 7, 8, 2, 2, 212, 213,
+	7, 46, 2, 2, 213, 214, 7, 7, 2, 2, 214, 215, 7, 9, 2, 2, 215, 219, 7, 8,
+	2, 2, 216, 219, 7, 46, 2, 2, 217, 219, 7, 44, 2, 2, 218, 205, 3, 2, 2,
+	2, 218, 208, 3, 2, 2, 2, 218, 212, 3, 2, 2, 2, 218, 216, 3, 2, 2, 2, 218,
+	217, 3, 2, 2, 2, 219, 41, 3, 2, 2, 2, 220, 221, 7, 41, 2, 2, 221, 230,
+	7, 10, 2, 2, 222, 223, 7, 41, 2, 2, 223, 224, 7, 7, 2, 2, 224, 225, 7,
+	42, 2, 2, 225, 230, 7, 8, 2, 2, 226, 227, 7, 41, 2, 2, 227, 230, 7, 11,
+	2, 2, 228, 230, 7, 41, 2, 2, 229, 220, 3, 2, 2, 2, 229, 222, 3, 2, 2, 2,
+	229, 226, 3, 2, 2, 2, 229, 228, 3, 2, 2, 2, 230, 43, 3, 2, 2, 2, 24, 58,
+	67, 80, 88, 92, 104, 115, 117, 126, 135, 150, 155, 164, 167, 177, 182,
+	186, 192, 197, 201, 218, 229,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
 var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
@@ -131,10 +137,11 @@ var symbolicNames = []string{
 }
 
 var ruleNames = []string{
-	"root", "target", "fields", "field_elem", "filter", "filter_condition",
-	"filter_condition_or", "filter_condition_not", "expr", "source_stmt", "sourceEntity",
-	"propertyEntity", "constant", "switch_stmt", "call_expr", "asterisk", "xpath_name",
-	"dotnotation", "identifierWithTOPICITEM", "identifierWithQualifier",
+	"root", "target", "fields", "field_elem", "field_elem_with_as", "filter",
+	"filter_condition", "filter_condition_or", "filter_condition_not", "expr",
+	"sourceEntity", "propertyEntity", "constant", "switch_stmt", "call_expr",
+	"asterisk", "xpath_name", "target_name", "dotnotation", "identifierWithTOPICITEM",
+	"identifierWithQualifier",
 }
 var decisionToDFA = make([]*antlr.DFA, len(deserializedATN.DecisionToState))
 
@@ -220,12 +227,12 @@ const (
 	QingQLParserRULE_target                  = 1
 	QingQLParserRULE_fields                  = 2
 	QingQLParserRULE_field_elem              = 3
-	QingQLParserRULE_filter                  = 4
-	QingQLParserRULE_filter_condition        = 5
-	QingQLParserRULE_filter_condition_or     = 6
-	QingQLParserRULE_filter_condition_not    = 7
-	QingQLParserRULE_expr                    = 8
-	QingQLParserRULE_source_stmt             = 9
+	QingQLParserRULE_field_elem_with_as      = 4
+	QingQLParserRULE_filter                  = 5
+	QingQLParserRULE_filter_condition        = 6
+	QingQLParserRULE_filter_condition_or     = 7
+	QingQLParserRULE_filter_condition_not    = 8
+	QingQLParserRULE_expr                    = 9
 	QingQLParserRULE_sourceEntity            = 10
 	QingQLParserRULE_propertyEntity          = 11
 	QingQLParserRULE_constant                = 12
@@ -233,9 +240,10 @@ const (
 	QingQLParserRULE_call_expr               = 14
 	QingQLParserRULE_asterisk                = 15
 	QingQLParserRULE_xpath_name              = 16
-	QingQLParserRULE_dotnotation             = 17
-	QingQLParserRULE_identifierWithTOPICITEM = 18
-	QingQLParserRULE_identifierWithQualifier = 19
+	QingQLParserRULE_target_name             = 17
+	QingQLParserRULE_dotnotation             = 18
+	QingQLParserRULE_identifierWithTOPICITEM = 19
+	QingQLParserRULE_identifierWithQualifier = 20
 )
 
 // IRootContext is an interface to support dynamic dispatch.
@@ -354,27 +362,27 @@ func (p *QingQLParser) Root() (localctx IRootContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(40)
+		p.SetState(42)
 		p.Match(QingQLParserINSERT)
 	}
 	{
-		p.SetState(41)
+		p.SetState(43)
 		p.Match(QingQLParserINTO)
 	}
 	{
-		p.SetState(42)
+		p.SetState(44)
 		p.Target()
 	}
 	{
-		p.SetState(43)
+		p.SetState(45)
 		p.Match(QingQLParserSELECT)
 	}
 	{
-		p.SetState(44)
+		p.SetState(46)
 		p.Fields()
 	}
 	{
-		p.SetState(45)
+		p.SetState(47)
 		p.Match(QingQLParserEOF)
 	}
 
@@ -465,7 +473,7 @@ func (p *QingQLParser) Target() (localctx ITargetContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(47)
+		p.SetState(49)
 		p.Match(QingQLParserINDENTIFIER)
 	}
 
@@ -576,24 +584,24 @@ func (p *QingQLParser) Fields() (localctx IFieldsContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(49)
+		p.SetState(51)
 		p.Field_elem()
 	}
-	p.SetState(54)
+	p.SetState(56)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for _la == QingQLParserT__0 {
 		{
-			p.SetState(50)
+			p.SetState(52)
 			p.Match(QingQLParserT__0)
 		}
 		{
-			p.SetState(51)
+			p.SetState(53)
 			p.Field_elem()
 		}
 
-		p.SetState(56)
+		p.SetState(58)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -651,12 +659,12 @@ func (s *Field_elemContext) ToStringTree(ruleNames []string, recog antlr.Recogni
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-type SourceFieldContext struct {
+type FieldElemExprContext struct {
 	*Field_elemContext
 }
 
-func NewSourceFieldContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *SourceFieldContext {
-	var p = new(SourceFieldContext)
+func NewFieldElemExprContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *FieldElemExprContext {
+	var p = new(FieldElemExprContext)
 
 	p.Field_elemContext = NewEmptyField_elemContext()
 	p.parser = parser
@@ -665,61 +673,11 @@ func NewSourceFieldContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *So
 	return p
 }
 
-func (s *SourceFieldContext) GetRuleContext() antlr.RuleContext {
+func (s *FieldElemExprContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *SourceFieldContext) SourceEntity() ISourceEntityContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISourceEntityContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(ISourceEntityContext)
-}
-
-func (s *SourceFieldContext) Asterisk() IAsteriskContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IAsteriskContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IAsteriskContext)
-}
-
-func (s *SourceFieldContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.EnterSourceField(s)
-	}
-}
-
-func (s *SourceFieldContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.ExitSourceField(s)
-	}
-}
-
-type ExprFieldContext struct {
-	*Field_elemContext
-}
-
-func NewExprFieldContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ExprFieldContext {
-	var p = new(ExprFieldContext)
-
-	p.Field_elemContext = NewEmptyField_elemContext()
-	p.parser = parser
-	p.CopyFrom(ctx.(*Field_elemContext))
-
-	return p
-}
-
-func (s *ExprFieldContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *ExprFieldContext) Expr() IExprContext {
+func (s *FieldElemExprContext) Expr() IExprContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExprContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -729,38 +687,24 @@ func (s *ExprFieldContext) Expr() IExprContext {
 	return t.(IExprContext)
 }
 
-func (s *ExprFieldContext) AS() antlr.TerminalNode {
-	return s.GetToken(QingQLParserAS, 0)
-}
-
-func (s *ExprFieldContext) Xpath_name() IXpath_nameContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IXpath_nameContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IXpath_nameContext)
-}
-
-func (s *ExprFieldContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *FieldElemExprContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.EnterExprField(s)
+		listenerT.EnterFieldElemExpr(s)
 	}
 }
 
-func (s *ExprFieldContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *FieldElemExprContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.ExitExprField(s)
+		listenerT.ExitFieldElemExpr(s)
 	}
 }
 
-type XpathFieldContext struct {
+type FieldElemSourceContext struct {
 	*Field_elemContext
 }
 
-func NewXpathFieldContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *XpathFieldContext {
-	var p = new(XpathFieldContext)
+func NewFieldElemSourceContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *FieldElemSourceContext {
+	var p = new(FieldElemSourceContext)
 
 	p.Field_elemContext = NewEmptyField_elemContext()
 	p.parser = parser
@@ -769,29 +713,79 @@ func NewXpathFieldContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *Xpa
 	return p
 }
 
-func (s *XpathFieldContext) GetRuleContext() antlr.RuleContext {
+func (s *FieldElemSourceContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *XpathFieldContext) Xpath_name() IXpath_nameContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IXpath_nameContext)(nil)).Elem(), 0)
+func (s *FieldElemSourceContext) SourceEntity() ISourceEntityContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISourceEntityContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IXpath_nameContext)
+	return t.(ISourceEntityContext)
 }
 
-func (s *XpathFieldContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *FieldElemSourceContext) Asterisk() IAsteriskContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IAsteriskContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IAsteriskContext)
+}
+
+func (s *FieldElemSourceContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.EnterXpathField(s)
+		listenerT.EnterFieldElemSource(s)
 	}
 }
 
-func (s *XpathFieldContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *FieldElemSourceContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.ExitXpathField(s)
+		listenerT.ExitFieldElemSource(s)
+	}
+}
+
+type FieldElemAsContext struct {
+	*Field_elemContext
+}
+
+func NewFieldElemAsContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *FieldElemAsContext {
+	var p = new(FieldElemAsContext)
+
+	p.Field_elemContext = NewEmptyField_elemContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*Field_elemContext))
+
+	return p
+}
+
+func (s *FieldElemAsContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *FieldElemAsContext) Field_elem_with_as() IField_elem_with_asContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IField_elem_with_asContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IField_elem_with_asContext)
+}
+
+func (s *FieldElemAsContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(QingQLListener); ok {
+		listenerT.EnterFieldElemAs(s)
+	}
+}
+
+func (s *FieldElemAsContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(QingQLListener); ok {
+		listenerT.ExitFieldElemAs(s)
 	}
 }
 
@@ -815,49 +809,183 @@ func (p *QingQLParser) Field_elem() (localctx IField_elemContext) {
 		}
 	}()
 
-	p.SetState(66)
+	p.SetState(65)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 1, p.GetParserRuleContext()) {
 	case 1:
-		localctx = NewExprFieldContext(p, localctx)
+		localctx = NewFieldElemAsContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(57)
-			p.expr(0)
-		}
-		{
-			p.SetState(58)
-			p.Match(QingQLParserAS)
-		}
-		{
 			p.SetState(59)
-			p.Xpath_name()
+			p.Field_elem_with_as()
 		}
 
 	case 2:
-		localctx = NewSourceFieldContext(p, localctx)
+		localctx = NewFieldElemSourceContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(61)
+			p.SetState(60)
 			p.SourceEntity()
 		}
 		{
-			p.SetState(62)
+			p.SetState(61)
 			p.Match(QingQLParserDOT)
 		}
 		{
-			p.SetState(63)
+			p.SetState(62)
 			p.Asterisk()
 		}
 
 	case 3:
-		localctx = NewXpathFieldContext(p, localctx)
+		localctx = NewFieldElemExprContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(65)
-			p.Xpath_name()
+			p.SetState(64)
+			p.expr(0)
 		}
 
+	}
+
+	return localctx
+}
+
+// IField_elem_with_asContext is an interface to support dynamic dispatch.
+type IField_elem_with_asContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsField_elem_with_asContext differentiates from other interfaces.
+	IsField_elem_with_asContext()
+}
+
+type Field_elem_with_asContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyField_elem_with_asContext() *Field_elem_with_asContext {
+	var p = new(Field_elem_with_asContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = QingQLParserRULE_field_elem_with_as
+	return p
+}
+
+func (*Field_elem_with_asContext) IsField_elem_with_asContext() {}
+
+func NewField_elem_with_asContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Field_elem_with_asContext {
+	var p = new(Field_elem_with_asContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = QingQLParserRULE_field_elem_with_as
+
+	return p
+}
+
+func (s *Field_elem_with_asContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Field_elem_with_asContext) CopyFrom(ctx *Field_elem_with_asContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
+}
+
+func (s *Field_elem_with_asContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Field_elem_with_asContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+type TargetAsElemContext struct {
+	*Field_elem_with_asContext
+}
+
+func NewTargetAsElemContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *TargetAsElemContext {
+	var p = new(TargetAsElemContext)
+
+	p.Field_elem_with_asContext = NewEmptyField_elem_with_asContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*Field_elem_with_asContext))
+
+	return p
+}
+
+func (s *TargetAsElemContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *TargetAsElemContext) Expr() IExprContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExprContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExprContext)
+}
+
+func (s *TargetAsElemContext) AS() antlr.TerminalNode {
+	return s.GetToken(QingQLParserAS, 0)
+}
+
+func (s *TargetAsElemContext) Target_name() ITarget_nameContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ITarget_nameContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(ITarget_nameContext)
+}
+
+func (s *TargetAsElemContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(QingQLListener); ok {
+		listenerT.EnterTargetAsElem(s)
+	}
+}
+
+func (s *TargetAsElemContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(QingQLListener); ok {
+		listenerT.ExitTargetAsElem(s)
+	}
+}
+
+func (p *QingQLParser) Field_elem_with_as() (localctx IField_elem_with_asContext) {
+	localctx = NewField_elem_with_asContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 8, QingQLParserRULE_field_elem_with_as)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	localctx = NewTargetAsElemContext(p, localctx)
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(67)
+		p.expr(0)
+	}
+	{
+		p.SetState(68)
+		p.Match(QingQLParserAS)
+	}
+	{
+		p.SetState(69)
+		p.Target_name()
 	}
 
 	return localctx
@@ -933,7 +1061,7 @@ func (s *FilterContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *QingQLParser) Filter() (localctx IFilterContext) {
 	localctx = NewFilterContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 8, QingQLParserRULE_filter)
+	p.EnterRule(localctx, 10, QingQLParserRULE_filter)
 
 	defer func() {
 		p.ExitRule()
@@ -953,7 +1081,7 @@ func (p *QingQLParser) Filter() (localctx IFilterContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(68)
+		p.SetState(71)
 		p.Filter_condition()
 	}
 
@@ -1051,7 +1179,7 @@ func (s *Filter_conditionContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *QingQLParser) Filter_condition() (localctx IFilter_conditionContext) {
 	localctx = NewFilter_conditionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 10, QingQLParserRULE_filter_condition)
+	p.EnterRule(localctx, 12, QingQLParserRULE_filter_condition)
 	var _la int
 
 	defer func() {
@@ -1072,24 +1200,24 @@ func (p *QingQLParser) Filter_condition() (localctx IFilter_conditionContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(70)
+		p.SetState(73)
 		p.Filter_condition_or()
 	}
-	p.SetState(75)
+	p.SetState(78)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for _la == QingQLParserAND {
 		{
-			p.SetState(71)
+			p.SetState(74)
 			p.Match(QingQLParserAND)
 		}
 		{
-			p.SetState(72)
+			p.SetState(75)
 			p.Filter_condition_or()
 		}
 
-		p.SetState(77)
+		p.SetState(80)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -1188,7 +1316,7 @@ func (s *Filter_condition_orContext) ExitRule(listener antlr.ParseTreeListener) 
 
 func (p *QingQLParser) Filter_condition_or() (localctx IFilter_condition_orContext) {
 	localctx = NewFilter_condition_orContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 12, QingQLParserRULE_filter_condition_or)
+	p.EnterRule(localctx, 14, QingQLParserRULE_filter_condition_or)
 	var _la int
 
 	defer func() {
@@ -1209,24 +1337,24 @@ func (p *QingQLParser) Filter_condition_or() (localctx IFilter_condition_orConte
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(78)
+		p.SetState(81)
 		p.Filter_condition_not()
 	}
-	p.SetState(83)
+	p.SetState(86)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for _la == QingQLParserOR {
 		{
-			p.SetState(79)
+			p.SetState(82)
 			p.Match(QingQLParserOR)
 		}
 		{
-			p.SetState(80)
+			p.SetState(83)
 			p.Filter_condition_not()
 		}
 
-		p.SetState(85)
+		p.SetState(88)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -1308,7 +1436,7 @@ func (s *Filter_condition_notContext) ExitRule(listener antlr.ParseTreeListener)
 
 func (p *QingQLParser) Filter_condition_not() (localctx IFilter_condition_notContext) {
 	localctx = NewFilter_condition_notContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 14, QingQLParserRULE_filter_condition_not)
+	p.EnterRule(localctx, 16, QingQLParserRULE_filter_condition_not)
 	var _la int
 
 	defer func() {
@@ -1328,19 +1456,19 @@ func (p *QingQLParser) Filter_condition_not() (localctx IFilter_condition_notCon
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(87)
+	p.SetState(90)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	if _la == QingQLParserNOT {
 		{
-			p.SetState(86)
+			p.SetState(89)
 			p.Match(QingQLParserNOT)
 		}
 
 	}
 	{
-		p.SetState(89)
+		p.SetState(92)
 		p.expr(0)
 	}
 
@@ -1609,46 +1737,6 @@ func (s *BinaryContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
-type SourceContext struct {
-	*ExprContext
-}
-
-func NewSourceContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *SourceContext {
-	var p = new(SourceContext)
-
-	p.ExprContext = NewEmptyExprContext()
-	p.parser = parser
-	p.CopyFrom(ctx.(*ExprContext))
-
-	return p
-}
-
-func (s *SourceContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *SourceContext) Source_stmt() ISource_stmtContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISource_stmtContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(ISource_stmtContext)
-}
-
-func (s *SourceContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.EnterSource(s)
-	}
-}
-
-func (s *SourceContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.ExitSource(s)
-	}
-}
-
 func (p *QingQLParser) Expr() (localctx IExprContext) {
 	return p.expr(0)
 }
@@ -1659,8 +1747,8 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 	localctx = NewExprContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IExprContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 16
-	p.EnterRecursionRule(localctx, 16, QingQLParserRULE_expr, _p)
+	_startState := 18
+	p.EnterRecursionRule(localctx, 18, QingQLParserRULE_expr, _p)
 	var _la int
 
 	defer func() {
@@ -1682,7 +1770,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(100)
+	p.SetState(102)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext()) {
 	case 1:
@@ -1691,7 +1779,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 		_prevctx = localctx
 
 		{
-			p.SetState(92)
+			p.SetState(95)
 			p.Constant()
 		}
 
@@ -1700,15 +1788,15 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(93)
+			p.SetState(96)
 			p.Match(QingQLParserT__1)
 		}
 		{
-			p.SetState(94)
+			p.SetState(97)
 			p.expr(0)
 		}
 		{
-			p.SetState(95)
+			p.SetState(98)
 			p.Match(QingQLParserT__2)
 		}
 
@@ -1717,7 +1805,7 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(97)
+			p.SetState(100)
 			p.Call_expr()
 		}
 
@@ -1726,22 +1814,13 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(98)
+			p.SetState(101)
 			p.Switch_stmt()
-		}
-
-	case 5:
-		localctx = NewSourceContext(p, localctx)
-		p.SetParserRuleContext(localctx)
-		_prevctx = localctx
-		{
-			p.SetState(99)
-			p.Source_stmt()
 		}
 
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(113)
+	p.SetState(115)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext())
 
@@ -1751,18 +1830,18 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(111)
+			p.SetState(113)
 			p.GetErrorHandler().Sync(p)
 			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewBinaryContext(p, NewExprContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, QingQLParserRULE_expr)
-				p.SetState(102)
+				p.SetState(104)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 6)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 6)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 5)", ""))
 				}
-				p.SetState(103)
+				p.SetState(105)
 
 				var _lt = p.GetTokenStream().LT(1)
 
@@ -1779,19 +1858,19 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 					p.Consume()
 				}
 				{
-					p.SetState(104)
-					p.expr(7)
+					p.SetState(106)
+					p.expr(6)
 				}
 
 			case 2:
 				localctx = NewBinaryContext(p, NewExprContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, QingQLParserRULE_expr)
-				p.SetState(105)
+				p.SetState(107)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 5)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
 				}
-				p.SetState(106)
+				p.SetState(108)
 
 				var _lt = p.GetTokenStream().LT(1)
 
@@ -1808,19 +1887,19 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 					p.Consume()
 				}
 				{
-					p.SetState(107)
-					p.expr(6)
+					p.SetState(109)
+					p.expr(5)
 				}
 
 			case 3:
 				localctx = NewBinaryContext(p, NewExprContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, QingQLParserRULE_expr)
-				p.SetState(108)
+				p.SetState(110)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
 				}
-				p.SetState(109)
+				p.SetState(111)
 
 				var _lt = p.GetTokenStream().LT(1)
 
@@ -1837,127 +1916,16 @@ func (p *QingQLParser) expr(_p int) (localctx IExprContext) {
 					p.Consume()
 				}
 				{
-					p.SetState(110)
-					p.expr(5)
+					p.SetState(112)
+					p.expr(4)
 				}
 
 			}
 
 		}
-		p.SetState(115)
+		p.SetState(117)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext())
-	}
-
-	return localctx
-}
-
-// ISource_stmtContext is an interface to support dynamic dispatch.
-type ISource_stmtContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsSource_stmtContext differentiates from other interfaces.
-	IsSource_stmtContext()
-}
-
-type Source_stmtContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptySource_stmtContext() *Source_stmtContext {
-	var p = new(Source_stmtContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = QingQLParserRULE_source_stmt
-	return p
-}
-
-func (*Source_stmtContext) IsSource_stmtContext() {}
-
-func NewSource_stmtContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Source_stmtContext {
-	var p = new(Source_stmtContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = QingQLParserRULE_source_stmt
-
-	return p
-}
-
-func (s *Source_stmtContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *Source_stmtContext) SourceEntity() ISourceEntityContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISourceEntityContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(ISourceEntityContext)
-}
-
-func (s *Source_stmtContext) PropertyEntity() IPropertyEntityContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPropertyEntityContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IPropertyEntityContext)
-}
-
-func (s *Source_stmtContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *Source_stmtContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *Source_stmtContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.EnterSource_stmt(s)
-	}
-}
-
-func (s *Source_stmtContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.ExitSource_stmt(s)
-	}
-}
-
-func (p *QingQLParser) Source_stmt() (localctx ISource_stmtContext) {
-	localctx = NewSource_stmtContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 18, QingQLParserRULE_source_stmt)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(116)
-		p.SourceEntity()
-	}
-	{
-		p.SetState(117)
-		p.PropertyEntity()
 	}
 
 	return localctx
@@ -2047,7 +2015,7 @@ func (p *QingQLParser) SourceEntity() (localctx ISourceEntityContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(119)
+		p.SetState(118)
 		p.Match(QingQLParserINDENTIFIER)
 	}
 
@@ -2123,6 +2091,7 @@ func (s *PropertyEntityContext) ExitRule(listener antlr.ParseTreeListener) {
 func (p *QingQLParser) PropertyEntity() (localctx IPropertyEntityContext) {
 	localctx = NewPropertyEntityContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 22, QingQLParserRULE_propertyEntity)
+	var _la int
 
 	defer func() {
 		p.ExitRule()
@@ -2140,31 +2109,24 @@ func (p *QingQLParser) PropertyEntity() (localctx IPropertyEntityContext) {
 		}
 	}()
 
-	var _alt int
-
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(123)
+	p.SetState(122)
 	p.GetErrorHandler().Sync(p)
-	_alt = 1
-	for ok := true; ok; ok = _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
-		switch _alt {
-		case 1:
-			{
-				p.SetState(121)
-				p.Match(QingQLParserDOT)
-			}
-			{
-				p.SetState(122)
-				p.Match(QingQLParserINDENTIFIER)
-			}
+	_la = p.GetTokenStream().LA(1)
 
-		default:
-			panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	for ok := true; ok; ok = _la == QingQLParserDOT {
+		{
+			p.SetState(120)
+			p.Match(QingQLParserDOT)
+		}
+		{
+			p.SetState(121)
+			p.Match(QingQLParserINDENTIFIER)
 		}
 
-		p.SetState(125)
+		p.SetState(124)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext())
+		_la = p.GetTokenStream().LA(1)
 	}
 
 	return localctx
@@ -2255,46 +2217,6 @@ func (s *IntegerContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *IntegerContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(QingQLListener); ok {
 		listenerT.ExitInteger(s)
-	}
-}
-
-type XPathContext struct {
-	*ConstantContext
-}
-
-func NewXPathContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *XPathContext {
-	var p = new(XPathContext)
-
-	p.ConstantContext = NewEmptyConstantContext()
-	p.parser = parser
-	p.CopyFrom(ctx.(*ConstantContext))
-
-	return p
-}
-
-func (s *XPathContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *XPathContext) Xpath_name() IXpath_nameContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IXpath_nameContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IXpath_nameContext)
-}
-
-func (s *XPathContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.EnterXPath(s)
-	}
-}
-
-func (s *XPathContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(QingQLListener); ok {
-		listenerT.ExitXPath(s)
 	}
 }
 
@@ -2404,6 +2326,46 @@ func (s *BooleanContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+type SourceContext struct {
+	*ConstantContext
+}
+
+func NewSourceContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *SourceContext {
+	var p = new(SourceContext)
+
+	p.ConstantContext = NewEmptyConstantContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ConstantContext))
+
+	return p
+}
+
+func (s *SourceContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *SourceContext) Xpath_name() IXpath_nameContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IXpath_nameContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IXpath_nameContext)
+}
+
+func (s *SourceContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(QingQLListener); ok {
+		listenerT.EnterSource(s)
+	}
+}
+
+func (s *SourceContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(QingQLListener); ok {
+		listenerT.ExitSource(s)
+	}
+}
+
 func (p *QingQLParser) Constant() (localctx IConstantContext) {
 	localctx = NewConstantContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 24, QingQLParserRULE_constant)
@@ -2424,7 +2386,7 @@ func (p *QingQLParser) Constant() (localctx IConstantContext) {
 		}
 	}()
 
-	p.SetState(134)
+	p.SetState(133)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
@@ -2432,7 +2394,7 @@ func (p *QingQLParser) Constant() (localctx IConstantContext) {
 		localctx = NewBooleanContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(127)
+			p.SetState(126)
 			p.Match(QingQLParserTRUE)
 		}
 
@@ -2440,7 +2402,7 @@ func (p *QingQLParser) Constant() (localctx IConstantContext) {
 		localctx = NewBooleanContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(128)
+			p.SetState(127)
 			p.Match(QingQLParserFALSE)
 		}
 
@@ -2448,7 +2410,7 @@ func (p *QingQLParser) Constant() (localctx IConstantContext) {
 		localctx = NewIntegerContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(129)
+			p.SetState(128)
 			p.Match(QingQLParserNUMBER)
 		}
 
@@ -2456,7 +2418,7 @@ func (p *QingQLParser) Constant() (localctx IConstantContext) {
 		localctx = NewIntegerContext(p, localctx)
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(130)
+			p.SetState(129)
 			p.Match(QingQLParserINTEGER)
 		}
 
@@ -2464,7 +2426,7 @@ func (p *QingQLParser) Constant() (localctx IConstantContext) {
 		localctx = NewFloatContext(p, localctx)
 		p.EnterOuterAlt(localctx, 5)
 		{
-			p.SetState(131)
+			p.SetState(130)
 			p.Match(QingQLParserFLOAT)
 		}
 
@@ -2472,15 +2434,15 @@ func (p *QingQLParser) Constant() (localctx IConstantContext) {
 		localctx = NewStringContext(p, localctx)
 		p.EnterOuterAlt(localctx, 6)
 		{
-			p.SetState(132)
+			p.SetState(131)
 			p.Match(QingQLParserSTRING)
 		}
 
-	case QingQLParserT__3, QingQLParserMUL, QingQLParserINDENTIFIER, QingQLParserPATHITEM:
-		localctx = NewXPathContext(p, localctx)
+	case QingQLParserT__3, QingQLParserINDENTIFIER, QingQLParserPATHITEM:
+		localctx = NewSourceContext(p, localctx)
 		p.EnterOuterAlt(localctx, 7)
 		{
-			p.SetState(133)
+			p.SetState(132)
 			p.Xpath_name()
 		}
 
@@ -2620,67 +2582,67 @@ func (p *QingQLParser) Switch_stmt() (localctx ISwitch_stmtContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(136)
+		p.SetState(135)
 		p.Match(QingQLParserCASE)
 	}
 	{
-		p.SetState(137)
+		p.SetState(136)
 		p.expr(0)
 	}
 	{
-		p.SetState(138)
+		p.SetState(137)
 		p.Match(QingQLParserWHEN)
 	}
 	{
-		p.SetState(139)
+		p.SetState(138)
 		p.expr(0)
 	}
 	{
-		p.SetState(140)
+		p.SetState(139)
 		p.Match(QingQLParserTHEN)
 	}
 	{
-		p.SetState(141)
+		p.SetState(140)
 		p.expr(0)
 	}
-	p.SetState(149)
+	p.SetState(148)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
 			{
-				p.SetState(142)
+				p.SetState(141)
 				p.Match(QingQLParserWHEN)
 			}
 			{
-				p.SetState(143)
+				p.SetState(142)
 				p.expr(0)
 			}
 			{
-				p.SetState(144)
+				p.SetState(143)
 				p.Match(QingQLParserTHEN)
 			}
 			{
-				p.SetState(145)
+				p.SetState(144)
 				p.expr(0)
 			}
 
 		}
-		p.SetState(151)
+		p.SetState(150)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext())
 	}
-	p.SetState(154)
+	p.SetState(153)
 	p.GetErrorHandler().Sync(p)
 
 	if p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext()) == 1 {
 		{
-			p.SetState(152)
+			p.SetState(151)
 			p.Match(QingQLParserELSE)
 		}
 		{
-			p.SetState(153)
+			p.SetState(152)
 			p.expr(0)
 		}
 
@@ -2808,47 +2770,47 @@ func (p *QingQLParser) Call_expr() (localctx ICall_exprContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(156)
+		p.SetState(155)
 
 		var _m = p.Match(QingQLParserINDENTIFIER)
 
 		localctx.(*Call_exprContext).key = _m
 	}
 	{
-		p.SetState(157)
+		p.SetState(156)
 		p.Match(QingQLParserT__1)
 	}
-	p.SetState(166)
+	p.SetState(165)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QingQLParserT__1)|(1<<QingQLParserT__3)|(1<<QingQLParserCASE)|(1<<QingQLParserMUL))) != 0) || (((_la-37)&-(0x1f+1)) == 0 && ((1<<uint((_la-37)))&((1<<(QingQLParserTRUE-37))|(1<<(QingQLParserFALSE-37))|(1<<(QingQLParserINDENTIFIER-37))|(1<<(QingQLParserNUMBER-37))|(1<<(QingQLParserINTEGER-37))|(1<<(QingQLParserFLOAT-37))|(1<<(QingQLParserPATHITEM-37))|(1<<(QingQLParserSTRING-37)))) != 0) {
+	if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<QingQLParserT__1)|(1<<QingQLParserT__3)|(1<<QingQLParserCASE))) != 0) || (((_la-37)&-(0x1f+1)) == 0 && ((1<<uint((_la-37)))&((1<<(QingQLParserTRUE-37))|(1<<(QingQLParserFALSE-37))|(1<<(QingQLParserINDENTIFIER-37))|(1<<(QingQLParserNUMBER-37))|(1<<(QingQLParserINTEGER-37))|(1<<(QingQLParserFLOAT-37))|(1<<(QingQLParserPATHITEM-37))|(1<<(QingQLParserSTRING-37)))) != 0) {
 		{
-			p.SetState(158)
+			p.SetState(157)
 			p.expr(0)
 		}
-		p.SetState(163)
+		p.SetState(162)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		for _la == QingQLParserT__0 {
 			{
-				p.SetState(159)
+				p.SetState(158)
 				p.Match(QingQLParserT__0)
 			}
 			{
-				p.SetState(160)
+				p.SetState(159)
 				p.expr(0)
 			}
 
-			p.SetState(165)
+			p.SetState(164)
 			p.GetErrorHandler().Sync(p)
 			_la = p.GetTokenStream().LA(1)
 		}
 
 	}
 	{
-		p.SetState(168)
+		p.SetState(167)
 		p.Match(QingQLParserT__2)
 	}
 
@@ -2934,7 +2896,7 @@ func (p *QingQLParser) Asterisk() (localctx IAsteriskContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(170)
+		p.SetState(169)
 		p.Match(QingQLParserMUL)
 	}
 
@@ -2978,16 +2940,6 @@ func NewXpath_nameContext(parser antlr.Parser, parent antlr.ParserRuleContext, i
 }
 
 func (s *Xpath_nameContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *Xpath_nameContext) Asterisk() IAsteriskContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IAsteriskContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IAsteriskContext)
-}
 
 func (s *Xpath_nameContext) AllDotnotation() []IDotnotationContext {
 	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IDotnotationContext)(nil)).Elem())
@@ -3053,56 +3005,204 @@ func (p *QingQLParser) Xpath_name() (localctx IXpath_nameContext) {
 		}
 	}()
 
-	p.SetState(186)
+	p.SetState(184)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case QingQLParserMUL:
+	case QingQLParserINDENTIFIER, QingQLParserPATHITEM:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(172)
-			p.Asterisk()
-		}
-
-	case QingQLParserINDENTIFIER, QingQLParserPATHITEM:
-		p.EnterOuterAlt(localctx, 2)
-		{
-			p.SetState(173)
+			p.SetState(171)
 			p.Dotnotation()
 		}
 
 	case QingQLParserT__3:
-		p.EnterOuterAlt(localctx, 3)
-		p.SetState(175)
+		p.EnterOuterAlt(localctx, 2)
+		p.SetState(173)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		for ok := true; ok; ok = _la == QingQLParserT__3 {
 			{
-				p.SetState(174)
+				p.SetState(172)
 				p.Match(QingQLParserT__3)
 			}
 
-			p.SetState(177)
+			p.SetState(175)
 			p.GetErrorHandler().Sync(p)
 			_la = p.GetTokenStream().LA(1)
 		}
-		p.SetState(180)
+		p.SetState(178)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		for ok := true; ok; ok = _la == QingQLParserINDENTIFIER || _la == QingQLParserPATHITEM {
 			{
-				p.SetState(179)
+				p.SetState(177)
 				p.Dotnotation()
 			}
 
-			p.SetState(182)
+			p.SetState(180)
 			p.GetErrorHandler().Sync(p)
 			_la = p.GetTokenStream().LA(1)
 		}
 		{
-			p.SetState(184)
+			p.SetState(182)
+			p.Match(QingQLParserT__3)
+		}
+
+	default:
+		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+
+	return localctx
+}
+
+// ITarget_nameContext is an interface to support dynamic dispatch.
+type ITarget_nameContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsTarget_nameContext differentiates from other interfaces.
+	IsTarget_nameContext()
+}
+
+type Target_nameContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyTarget_nameContext() *Target_nameContext {
+	var p = new(Target_nameContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = QingQLParserRULE_target_name
+	return p
+}
+
+func (*Target_nameContext) IsTarget_nameContext() {}
+
+func NewTarget_nameContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Target_nameContext {
+	var p = new(Target_nameContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = QingQLParserRULE_target_name
+
+	return p
+}
+
+func (s *Target_nameContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Target_nameContext) AllDotnotation() []IDotnotationContext {
+	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IDotnotationContext)(nil)).Elem())
+	var tst = make([]IDotnotationContext, len(ts))
+
+	for i, t := range ts {
+		if t != nil {
+			tst[i] = t.(IDotnotationContext)
+		}
+	}
+
+	return tst
+}
+
+func (s *Target_nameContext) Dotnotation(i int) IDotnotationContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDotnotationContext)(nil)).Elem(), i)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDotnotationContext)
+}
+
+func (s *Target_nameContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Target_nameContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Target_nameContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(QingQLListener); ok {
+		listenerT.EnterTarget_name(s)
+	}
+}
+
+func (s *Target_nameContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(QingQLListener); ok {
+		listenerT.ExitTarget_name(s)
+	}
+}
+
+func (p *QingQLParser) Target_name() (localctx ITarget_nameContext) {
+	localctx = NewTarget_nameContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 34, QingQLParserRULE_target_name)
+	var _la int
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.SetState(199)
+	p.GetErrorHandler().Sync(p)
+
+	switch p.GetTokenStream().LA(1) {
+	case QingQLParserINDENTIFIER, QingQLParserPATHITEM:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(186)
+			p.Dotnotation()
+		}
+
+	case QingQLParserT__3:
+		p.EnterOuterAlt(localctx, 2)
+		p.SetState(188)
+		p.GetErrorHandler().Sync(p)
+		_la = p.GetTokenStream().LA(1)
+
+		for ok := true; ok; ok = _la == QingQLParserT__3 {
+			{
+				p.SetState(187)
+				p.Match(QingQLParserT__3)
+			}
+
+			p.SetState(190)
+			p.GetErrorHandler().Sync(p)
+			_la = p.GetTokenStream().LA(1)
+		}
+		p.SetState(193)
+		p.GetErrorHandler().Sync(p)
+		_la = p.GetTokenStream().LA(1)
+
+		for ok := true; ok; ok = _la == QingQLParserINDENTIFIER || _la == QingQLParserPATHITEM {
+			{
+				p.SetState(192)
+				p.Dotnotation()
+			}
+
+			p.SetState(195)
+			p.GetErrorHandler().Sync(p)
+			_la = p.GetTokenStream().LA(1)
+		}
+		{
+			p.SetState(197)
 			p.Match(QingQLParserT__3)
 		}
 
@@ -3181,7 +3281,7 @@ func (s *DotnotationContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *QingQLParser) Dotnotation() (localctx IDotnotationContext) {
 	localctx = NewDotnotationContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 34, QingQLParserRULE_dotnotation)
+	p.EnterRule(localctx, 36, QingQLParserRULE_dotnotation)
 	var _la int
 
 	defer func() {
@@ -3201,7 +3301,7 @@ func (p *QingQLParser) Dotnotation() (localctx IDotnotationContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(188)
+	p.SetState(201)
 	_la = p.GetTokenStream().LA(1)
 
 	if !(_la == QingQLParserINDENTIFIER || _la == QingQLParserPATHITEM) {
@@ -3286,7 +3386,7 @@ func (s *IdentifierWithTOPICITEMContext) ExitRule(listener antlr.ParseTreeListen
 
 func (p *QingQLParser) IdentifierWithTOPICITEM() (localctx IIdentifierWithTOPICITEMContext) {
 	localctx = NewIdentifierWithTOPICITEMContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 36, QingQLParserRULE_identifierWithTOPICITEM)
+	p.EnterRule(localctx, 38, QingQLParserRULE_identifierWithTOPICITEM)
 
 	defer func() {
 		p.ExitRule()
@@ -3304,73 +3404,73 @@ func (p *QingQLParser) IdentifierWithTOPICITEM() (localctx IIdentifierWithTOPICI
 		}
 	}()
 
-	p.SetState(203)
+	p.SetState(216)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 17, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 20, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(190)
+			p.SetState(203)
 			p.Match(QingQLParserPATHITEM)
 		}
 		{
-			p.SetState(191)
+			p.SetState(204)
 			p.Match(QingQLParserT__4)
 		}
 		{
-			p.SetState(192)
+			p.SetState(205)
 			p.Match(QingQLParserT__5)
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(193)
+			p.SetState(206)
 			p.Match(QingQLParserPATHITEM)
 		}
 		{
-			p.SetState(194)
+			p.SetState(207)
 			p.Match(QingQLParserT__4)
 		}
 		{
-			p.SetState(195)
+			p.SetState(208)
 			p.Match(QingQLParserNUMBER)
 		}
 		{
-			p.SetState(196)
+			p.SetState(209)
 			p.Match(QingQLParserT__5)
 		}
 
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(197)
+			p.SetState(210)
 			p.Match(QingQLParserPATHITEM)
 		}
 		{
-			p.SetState(198)
+			p.SetState(211)
 			p.Match(QingQLParserT__4)
 		}
 		{
-			p.SetState(199)
+			p.SetState(212)
 			p.Match(QingQLParserT__6)
 		}
 		{
-			p.SetState(200)
+			p.SetState(213)
 			p.Match(QingQLParserT__5)
 		}
 
 	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(201)
+			p.SetState(214)
 			p.Match(QingQLParserPATHITEM)
 		}
 
 	case 5:
 		p.EnterOuterAlt(localctx, 5)
 		{
-			p.SetState(202)
+			p.SetState(215)
 			p.Match(QingQLParserFLOAT)
 		}
 
@@ -3447,7 +3547,7 @@ func (s *IdentifierWithQualifierContext) ExitRule(listener antlr.ParseTreeListen
 
 func (p *QingQLParser) IdentifierWithQualifier() (localctx IIdentifierWithQualifierContext) {
 	localctx = NewIdentifierWithQualifierContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 38, QingQLParserRULE_identifierWithQualifier)
+	p.EnterRule(localctx, 40, QingQLParserRULE_identifierWithQualifier)
 
 	defer func() {
 		p.ExitRule()
@@ -3465,54 +3565,54 @@ func (p *QingQLParser) IdentifierWithQualifier() (localctx IIdentifierWithQualif
 		}
 	}()
 
-	p.SetState(214)
+	p.SetState(227)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 18, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 21, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(205)
+			p.SetState(218)
 			p.Match(QingQLParserINDENTIFIER)
 		}
 		{
-			p.SetState(206)
+			p.SetState(219)
 			p.Match(QingQLParserT__7)
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(207)
+			p.SetState(220)
 			p.Match(QingQLParserINDENTIFIER)
 		}
 		{
-			p.SetState(208)
+			p.SetState(221)
 			p.Match(QingQLParserT__4)
 		}
 		{
-			p.SetState(209)
+			p.SetState(222)
 			p.Match(QingQLParserNUMBER)
 		}
 		{
-			p.SetState(210)
+			p.SetState(223)
 			p.Match(QingQLParserT__5)
 		}
 
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(211)
+			p.SetState(224)
 			p.Match(QingQLParserINDENTIFIER)
 		}
 		{
-			p.SetState(212)
+			p.SetState(225)
 			p.Match(QingQLParserT__8)
 		}
 
 	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(213)
+			p.SetState(226)
 			p.Match(QingQLParserINDENTIFIER)
 		}
 
@@ -3523,7 +3623,7 @@ func (p *QingQLParser) IdentifierWithQualifier() (localctx IIdentifierWithQualif
 
 func (p *QingQLParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
 	switch ruleIndex {
-	case 8:
+	case 9:
 		var t *ExprContext = nil
 		if localctx != nil {
 			t = localctx.(*ExprContext)
@@ -3538,13 +3638,13 @@ func (p *QingQLParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex 
 func (p *QingQLParser) Expr_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 0:
-		return p.Precpred(p.GetParserRuleContext(), 6)
-
-	case 1:
 		return p.Precpred(p.GetParserRuleContext(), 5)
 
-	case 2:
+	case 1:
 		return p.Precpred(p.GetParserRuleContext(), 4)
+
+	case 2:
+		return p.Precpred(p.GetParserRuleContext(), 3)
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(predIndex))

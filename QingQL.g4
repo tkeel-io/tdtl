@@ -83,11 +83,17 @@ fields
     : field_elem (',' field_elem)*
     ;
 
+
 field_elem
-    : expr AS xpath_name                            # ExprField
-    | sourceEntity '.' asterisk                     # SourceField
-    | xpath_name                                    # XpathField
+    : field_elem_with_as                            # FieldElemAs
+    | sourceEntity '.' asterisk                     # FieldElemSource
+    | expr                                          # FieldElemExpr
     ;
+
+field_elem_with_as
+    : expr AS target_name                            # TargetAsElem
+    ;
+
 
 
 filter
@@ -115,13 +121,14 @@ expr
    | expr op=(EQ | GT | LT | GTE | LTE | NE) expr   # Binary
    | call_expr                                      # Function
    | switch_stmt                                    # Switch
-   | source_stmt                                    # Source
    ;
 
 // 2.1 entity
+/*
 source_stmt
-    : sourceEntity propertyEntity
+    : sourceEntity propertyEntity                   # ExprElemSource
     ;
+*/
 
 sourceEntity
     :INDENTIFIER
@@ -138,7 +145,7 @@ constant
     | INTEGER                                        # Integer
     | FLOAT                                          # Float
     | STRING                                         # String
-    | xpath_name                                     # XPath
+    | xpath_name                                     # Source
     ;
 
 
@@ -162,8 +169,12 @@ CASE v WHEN t[1] THEN r[1]
 asterisk: '*';
 
 xpath_name
-        : asterisk
-        | dotnotation
+        : dotnotation
+        | '"' + (dotnotation) + '"'
+        ;
+
+target_name
+        : dotnotation
         | '"' + (dotnotation) + '"'
         ;
 

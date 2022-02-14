@@ -30,9 +30,36 @@ import (
 type QingQLListener struct {
 	ctx context.Context
 	*parser.BaseQingQLListener
-	stack  []Expr
+	stack   []Expr
+	target  string
+	sources map[string][]string
+	fields  map[string]string
+	//fields:    listener.fields,
+
 	expr   Expr
 	errors []string
+}
+
+func (l *QingQLListener) setTarget(target string) {
+	l.target = target
+}
+
+func (l *QingQLListener) addSource(source string, expr string) {
+	if l.sources == nil {
+		l.sources = map[string][]string{}
+	}
+	_, ok := l.sources[source]
+	if !ok {
+		l.sources[source] = []string{}
+	}
+	l.sources[source] = append(l.sources[source], expr)
+}
+
+func (l *QingQLListener) addFields(alias string, expr string) {
+	if l.fields == nil {
+		l.fields = map[string]string{}
+	}
+	l.fields[alias] = expr
 }
 
 func (l *QingQLListener) appendErrorf(format string, a ...interface{}) {
@@ -80,7 +107,13 @@ func (l *QingQLListener) ExitRoot(c *parser.RootContext) {
 	l.push(r)
 }
 
-//ExitSelect_list construct fields from select statement
+//ExitTarget construct target entity from select statement
+func (l *QingQLListener) ExitTarget(c *parser.TargetContext) {
+	//fmt.Println("ExitTarget", c.GetText())
+	l.setTarget(c.GetText())
+}
+
+//ExitFields construct fields from select statement
 func (l *QingQLListener) ExitFields(c *parser.FieldsContext) {
 	//fmt.Println("ExitFields")
 	var (
@@ -99,39 +132,40 @@ func (l *QingQLListener) ExitFields(c *parser.FieldsContext) {
 	l.push(data)
 }
 
-func (l *QingQLListener) ExitXpathField(c *parser.XpathFieldContext) {
-	//fmt.Println("ExitXpathField")
-	var alias string
-	xpath := c.GetText()
-	//if xpath != "*" {
-	//	arr := strings.Split(xpath, ".")
-	//	alias = arr[len(arr)-1]
-	//}
-	l.push(&FieldExpr{
-		exp: &JSONPathExpr{
-			xpath,
-		},
-		alias: alias,
-	})
+//ExitFieldElemExpr
+func (l *QingQLListener) ExitFieldElemExpr(c *parser.FieldElemExprContext) {
+	//fmt.Println("ExitFieldElemExpr", c.GetText())
+
 }
 
-func (l *QingQLListener) ExitExprField(c *parser.ExprFieldContext) {
-	//fmt.Println("ExitExprField", c.Expr(), c.Xpath_name())
+func (l *QingQLListener) ExitFieldElemAs(c *parser.FieldElemAsContext) {
+	//fmt.Println("ExitFieldElemAs", c.GetText())
+}
+
+//TODO
+//func (l *QingQLListener) ExitExprElemSource(c *parser.ExprElemSourceContext) {
+//	//fmt.Println("ExitExprElemSource", c.GetText(), c.SourceEntity().GetText())
+//}
+
+func (l *QingQLListener) ExitFieldElemSource(c *parser.FieldElemSourceContext) {
+	//fmt.Println("ExitFieldElemSource", c.GetText())
+	l.addSource(c.SourceEntity().GetText(), c.GetText())
+}
+
+func (l *QingQLListener) ExitTargetAsElem(c *parser.TargetAsElemContext) {
+	//fmt.Println("ExitTargetField", c.GetText(), c.Expr().GetText(), c.Target_name())
 	var alias string
 	expr := l.pop()
-	path := c.Xpath_name()
+	path := c.Target_name()
 	if path != nil {
 		alias = path.GetText()
 		l.push(&FieldExpr{
 			exp:   expr,
 			alias: alias,
 		})
+		l.addFields(alias, c.Expr().GetText())
 	} else {
-		//fmt.Println("+", expr, alias)
-		l.push(&FieldExpr{
-			exp:   expr,
-			alias: "",
-		})
+		panic("path could not nil")
 	}
 }
 
@@ -182,19 +216,23 @@ func (l *QingQLListener) ExitBoolean(c *parser.BooleanContext) {
 	l.push(BoolNode(i))
 }
 
-func (l *QingQLListener) ExitXPath(c *parser.XPathContext) {
-	//fmt.Println("ExitXpath", c.GetText())
+func (l *QingQLListener) ExitXpath_name(c *parser.Xpath_nameContext) {
+	//fmt.Println("ExitXpath_name", c.GetText())
 	str := c.GetText()
+	expr := ""
 	if str[0] != '"' {
-		l.push(&JSONPathExpr{
-			str,
-		})
+		expr = str
+	} else if str[0] == '"' && str[len(str)-1] == '"' {
+		expr = str[1 : len(str)-1]
 	} else {
-		if str[len(str)-1] == '"' {
-			l.push(&JSONPathExpr{
-				str[1 : len(str)-1],
-			})
-		}
+		return
+	}
+	l.push(&JSONPathExpr{
+		expr,
+	})
+	xpaths := strings.Split(expr, ".")
+	if expr != "" && len(xpaths) > 0 {
+		l.addSource(xpaths[0], expr)
 	}
 	//error
 }

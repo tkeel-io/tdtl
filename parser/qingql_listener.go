@@ -17,14 +17,17 @@ type QingQLListener interface {
 	// EnterFields is called when entering the fields production.
 	EnterFields(c *FieldsContext)
 
-	// EnterExprField is called when entering the ExprField production.
-	EnterExprField(c *ExprFieldContext)
+	// EnterFieldElemAs is called when entering the FieldElemAs production.
+	EnterFieldElemAs(c *FieldElemAsContext)
 
-	// EnterSourceField is called when entering the SourceField production.
-	EnterSourceField(c *SourceFieldContext)
+	// EnterFieldElemSource is called when entering the FieldElemSource production.
+	EnterFieldElemSource(c *FieldElemSourceContext)
 
-	// EnterXpathField is called when entering the XpathField production.
-	EnterXpathField(c *XpathFieldContext)
+	// EnterFieldElemExpr is called when entering the FieldElemExpr production.
+	EnterFieldElemExpr(c *FieldElemExprContext)
+
+	// EnterTargetAsElem is called when entering the TargetAsElem production.
+	EnterTargetAsElem(c *TargetAsElemContext)
 
 	// EnterFilter is called when entering the filter production.
 	EnterFilter(c *FilterContext)
@@ -50,12 +53,6 @@ type QingQLListener interface {
 	// EnterBinary is called when entering the Binary production.
 	EnterBinary(c *BinaryContext)
 
-	// EnterSource is called when entering the Source production.
-	EnterSource(c *SourceContext)
-
-	// EnterSource_stmt is called when entering the source_stmt production.
-	EnterSource_stmt(c *Source_stmtContext)
-
 	// EnterSourceEntity is called when entering the sourceEntity production.
 	EnterSourceEntity(c *SourceEntityContext)
 
@@ -74,8 +71,8 @@ type QingQLListener interface {
 	// EnterString is called when entering the String production.
 	EnterString(c *StringContext)
 
-	// EnterXPath is called when entering the XPath production.
-	EnterXPath(c *XPathContext)
+	// EnterSource is called when entering the Source production.
+	EnterSource(c *SourceContext)
 
 	// EnterSwitch_stmt is called when entering the switch_stmt production.
 	EnterSwitch_stmt(c *Switch_stmtContext)
@@ -88,6 +85,9 @@ type QingQLListener interface {
 
 	// EnterXpath_name is called when entering the xpath_name production.
 	EnterXpath_name(c *Xpath_nameContext)
+
+	// EnterTarget_name is called when entering the target_name production.
+	EnterTarget_name(c *Target_nameContext)
 
 	// EnterDotnotation is called when entering the dotnotation production.
 	EnterDotnotation(c *DotnotationContext)
@@ -107,14 +107,17 @@ type QingQLListener interface {
 	// ExitFields is called when exiting the fields production.
 	ExitFields(c *FieldsContext)
 
-	// ExitExprField is called when exiting the ExprField production.
-	ExitExprField(c *ExprFieldContext)
+	// ExitFieldElemAs is called when exiting the FieldElemAs production.
+	ExitFieldElemAs(c *FieldElemAsContext)
 
-	// ExitSourceField is called when exiting the SourceField production.
-	ExitSourceField(c *SourceFieldContext)
+	// ExitFieldElemSource is called when exiting the FieldElemSource production.
+	ExitFieldElemSource(c *FieldElemSourceContext)
 
-	// ExitXpathField is called when exiting the XpathField production.
-	ExitXpathField(c *XpathFieldContext)
+	// ExitFieldElemExpr is called when exiting the FieldElemExpr production.
+	ExitFieldElemExpr(c *FieldElemExprContext)
+
+	// ExitTargetAsElem is called when exiting the TargetAsElem production.
+	ExitTargetAsElem(c *TargetAsElemContext)
 
 	// ExitFilter is called when exiting the filter production.
 	ExitFilter(c *FilterContext)
@@ -140,12 +143,6 @@ type QingQLListener interface {
 	// ExitBinary is called when exiting the Binary production.
 	ExitBinary(c *BinaryContext)
 
-	// ExitSource is called when exiting the Source production.
-	ExitSource(c *SourceContext)
-
-	// ExitSource_stmt is called when exiting the source_stmt production.
-	ExitSource_stmt(c *Source_stmtContext)
-
 	// ExitSourceEntity is called when exiting the sourceEntity production.
 	ExitSourceEntity(c *SourceEntityContext)
 
@@ -164,8 +161,8 @@ type QingQLListener interface {
 	// ExitString is called when exiting the String production.
 	ExitString(c *StringContext)
 
-	// ExitXPath is called when exiting the XPath production.
-	ExitXPath(c *XPathContext)
+	// ExitSource is called when exiting the Source production.
+	ExitSource(c *SourceContext)
 
 	// ExitSwitch_stmt is called when exiting the switch_stmt production.
 	ExitSwitch_stmt(c *Switch_stmtContext)
@@ -178,6 +175,9 @@ type QingQLListener interface {
 
 	// ExitXpath_name is called when exiting the xpath_name production.
 	ExitXpath_name(c *Xpath_nameContext)
+
+	// ExitTarget_name is called when exiting the target_name production.
+	ExitTarget_name(c *Target_nameContext)
 
 	// ExitDotnotation is called when exiting the dotnotation production.
 	ExitDotnotation(c *DotnotationContext)

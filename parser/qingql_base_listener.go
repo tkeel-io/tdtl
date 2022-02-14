@@ -39,23 +39,29 @@ func (s *BaseQingQLListener) EnterFields(ctx *FieldsContext) {}
 // ExitFields is called when production fields is exited.
 func (s *BaseQingQLListener) ExitFields(ctx *FieldsContext) {}
 
-// EnterExprField is called when production ExprField is entered.
-func (s *BaseQingQLListener) EnterExprField(ctx *ExprFieldContext) {}
+// EnterFieldElemAs is called when production FieldElemAs is entered.
+func (s *BaseQingQLListener) EnterFieldElemAs(ctx *FieldElemAsContext) {}
 
-// ExitExprField is called when production ExprField is exited.
-func (s *BaseQingQLListener) ExitExprField(ctx *ExprFieldContext) {}
+// ExitFieldElemAs is called when production FieldElemAs is exited.
+func (s *BaseQingQLListener) ExitFieldElemAs(ctx *FieldElemAsContext) {}
 
-// EnterSourceField is called when production SourceField is entered.
-func (s *BaseQingQLListener) EnterSourceField(ctx *SourceFieldContext) {}
+// EnterFieldElemSource is called when production FieldElemSource is entered.
+func (s *BaseQingQLListener) EnterFieldElemSource(ctx *FieldElemSourceContext) {}
 
-// ExitSourceField is called when production SourceField is exited.
-func (s *BaseQingQLListener) ExitSourceField(ctx *SourceFieldContext) {}
+// ExitFieldElemSource is called when production FieldElemSource is exited.
+func (s *BaseQingQLListener) ExitFieldElemSource(ctx *FieldElemSourceContext) {}
 
-// EnterXpathField is called when production XpathField is entered.
-func (s *BaseQingQLListener) EnterXpathField(ctx *XpathFieldContext) {}
+// EnterFieldElemExpr is called when production FieldElemExpr is entered.
+func (s *BaseQingQLListener) EnterFieldElemExpr(ctx *FieldElemExprContext) {}
 
-// ExitXpathField is called when production XpathField is exited.
-func (s *BaseQingQLListener) ExitXpathField(ctx *XpathFieldContext) {}
+// ExitFieldElemExpr is called when production FieldElemExpr is exited.
+func (s *BaseQingQLListener) ExitFieldElemExpr(ctx *FieldElemExprContext) {}
+
+// EnterTargetAsElem is called when production TargetAsElem is entered.
+func (s *BaseQingQLListener) EnterTargetAsElem(ctx *TargetAsElemContext) {}
+
+// ExitTargetAsElem is called when production TargetAsElem is exited.
+func (s *BaseQingQLListener) ExitTargetAsElem(ctx *TargetAsElemContext) {}
 
 // EnterFilter is called when production filter is entered.
 func (s *BaseQingQLListener) EnterFilter(ctx *FilterContext) {}
@@ -105,18 +111,6 @@ func (s *BaseQingQLListener) EnterBinary(ctx *BinaryContext) {}
 // ExitBinary is called when production Binary is exited.
 func (s *BaseQingQLListener) ExitBinary(ctx *BinaryContext) {}
 
-// EnterSource is called when production Source is entered.
-func (s *BaseQingQLListener) EnterSource(ctx *SourceContext) {}
-
-// ExitSource is called when production Source is exited.
-func (s *BaseQingQLListener) ExitSource(ctx *SourceContext) {}
-
-// EnterSource_stmt is called when production source_stmt is entered.
-func (s *BaseQingQLListener) EnterSource_stmt(ctx *Source_stmtContext) {}
-
-// ExitSource_stmt is called when production source_stmt is exited.
-func (s *BaseQingQLListener) ExitSource_stmt(ctx *Source_stmtContext) {}
-
 // EnterSourceEntity is called when production sourceEntity is entered.
 func (s *BaseQingQLListener) EnterSourceEntity(ctx *SourceEntityContext) {}
 
@@ -153,11 +147,11 @@ func (s *BaseQingQLListener) EnterString(ctx *StringContext) {}
 // ExitString is called when production String is exited.
 func (s *BaseQingQLListener) ExitString(ctx *StringContext) {}
 
-// EnterXPath is called when production XPath is entered.
-func (s *BaseQingQLListener) EnterXPath(ctx *XPathContext) {}
+// EnterSource is called when production Source is entered.
+func (s *BaseQingQLListener) EnterSource(ctx *SourceContext) {}
 
-// ExitXPath is called when production XPath is exited.
-func (s *BaseQingQLListener) ExitXPath(ctx *XPathContext) {}
+// ExitSource is called when production Source is exited.
+func (s *BaseQingQLListener) ExitSource(ctx *SourceContext) {}
 
 // EnterSwitch_stmt is called when production switch_stmt is entered.
 func (s *BaseQingQLListener) EnterSwitch_stmt(ctx *Switch_stmtContext) {}
@@ -182,6 +176,12 @@ func (s *BaseQingQLListener) EnterXpath_name(ctx *Xpath_nameContext) {}
 
 // ExitXpath_name is called when production xpath_name is exited.
 func (s *BaseQingQLListener) ExitXpath_name(ctx *Xpath_nameContext) {}
+
+// EnterTarget_name is called when production target_name is entered.
+func (s *BaseQingQLListener) EnterTarget_name(ctx *Target_nameContext) {}
+
+// ExitTarget_name is called when production target_name is exited.
+func (s *BaseQingQLListener) ExitTarget_name(ctx *Target_nameContext) {}
 
 // EnterDotnotation is called when production dotnotation is entered.
 func (s *BaseQingQLListener) EnterDotnotation(ctx *DotnotationContext) {}

@@ -110,9 +110,9 @@ func TestBoolExpr(t *testing.T) {
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and false`, false},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and true`, true},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and true and false`, false},
-		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and true and true`, false},
+		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and true and true`, true},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `false or  false`, false},
-		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  or  false`, true},
+		{"bool1", NewJSONContext(JSONRaw.SimpleJSON), `true  or  false`, true},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  or  true`, true},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `false or  false  or true`, true},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `false or  false  or false`, false},
@@ -167,15 +167,15 @@ func TestSQL(t *testing.T) {
 		name string
 		ctx  Context
 		expr string
-		want interface{}
+		want JSONNode
 	}{
-		{"sql", ctx, `insert into select entity1.color`, JSONNode(`{}`)},
-		{"sql", ctx, `insert into select entity1.*`, JSONNode(`{}`)},
-		{"sql", ctx, `insert into select entity1.color as aaa`, JSONNode(`{"aaa":"red"}`)},
-		{"sql", ctx, `insert into select entity1.temperature + 1 AS temp`, JSONNode(`{"temp":51}`)},
-		{"sql", ctx, `insert into select entity1.temperature - 1 AS temp from a/b`, JSONNode(`{"temp":49}`)},
-		{"sql", ctx, `insert into select entity1.temperature + '1' AS temp from a/b`, JSONNode(`{"temp":"501"}`)},
-		{"sql", ctx, `insert into select entity1.temperature - '1' AS temp from a/b`, JSONNode(`{"temp":49}`)},
+		{"sql", ctx, `insert into target1 select entity1.color`, JSONNode(`{}`)},
+		{"sql", ctx, `insert into target1 select entity1.*`, JSONNode(`{}`)},
+		{"sql", ctx, `insert into target1 select entity1.color as aaa`, JSONNode(`{"aaa":"red"}`)},
+		{"sql", ctx, `insert into target1 select entity1.temperature + 1 AS temp`, JSONNode(`{"temp":51}`)},
+		{"sql", ctx, `insert into target1 select entity1.temperature - 1 AS temp`, JSONNode(`{"temp":49}`)},
+		{"sql", ctx, `insert into target1 select entity1.temperature + '1' AS temp`, JSONNode(`{"temp":"501"}`)},
+		{"sql", ctx, `insert into target1  select entity1.temperature - '1' AS temp`, JSONNode(`{"temp":49}`)},
 		//{"sql", ctx, `insert into select entity1.params.OPCUA#Lu1_Bottom_Waice_Temp.value - 20 AS temp`, JSONNode(`{"temp":103}`)},
 		//{"sql", ctx,
 		//	`insert into select * from a/b`,
@@ -198,8 +198,9 @@ func TestSQL(t *testing.T) {
 	}
 	Convey("run test", t, func() {
 		for _, tt := range tests {
-			expr, _ := Parse(tt.expr) // Filter expr
-			So(EvalRuleQL(tt.ctx, expr), ShouldEqual, tt.want)
+			expr, err := Parse(tt.expr) // Filter expr
+			So(err, ShouldBeNil)
+			So(EvalRuleQL(tt.ctx, expr).String(), ShouldEqual, tt.want.String())
 		}
 	})
 }
