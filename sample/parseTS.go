@@ -31,9 +31,19 @@ var input = `{
 }`
 
 func main() {
-	tqlString := `insert into entity3 select telemetryV1(entity1.input) as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`
+	tqlString := `insert into entity3 select json(telemetryV1(entity1.input), 'values') as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`
 
 	tqlInst, err := tdtl.NewTDTL(tqlString, map[string]tdtl.ContextFunc{
+		"json": func(args ...tdtl.Node) tdtl.Node {
+			if len(args) != 2 {
+				return tdtl.NULL_RESULT
+			}
+			jsonRaw := args[0].String()
+			path := args[1].String()
+
+			cc := collectjs.New(jsonRaw)
+			return tdtl.JSONNode(string(cc.Get(path).GetRaw()))
+		},
 		"telemetryV1": func(args ...tdtl.Node) tdtl.Node {
 			if len(args) != 1 {
 				return tdtl.NULL_RESULT
