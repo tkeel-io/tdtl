@@ -35,7 +35,7 @@ func TestExec3(t *testing.T) {
 	select entity4.*,entity1.property1, entity1.property1 as target1.uuu, 
 			entity2.property2.name as target2, entity1.property1 + '/' + entity2.property3 as target3`
 
-	tqlInst, err := NewTDTL(tqlString)
+	tqlInst, err := NewTDTL(tqlString, nil)
 	if nil != err {
 		t.Fatal("err:", err)
 	}

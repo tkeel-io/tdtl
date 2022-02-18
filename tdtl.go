@@ -28,6 +28,7 @@ type tdtl struct {
 	sources   map[string][]string
 	tentacles []tql.TentacleConfig
 	listener  *TDTLListener
+	extFunc   map[string]ContextFunc
 }
 
 type TDTL interface {
@@ -37,7 +38,7 @@ type TDTL interface {
 	Exec(map[string]Node) (map[string]Node, error)
 }
 
-func NewTDTL(sql string) (TDTL, error) {
+func NewTDTL(sql string, extFunc map[string]ContextFunc) (TDTL, error) {
 	parse, listener := parse(sql)
 	antlr.ParseTreeWalkerDefault.Walk(listener, parse.Root())
 	err := listener.error()
@@ -49,6 +50,7 @@ func NewTDTL(sql string) (TDTL, error) {
 		target:   listener.target,
 		sources:  listener.sources,
 		//fields:    listener.fields,
+		extFunc:   extFunc,
 		tentacles: nil,
 	}, nil
 }
@@ -70,7 +72,7 @@ func (Q *tdtl) expr() Expr {
 }
 
 func (Q *tdtl) Exec(input map[string]Node) (map[string]Node, error) {
-	ctx := NewMapContext(input, map[string]ContextFunc{})
+	ctx := NewMapContext(input, Q.extFunc)
 	result := EvalRuleQL(ctx, Q.expr())
 	retCtx := NewJSONContext(result.String())
 	ret := map[string]Node{}
