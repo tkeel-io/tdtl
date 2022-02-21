@@ -25,7 +25,7 @@ func TestQL(t *testing.T) {
 	tqlString := `
 insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3
 `
-	tql, _ := NewTDTL(tqlString)
+	tql, _ := NewTDTL(tqlString, nil)
 	fmt.Println(tql.Target())
 	//
 }
@@ -44,8 +44,8 @@ func TestExec3(t *testing.T) {
 	t.Log(tqlString)
 	t.Log("target: ", tqlInst.Target())
 	t.Log("sources: ", tqlInst.Entities())
-	for _, tentacle := range tqlInst.Tentacles() {
-		t.Log("tentacle: ", tentacle)
+	for k, tentacle := range tqlInst.Fields() {
+		t.Log("tentacle: ", k, tentacle)
 	}
 
 	result, err := tqlInst.Exec(map[string]Node{

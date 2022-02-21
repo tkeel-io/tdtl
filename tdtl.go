@@ -18,7 +18,6 @@ package tdtl
 
 import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/tkeel-io/core/pkg/tql"
 )
 
 var _ TDTL = (*tdtl)(nil)
@@ -26,15 +25,15 @@ var _ TDTL = (*tdtl)(nil)
 type tdtl struct {
 	target    string
 	sources   map[string][]string
-	tentacles []tql.TentacleConfig
 	listener  *TDTLListener
 	extFunc   map[string]ContextFunc
+	fields    map[string]string
 }
 
 type TDTL interface {
 	Target() string
 	Entities() map[string][]string
-	Tentacles() []tql.TentacleConfig
+	Fields() map[string]string
 	Exec(map[string]Node) (map[string]Node, error)
 }
 
@@ -49,9 +48,8 @@ func NewTDTL(sql string, extFunc map[string]ContextFunc) (TDTL, error) {
 		listener: listener,
 		target:   listener.target,
 		sources:  listener.sources,
-		//fields:    listener.fields,
-		extFunc:   extFunc,
-		tentacles: nil,
+		fields:   listener.fields,
+		extFunc:  extFunc,
 	}, nil
 }
 
@@ -63,8 +61,8 @@ func (Q *tdtl) Entities() map[string][]string {
 	return Q.sources
 }
 
-func (Q *tdtl) Tentacles() []tql.TentacleConfig {
-	return Q.tentacles
+func (Q *tdtl) Fields() map[string]string {
+	return Q.fields
 }
 
 func (Q *tdtl) expr() Expr {
