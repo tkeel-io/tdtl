@@ -16,9 +16,10 @@ limitations under the License.
 package tdtl
 
 import (
-	"github.com/tkeel-io/tdtl/json/gjson"
 	"regexp"
 	"strings"
+
+	"github.com/tkeel-io/tdtl/json/gjson"
 )
 
 var (

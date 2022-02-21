@@ -25,7 +25,7 @@ func TestQL(t *testing.T) {
 	tqlString := `
 insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3
 `
-	tql, _ := NewTDTL(tqlString)
+	tql, _ := NewTDTL(tqlString, nil)
 	fmt.Println(tql.Target())
 	//
 }
