@@ -18,7 +18,6 @@ package tdtl
 
 import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/tkeel-io/core/pkg/constraint"
 )
 
 var _ TDTL = (*tdtl)(nil)
@@ -92,11 +91,4 @@ type TQLConfig struct { // nolint
 	TargetEntity   string
 	SourceEntities []string
 	Tentacles      []TentacleConfig
-}
-
-type TQL interface {
-	Target() string
-	Entities() []string
-	Tentacles() []TentacleConfig
-	Exec(map[string]constraint.Node) (map[string]constraint.Node, error)
 }
