@@ -18,7 +18,7 @@ package tdtl
 
 import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/tkeel-io/core/pkg/tql"
+	"github.com/tkeel-io/core/pkg/constraint"
 )
 
 var _ TDTL = (*tdtl)(nil)
@@ -26,7 +26,7 @@ var _ TDTL = (*tdtl)(nil)
 type tdtl struct {
 	target    string
 	sources   map[string][]string
-	tentacles []tql.TentacleConfig
+	tentacles []TentacleConfig
 	listener  *TDTLListener
 	extFunc   map[string]ContextFunc
 }
@@ -34,7 +34,7 @@ type tdtl struct {
 type TDTL interface {
 	Target() string
 	Entities() map[string][]string
-	Tentacles() []tql.TentacleConfig
+	Tentacles() []TentacleConfig
 	Exec(map[string]Node) (map[string]Node, error)
 }
 
@@ -63,7 +63,7 @@ func (Q *tdtl) Entities() map[string][]string {
 	return Q.sources
 }
 
-func (Q *tdtl) Tentacles() []tql.TentacleConfig {
+func (Q *tdtl) Tentacles() []TentacleConfig {
 	return Q.tentacles
 }
 
@@ -80,4 +80,23 @@ func (Q *tdtl) Exec(input map[string]Node) (map[string]Node, error) {
 		ret[k] = retCtx.Value(k)
 	}
 	return ret, nil
+}
+
+// ------------------------.
+type TentacleConfig struct {
+	SourceEntity string
+	PropertyKeys []string
+}
+
+type TQLConfig struct { // nolint
+	TargetEntity   string
+	SourceEntities []string
+	Tentacles      []TentacleConfig
+}
+
+type TQL interface {
+	Target() string
+	Entities() []string
+	Tentacles() []TentacleConfig
+	Exec(map[string]constraint.Node) (map[string]constraint.Node, error)
 }

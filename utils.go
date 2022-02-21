@@ -17,10 +17,11 @@ package tdtl
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"github.com/tkeel-io/tdtl/json/jsonparser"
 	"github.com/tkeel-io/tdtl/parser"
-	"strings"
 )
 
 //func Parse(expr string) Expr {

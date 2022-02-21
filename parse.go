@@ -19,10 +19,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/tkeel-io/tdtl/parser"
 	"strconv"
 	"strings"
+
+	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/tkeel-io/tdtl/parser"
 )
 
 //TDTLListener construct expr

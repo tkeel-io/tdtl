@@ -8,12 +8,13 @@ package tdtl
 
 import (
 	"fmt"
-	"github.com/tkeel-io/tdtl/parser"
 	"go/token"
 	"io"
 	"os"
 	"reflect"
 	"strings"
+
+	"github.com/tkeel-io/tdtl/parser"
 )
 
 var SymbolicNames []string

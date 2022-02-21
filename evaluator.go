@@ -16,9 +16,10 @@ limitations under the License.
 package tdtl
 
 import (
-	"github.com/tkeel-io/tdtl/parser"
 	"math"
 	"strings"
+
+	"github.com/tkeel-io/tdtl/parser"
 )
 
 func EvalRuleQL(ctx Context, expr Expr) Node {
@@ -171,7 +172,7 @@ func evalFieldListExpr(ctx Context, list FieldsExpr) Node {
 	v := JSONNode("{}")
 	for _, expr := range list {
 		ret := eval(ctx, expr.exp)
-		if expr.alias!= ""{
+		if expr.alias != "" {
 			val, err := v.Update(expr.alias, ret)
 			if err == nil {
 				v = JSONNode(val)

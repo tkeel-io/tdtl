@@ -2,9 +2,10 @@ package tdtl
 
 import (
 	"fmt"
-	. "github.com/smartystreets/goconvey/convey"
 	"reflect"
 	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestEval(t *testing.T) {
@@ -187,13 +188,13 @@ func TestSQL(t *testing.T) {
 		//	`insert into select
 		//			* ,
 		//			temperature - '1' AS temp
-        //         from a/b`,
+		//         from a/b`,
 		//	JSONNode(`{"color":"red", "temperature":50,"metadata": {"name": "Light1", "price": 11.05},"params": {"OPCUA#Lu1_Bottom_Waice_Temp": {"value":123}},"temp":49}`)},
 		//{"sql", ctx,
 		//	`insert into select
 		//			temperature - '1' AS temp,
 		//			*
-        //         from a/b`,
+		//         from a/b`,
 		//	JSONNode(jsonRaw)},
 	}
 	Convey("run test", t, func() {

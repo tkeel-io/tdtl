@@ -20,6 +20,8 @@ require (
 	github.com/tkeel-io/core v0.3.0
 )
 
+require github.com/tkeel-io/collectjs v0.0.0-20211130035606-e8d64c4a2a39
+
 require (
 	github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
@@ -28,9 +30,4 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/smartystreets/assertions v1.2.0 // indirect
 	github.com/tidwall/gjson v1.12.0 // indirect
-	github.com/tkeel-io/collectjs v0.0.0-20211130035606-e8d64c4a2a39 // indirect
-	github.com/tkeel-io/kit v0.0.0-20211122161648-31b3986683f2 // indirect
-	go.uber.org/atomic v1.9.0 // indirect
-	go.uber.org/multierr v1.7.0 // indirect
-	go.uber.org/zap v1.19.1 // indirect
 )
