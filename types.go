@@ -16,7 +16,9 @@ limitations under the License.
 package tdtl
 
 import (
+	"encoding/json"
 	"fmt"
+	"reflect"
 	"strconv"
 	"strings"
 )
@@ -45,6 +47,8 @@ const (
 	Float
 	// String is a json string
 	String
+	// Array is a json string
+	Array
 	// JSON is a raw block of JSON
 	JSON
 )
@@ -74,6 +78,7 @@ type Node interface {
 	Type() Type
 	To(Type) Node
 	String() string
+	Value() interface{}
 }
 
 //DefaultNode interface
@@ -91,10 +96,12 @@ func (r DefaultNode) To(Type) Node {
 func (r DefaultNode) String() string {
 	return r.raw
 }
+func (r DefaultNode) Value() interface{} { return r.raw }
 
 type BoolNode bool
 
-func (r BoolNode) Type() Type { return Bool }
+func (r BoolNode) Type() Type         { return Bool }
+func (r BoolNode) Value() interface{} { return bool(r) }
 func (r BoolNode) To(typ Type) Node {
 	switch typ {
 	case Bool:
@@ -110,7 +117,8 @@ func (r BoolNode) String() string {
 
 type IntNode int64
 
-func (r IntNode) Type() Type { return Int }
+func (r IntNode) Type() Type         { return Int }
+func (r IntNode) Value() interface{} { return int64(r) }
 func (r IntNode) To(typ Type) Node {
 	switch typ {
 	case Number, Int:
@@ -128,7 +136,8 @@ func (r IntNode) String() string {
 
 type FloatNode float64
 
-func (r FloatNode) Type() Type { return Float }
+func (r FloatNode) Type() Type         { return Float }
+func (r FloatNode) Value() interface{} { return float64(r) }
 func (r FloatNode) To(typ Type) Node {
 	switch typ {
 	case Number, Float:
@@ -146,7 +155,8 @@ func (r FloatNode) String() string {
 
 type StringNode string
 
-func (r StringNode) Type() Type { return String }
+func (r StringNode) Type() Type         { return String }
+func (r StringNode) Value() interface{} { return string(r) }
 func (r StringNode) To(typ Type) Node {
 	switch typ {
 	case String:
@@ -158,7 +168,7 @@ func (r StringNode) To(typ Type) Node {
 		}
 		return BoolNode(b)
 	case Number:
-		if strings.Index(string(r), ".") == -1 {
+		if !strings.Contains(string(r), ".") {
 			return r.To(Int)
 		}
 		return r.To(Float)
@@ -181,12 +191,58 @@ func (r StringNode) String() string {
 	return string(r)
 }
 
+type NullNode struct{}
+
+func (r NullNode) Type() Type         { return Null }
+func (r NullNode) String() string     { return "null" }
+func (r NullNode) Value() interface{} { return nil }
+func (r NullNode) To(typ Type) Node {
+	switch typ {
+	case Null:
+		return r
+	case JSON:
+		return JSONNode("{}")
+	case Array:
+		return ArrayNode("[]")
+	default:
+		return UNDEFINED_RESULT
+	}
+}
+
+type ArrayNode []byte
+
+func (r ArrayNode) Type() Type     { return Array }
+func (r ArrayNode) String() string { return string(r) }
+func (r ArrayNode) Value() interface{} {
+	var data interface{}
+	_ = json.Unmarshal(r, &data)
+	return data
+}
+
+func (r ArrayNode) To(typ Type) Node {
+	switch typ {
+	case String:
+		return StringNode(r)
+	case Array:
+		return r
+	case JSON:
+		return JSONNode(r)
+	default:
+		return UNDEFINED_RESULT
+	}
+}
+
 // JSONNode maybe Object or Array
 type JSONNode string
 
 func (r JSONNode) Type() Type { return JSON }
 func (r JSONNode) To(typ Type) Node {
 	return UNDEFINED_RESULT
+}
+func (r JSONNode) Value() interface{} {
+	var data interface{}
+	_ = json.Unmarshal([]byte(r), &data)
+	return data
 }
 func (r JSONNode) Update(key string, value Node) (val string, err error) {
 	switch value := value.(type) {
@@ -367,4 +423,52 @@ type SelectStatementExpr struct {
 
 func (r *SelectStatementExpr) String() string {
 	return "Root Expr"
+}
+
+func NewNode(v interface{}) Node {
+	switch val := v.(type) {
+	case float32:
+		return FloatNode(val)
+	case float64:
+		return FloatNode(val)
+	case uint8, int8, uint16, int16, uint, int, uint32, int32, int64, uint64:
+		return StringNode(fmt.Sprintf("%v", val)).To(Int)
+	case string:
+		return StringNode(val)
+	case []byte:
+		return JSONNode(val)
+	case bool:
+		return BoolNode(val)
+	case map[string]interface{}:
+		data, _ := json.Marshal(v)
+		return JSONNode(string(data))
+	case nil:
+		return NullNode{}
+	default:
+		valKind := reflect.TypeOf(val).Kind()
+		if reflect.Ptr == valKind {
+			// deference pointer.
+			return NewNode(reflect.ValueOf(val).Elem().Interface())
+		} else if reflect.Slice == valKind {
+			data, _ := json.Marshal(v)
+			return JSONNode(string(data))
+		}
+
+		return UNDEFINED_RESULT
+	}
+}
+func ToBytesWithWrapString(val Node) []byte {
+	if nil == val {
+		return []byte{}
+	}
+
+	switch val.Type() {
+	case JSON:
+		jsonVal, _ := val.(JSONNode)
+		return []byte(jsonVal)
+	case String:
+		return []byte("\"" + val.String() + "\"")
+	default:
+		return []byte(val.String())
+	}
 }
