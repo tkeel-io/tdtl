@@ -73,7 +73,6 @@ func (t Type) String() string {
 type Node interface {
 	Type() Type
 	To(Type) Node
-	Value() interface{}
 	String() string
 }
 
