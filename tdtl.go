@@ -17,6 +17,8 @@ limitations under the License.
 package tdtl
 
 import (
+	"strings"
+
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
@@ -32,7 +34,7 @@ type tdtl struct {
 
 type TDTL interface {
 	Target() string
-	Entities() map[string][]string
+	Entities() []string
 	Tentacles() []TentacleConfig
 	Exec(map[string]Node) (map[string]Node, error)
 }
@@ -58,12 +60,25 @@ func (Q *tdtl) Target() string {
 	return Q.target
 }
 
-func (Q *tdtl) Entities() map[string][]string {
-	return Q.sources
+func (Q *tdtl) Entities() []string {
+	sources := make([]string, 0)
+	for source := range Q.sources {
+		sources = append(sources, source)
+	}
+	return sources
 }
 
 func (Q *tdtl) Tentacles() []TentacleConfig {
-	return Q.tentacles
+	tentacleCfgs := make([]TentacleConfig, 0, len(Q.sources))
+	for entityID, keys := range Q.sources {
+		tentacleCfg := TentacleConfig{SourceEntity: entityID}
+		for index := range keys {
+			arr := strings.SplitN(keys[index], ".", 2)
+			tentacleCfg.PropertyKeys = append(tentacleCfg.PropertyKeys, arr[1])
+		}
+		tentacleCfgs = append(tentacleCfgs, tentacleCfg)
+	}
+	return tentacleCfgs
 }
 
 func (Q *tdtl) expr() Expr {
