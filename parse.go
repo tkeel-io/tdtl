@@ -153,7 +153,7 @@ func (l *TDTLListener) ExitFieldElemSource(c *parser.FieldElemSourceContext) {
 }
 
 func (l *TDTLListener) ExitTargetAsElem(c *parser.TargetAsElemContext) {
-	fmt.Println("ExitTargetField", c.GetText(), c.Expr().GetText(), c.Target_name())
+	// fmt.Println("ExitTargetField", c.GetText(), c.Expr().GetText(), c.Target_name())
 	var alias string
 	expr := l.pop()
 	path := c.Target_name()
@@ -217,7 +217,7 @@ func (l *TDTLListener) ExitBoolean(c *parser.BooleanContext) {
 }
 
 func (l *TDTLListener) ExitXpath_name(c *parser.Xpath_nameContext) {
-	fmt.Println("ExitXpath_name", c.GetText())
+	// fmt.Println("ExitXpath_name", c.GetText())
 	str := c.GetText()
 	expr := ""
 	if str[0] != '"' {
