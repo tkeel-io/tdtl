@@ -88,7 +88,6 @@ func (r DefaultNode) Type() Type { return r.typ }
 func (r DefaultNode) To(Type) Node {
 	return r
 }
-func (r DefaultNode) Value() interface{} { return r }
 func (r DefaultNode) String() string {
 	return r.raw
 }
@@ -105,7 +104,6 @@ func (r BoolNode) To(typ Type) Node {
 	}
 	return UNDEFINED_RESULT
 }
-func (r BoolNode) Value() interface{} { return bool(r) }
 func (r BoolNode) String() string {
 	return fmt.Sprintf("%t", r)
 }
@@ -124,7 +122,6 @@ func (r IntNode) To(typ Type) Node {
 	}
 	return UNDEFINED_RESULT
 }
-func (r IntNode) Value() interface{} { return int64(r) }
 func (r IntNode) String() string {
 	return fmt.Sprintf("%d", r)
 }
@@ -143,7 +140,6 @@ func (r FloatNode) To(typ Type) Node {
 	}
 	return UNDEFINED_RESULT
 }
-func (r FloatNode) Value() interface{} { return float64(r) }
 func (r FloatNode) String() string {
 	return fmt.Sprintf("%f", r)
 }
@@ -181,7 +177,6 @@ func (r StringNode) To(typ Type) Node {
 	}
 	return UNDEFINED_RESULT
 }
-func (r StringNode) Value() interface{} { return string(r) }
 func (r StringNode) String() string {
 	return string(r)
 }
@@ -214,7 +209,6 @@ func (r JSONNode) Update(key string, value Node) (val string, err error) {
 	}
 	return
 }
-func (r JSONNode) Value() interface{} { return string(r) }
 func (r JSONNode) String() string {
 	return string(r)
 }
