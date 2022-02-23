@@ -17,8 +17,6 @@ limitations under the License.
 package tdtl
 
 import (
-	"strings"
-
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
@@ -27,15 +25,15 @@ var _ TDTL = (*tdtl)(nil)
 type tdtl struct {
 	target    string
 	sources   map[string][]string
-	tentacles []TentacleConfig
 	listener  *TDTLListener
 	extFunc   map[string]ContextFunc
+	fields    map[string]string
 }
 
 type TDTL interface {
 	Target() string
-	Entities() []string
-	Tentacles() []TentacleConfig
+	Entities() map[string][]string
+	Fields() map[string]string
 	Exec(map[string]Node) (map[string]Node, error)
 }
 
@@ -50,9 +48,8 @@ func NewTDTL(sql string, extFunc map[string]ContextFunc) (TDTL, error) {
 		listener: listener,
 		target:   listener.target,
 		sources:  listener.sources,
-		//fields:    listener.fields,
-		extFunc:   extFunc,
-		tentacles: nil,
+		fields:   listener.fields,
+		extFunc:  extFunc,
 	}, nil
 }
 
@@ -60,25 +57,12 @@ func (Q *tdtl) Target() string {
 	return Q.target
 }
 
-func (Q *tdtl) Entities() []string {
-	sources := make([]string, 0)
-	for source := range Q.sources {
-		sources = append(sources, source)
-	}
-	return sources
+func (Q *tdtl) Entities() map[string][]string {
+	return Q.sources
 }
 
-func (Q *tdtl) Tentacles() []TentacleConfig {
-	tentacleCfgs := make([]TentacleConfig, 0, len(Q.sources))
-	for entityID, keys := range Q.sources {
-		tentacleCfg := TentacleConfig{SourceEntity: entityID}
-		for index := range keys {
-			arr := strings.SplitN(keys[index], ".", 2)
-			tentacleCfg.PropertyKeys = append(tentacleCfg.PropertyKeys, arr[1])
-		}
-		tentacleCfgs = append(tentacleCfgs, tentacleCfg)
-	}
-	return tentacleCfgs
+func (Q *tdtl) Fields() map[string]string {
+	return Q.fields
 }
 
 func (Q *tdtl) expr() Expr {
@@ -94,16 +78,4 @@ func (Q *tdtl) Exec(input map[string]Node) (map[string]Node, error) {
 		ret[k] = retCtx.Value(k)
 	}
 	return ret, nil
-}
-
-// ------------------------.
-type TentacleConfig struct {
-	SourceEntity string
-	PropertyKeys []string
-}
-
-type TQLConfig struct { // nolint
-	TargetEntity   string
-	SourceEntities []string
-	Tentacles      []TentacleConfig
 }

@@ -44,8 +44,8 @@ func TestExec3(t *testing.T) {
 	t.Log(tqlString)
 	t.Log("target: ", tqlInst.Target())
 	t.Log("sources: ", tqlInst.Entities())
-	for _, tentacle := range tqlInst.Tentacles() {
-		t.Log("tentacle: ", tentacle)
+	for k, tentacle := range tqlInst.Fields() {
+		t.Log("tentacle: ", k, tentacle)
 	}
 
 	result, err := tqlInst.Exec(map[string]Node{

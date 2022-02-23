@@ -5,8 +5,6 @@ go 1.17
 require (
 	github.com/Jeffail/gabs v1.4.0
 	github.com/a8m/djson v0.0.0-20170509170705-c02c5aef757f
-	//github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20211026222012-6af4c774c47b
-	//github.com/antlr/antlr4 v0.0.0-20200503195918-621b933c7a7f
 	github.com/antlr/antlr4 v0.0.0-20200503195918-621b933c7a7f
 	github.com/antonholmquist/jason v1.0.0
 	github.com/bitly/go-simplejson v0.5.0

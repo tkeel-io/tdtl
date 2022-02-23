@@ -32,7 +32,12 @@ var input = `{
 }`
 
 func main() {
-	tqlString := `insert into entity3 select json(telemetryV1(entity1.input), 'values') as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`
+	tqlString := `
+		insert into entity3 
+		select 
+			json(telemetryV1(entity1.input), 'values') as property1, 
+			entity2.property2.name as property2, 
+			entity1.property1 + entity2.property3 as property3`
 
 	tqlInst, err := tdtl.NewTDTL(tqlString, map[string]tdtl.ContextFunc{
 		"json": func(args ...tdtl.Node) tdtl.Node {
