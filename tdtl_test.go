@@ -17,17 +17,19 @@ limitations under the License.
 package tdtl
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestQL(t *testing.T) {
 	tqlString := `
-insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3
+insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3, entity2.property7
 `
 	tql, _ := NewTDTL(tqlString, nil)
 	fmt.Println(tql.Target())
-	//
 }
 
 func TestExec3(t *testing.T) {
@@ -36,9 +38,7 @@ func TestExec3(t *testing.T) {
 			entity2.property2.name as target2, entity1.property1 + '/' + entity2.property3 as target3`
 
 	tqlInst, err := NewTDTL(tqlString, nil)
-	if nil != err {
-		t.Fatal("err:", err)
-	}
+	assert.Nil(t, err)
 
 	t.Log(err)
 	t.Log(tqlString)
@@ -54,6 +54,9 @@ func TestExec3(t *testing.T) {
 		"entity2.property2.name": StringNode("g123"),
 		"entity2.property3":      StringNode("d123"),
 	})
+
+	bytes, _ := json.Marshal(result)
+	t.Log(string(bytes))
 
 	t.Log(err)
 	t.Log(result)
@@ -109,3 +112,11 @@ func Example_TQL() {
 //	t.Log(err)
 //	t.Log(result)
 //}
+
+func TestString(t *testing.T) {
+	tqlText := "insert into 4c1e33a1-6899-4643-a6b3-46cf37950b7f select 54cf69fc-78c3-4f79-9f6b-5d5e5bd8d3c0.sysField._spacePath  + '/4c1e33a1-6899-4643-a6b3-46cf37950b7f' as sysField._spacePath"
+	tqlIns, err := NewTDTL(tqlText, nil)
+	assert.Nil(t, err)
+	t.Log(tqlIns.Target())
+
+}

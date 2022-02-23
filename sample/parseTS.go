@@ -18,6 +18,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/tkeel-io/collectjs"
 	"github.com/tkeel-io/tdtl"
 )
@@ -82,8 +83,8 @@ func main() {
 	}
 
 	result, err := tqlInst.Exec(map[string]tdtl.Node{
-		"entity1.input": tdtl.StringNode(input),
-		"entity1.property1": tdtl.StringNode("test"),
+		"entity1.input":          tdtl.StringNode(input),
+		"entity1.property1":      tdtl.StringNode("test"),
 		"entity2.property2.name": tdtl.StringNode("123"),
 		"entity2.property3":      tdtl.StringNode("g123"),
 	})
