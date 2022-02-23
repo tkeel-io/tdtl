@@ -21,7 +21,7 @@ require (
 
 require (
 	github.com/stretchr/testify v1.7.0
-	github.com/tkeel-io/collectjs v0.0.0-20211130035606-e8d64c4a2a39
+	github.com/tkeel-io/collectjs v0.0.0-20220223040031-79acd37e4d90
 )
 
 require (
