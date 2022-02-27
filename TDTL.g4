@@ -57,7 +57,7 @@ SUB:                '-';
 DOT:                '.';
 TRUE:               T R U E;
 FALSE:              F A L S E;
-INDENTIFIER:        [a-zA-Z0-9_#][a-zA-Z_\-#$@0-9]*;
+INDENTIFIER:        [a-zA-Z_#][a-zA-Z_\-#$@0-9]*;
 NUMBER:             '0' | [1-9][0-9]* ;
 INTEGER:            ('+' | '-')? NUMBER;
 FLOAT:              ('+' | '-')? (NUMBER+ DOT NUMBER+ |  NUMBER+ DOT | DOT NUMBER+);
