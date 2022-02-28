@@ -53,33 +53,33 @@ func get(raw []byte, path string) *Collect {
 	ret := gjson.GetBytes(raw, path)
 	return newCollectFromGjsonResult(ret)
 }
+//
+//func Get(raw []byte, path string) []byte {
+//	//keys := path2JSONPARSER(path)
+//	//
+//	//if value, dataType, _, err := jsonparser.Get(raw, keys...); err == nil {
+//	//	return warpValue(dataType, value)
+//	//} else {
+//	//
+//	//}
+//	path = path2GJSON(path)
+//	ret := gjson.GetBytes(raw, path)
+//	ee := gjson.Get(ret.String(), "")
+//	fmt.Println(ee, ee.Type)
+//	return []byte(ret.String())
+//}
 
-func Get(raw []byte, path string) []byte {
-	//keys := path2JSONPARSER(path)
-	//
-	//if value, dataType, _, err := jsonparser.Get(raw, keys...); err == nil {
-	//	return warpValue(dataType, value)
-	//} else {
-	//
-	//}
-	path = path2GJSON(path)
-	ret := gjson.GetBytes(raw, path)
-	ee := gjson.Get(ret.String(), "")
-	fmt.Println(ee, ee.Type)
-	return []byte(ret.String())
-}
 
-
-func Set(raw []byte, path string, value []byte) ([]byte, error) {
+func set(raw []byte, path string, value []byte) ([]byte, error) {
 	keys := path2JSONPARSER(path)
 	return jsonparser.Set(raw, value, keys...)
 }
-func Append(raw []byte, path string, value []byte) ([]byte, error) {
+func add(raw []byte, path string, value []byte) ([]byte, error) {
 	keys := path2JSONPARSER(path)
 	return jsonparser.Append(raw, value, keys...)
 }
 
-func Del(raw []byte, path ...string) []byte {
+func del(raw []byte, path ...string) []byte {
 	for _, v := range path {
 		keys := path2JSONPARSER(v)
 		raw = jsonparser.Delete(raw, keys...)
@@ -87,7 +87,7 @@ func Del(raw []byte, path ...string) []byte {
 	return raw
 }
 
-func ForEach(raw []byte, datatype Type, fn func(key []byte, value *Collect)) []byte {
+func forEach(raw []byte, datatype Type, fn func(key []byte, value *Collect)) []byte {
 	// dispose object.
 	if datatype == Object {
 		jsonparser.ObjectEach(raw, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {

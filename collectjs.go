@@ -1,6 +1,7 @@
 package tdtl
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"strings"
@@ -37,8 +38,13 @@ func newCollect(data []byte) *Collect {
 func newCollectFromGjsonResult(ret Result) *Collect {
 	collect := &Collect{}
 	collect.path = ""
-	collect.value = []byte(ret.Raw)
 	collect.datatype = datetype(ret)
+	if collect.datatype == String {
+		collect.value = []byte(ret.Str)
+	} else {
+		collect.value = []byte(ret.Raw)
+	}
+
 	return collect
 }
 
@@ -65,25 +71,23 @@ func (cc *Collect) Get(path ...string) *Collect {
 }
 
 func (cc *Collect) Set(path string, value Node) {
-	cc.value, cc.err = Set(cc.value, path, value.Raw())
+	cc.value, cc.err = set(cc.value, path, value.Raw())
 }
 
 func (cc *Collect) Append(path string, value Node) {
-	cc.value, cc.err = Append(cc.value, path, value.Raw())
+	cc.value, cc.err = add(cc.value, path, value.Raw())
 }
 
 func (cc *Collect) Del(path ...string) {
-	cc.value = Del(cc.value, path...)
+	cc.value = del(cc.value, path...)
 }
 
 func (cc *Collect) Copy() *JSONNode {
 	return newCollect(cc.value)
 }
 
-type MapHandle func(key []byte, value *Collect) Node
-
-func (cc *Collect) Foreach(fn func(key []byte, value *Collect)) {
-	cc.value = ForEach(cc.value, cc.datatype, fn)
+func (cc *Collect) Foreach(fn ForeachHandle) {
+	cc.value = forEach(cc.value, cc.datatype, fn)
 }
 
 func (cc *Collect) Map(handle MapHandle) {
@@ -175,13 +179,13 @@ func MergeBy(json []byte, paths ...string) ([]byte, error) {
 	var err error
 	ret := New("{}")
 	c.Foreach(func(key []byte, value *Collect) {
-		keys := make([]string, 0, len(paths))
+		keys := make([][]byte, 0, len(paths))
 		for _, path := range paths {
-			keyValue := get(value.Raw(), path).String()
-			if len(keyValue) == 0 {
+			keyValueRaw := value.Get(path).String()
+			if len(keyValueRaw) == 0 {
 				break
 			}
-			keys = append(keys, keyValue)
+			keys = append(keys, []byte(keyValueRaw))
 		}
 
 		if len(keys) == 0 {
@@ -189,14 +193,15 @@ func MergeBy(json []byte, paths ...string) ([]byte, error) {
 		}
 
 		var newValue []byte
-		k := append([]byte{byte(34)}, []byte(strings.Join(keys, "+"))...)
-		k = append(k, byte(34))
+		k := string(bytes.Join(keys, []byte("+")))
+		k = strings.Replace(k, ".", "_", -1)
+
 		oldValue := ret.Get(string(k))
 		if newValue, err = Merge(oldValue.Raw(), value.Raw()); nil != err {
 			ret.err = err
 		}
 		ov := ByteNew(newValue)
-		ret.Set(string(k), ov)
+		ret.Set(k, ov)
 	})
 	return ret.value, ret.err
 }
@@ -210,7 +215,7 @@ func KeyBy(json []byte, path string) ([]byte, error) {
 	var err error
 	ret := []byte("{}")
 	c.Foreach(func(key []byte, value *Collect) {
-		keyValue := Get(value.Raw(), path)
+		keyValue := get(value.Raw(), path).Raw()
 		if keyValue[0] == '"' && keyValue[len(keyValue)-1] == '"' {
 			keyValue = keyValue[1 : len(keyValue)-1]
 		}
@@ -250,7 +255,7 @@ func Sort(json []byte, path string) ([]byte, error) {
 	var err error
 	ret := []byte("[]")
 	c.Foreach(func(key []byte, value *Collect) {
-		keyValue := Get(value.Raw(), path)
+		keyValue := get(value.Raw(), path).Raw()
 		if keyValue[0] == '"' && keyValue[len(keyValue)-1] == '"' {
 			keyValue = keyValue[1 : len(keyValue)-1]
 		}

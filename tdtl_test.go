@@ -63,32 +63,33 @@ func TestExec3(t *testing.T) {
 	//map[property1: property2: property3:]
 }
 
-func Example_TQL() {
-	tqlString := `insert into entity3 select entity1.*,entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`
-	expr, _ := Parse(tqlString)
-	Dump(expr)
-	//OUTPUT:
-	//0  Root {
-	//     1  .  Select {
-	//     2  .  .  Field (property1) {
-	//     3  .  .  .  "ref:&{entity1.property1}"
-	//     4  .  .  }
-	//     5  .  .  Field (property2) {
-	//     6  .  .  .  "ref:&{entity2.property2.name}"
-	//     7  .  .  }
-	//     8  .  .  Field (property3) {
-	//     9  .  .  .  Op [ADD] {
-	//    10  .  .  .  .  "ref:&{entity1.property1}"
-	//    11  .  .  .  .  "ref:&{entity2.property3}"
-	//    12  .  .  .  }
-	//    13  .  .  }
-	//    14  .  }
-	//    15  .  Topic [] {}
-	//    16  .  Where {
-	//    17  .  .  <nil>
-	//    18  .  }
-	//    19  }
-}
+//func Example_TQL() {
+//	tqlString := `insert into entity3 select entity1.*,entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`
+//	expr, _ := Parse(tqlString)
+//	Dump(expr)
+//	//OUTPUT:
+//	//
+//	//0  Root {
+//	//     1  .  Select {
+//	//     2  .  .  Field (property1) {
+//	//     3  .  .  .  "ref:&{entity1.property1}"
+//	//     4  .  .  }
+//	//     5  .  .  Field (property2) {
+//	//     6  .  .  .  "ref:&{entity2.property2.name}"
+//	//     7  .  .  }
+//	//     8  .  .  Field (property3) {
+//	//     9  .  .  .  Op [ADD] {
+//	//    10  .  .  .  .  "ref:&{entity1.property1}"
+//	//    11  .  .  .  .  "ref:&{entity2.property3}"
+//	//    12  .  .  .  }
+//	//    13  .  .  }
+//	//    14  .  }
+//	//    15  .  Topic [] {}
+//	//    16  .  Where {
+//	//    17  .  .  <nil>
+//	//    18  .  }
+//	//    19  }
+//}
 
 //func TestExec3(t *testing.T) {
 //	tqlString := `insert into entity3 select entity1.property1 as property1, entity2.property2.name as property2, entity1.property1 + entity2.property3 as property3`

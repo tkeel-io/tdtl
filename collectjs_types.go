@@ -23,11 +23,9 @@ import (
 	"strings"
 )
 
-//type Collect interface {
-//	Combine(Collect) Collect
-//	Get(string) Collect
-//	GetByte(path string) []byte
-//}
+type MapHandle func(key []byte, value *Collect) Node
+type ForeachHandle func(key []byte, value *Collect)
+type SortHandle func(p1 *Collect, p2 *Collect) bool
 
 var (
 	UNDEFINED_RESULT = &JSONNode{datatype: Undefined}
@@ -109,15 +107,16 @@ func datetype(data interface{}) Type {
 	case jsonparser.ValueType:
 		return jsonparserDatetype[data]
 	case gjson.Result:
-		typ:= gjsonDatetype[data.Type]
-		if typ == JSON{
-			if data.IsArray(){
+		typ := gjsonDatetype[data.Type]
+		if typ == JSON {
+			if data.IsArray() {
 				return Array
 			}
-			if data.IsObject(){
+			if data.IsObject() {
 				return Object
 			}
 		}
+		return typ
 	}
 	return Null
 }
@@ -259,9 +258,15 @@ func (r JSONNode) To(typ Type) Node {
 	return UNDEFINED_RESULT
 }
 func (r JSONNode) Raw() []byte {
-	return []byte(r.String())
+	switch r.datatype {
+	case String:
+		ret := append([]byte{byte('"')}, r.value...)
+		ret = append(ret, byte('"'))
+		return ret
+	default:
+		return []byte(r.String())
+	}
 }
 func (r JSONNode) String() string {
 	return string(r.value)
 }
-
