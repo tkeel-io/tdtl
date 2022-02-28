@@ -7,24 +7,6 @@ import (
 	"strings"
 )
 
-func _jsonparser2JsonNode(typ jsonparser.ValueType, raw []byte) Node {
-	switch typ {
-	case jsonparser.Array:
-		return JSONNode{
-			value:    []byte(raw),
-			datatype: Array,
-		}
-	case jsonparser.Object:
-		return JSONNode{
-			value:    []byte(raw),
-			datatype: Object,
-		}
-	default:
-		r := StringNode(raw)
-		return r.To(datetype(typ))
-	}
-	return NULL_RESULT
-}
 func _gjson2JsonNode(ret gjson.Result) Node {
 	switch ret.Type {
 	case gjson.True:
@@ -51,7 +33,7 @@ func _gjson2JsonNode(ret gjson.Result) Node {
 func get(raw []byte, path string) *Collect {
 	path = path2GJSON(path)
 	ret := gjson.GetBytes(raw, path)
-	return newCollectFromGjsonResult(ret)
+	return New(ret)
 }
 //
 //func Get(raw []byte, path string) []byte {

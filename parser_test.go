@@ -106,7 +106,7 @@ func TestJson(t *testing.T) {
 		args    string
 		want    Node
 	}{
-		{"", NewJSONContext(JSONRaw.JSON), `age`, IntNode(37)},
+		//{"", NewJSONContext(JSONRaw.JSON), `age`, IntNode(37)},
 		{"", NewJSONContext(JSONRaw.JSON), `age + 1`, IntNode(38)},
 		{"", NewJSONContext(JSONRaw.JSON), `(age + 1) * 2`, IntNode(76)},
 		{"", NewJSONContext(JSONRaw.JSON), `(1 + 1) * age`, IntNode(74)},

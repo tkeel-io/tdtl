@@ -19,7 +19,7 @@ func TestDefaultValue_Eval(t *testing.T) {
 		name string
 		json string
 		expr string
-		want interface{}
+		want Node
 	}{
 		{"number", JSONRaw.SimpleJSON, `(YX_0002 * 2 + YX_0003)`, IntNode(4)},
 		{"number", JSONRaw.SimpleJSON, `1`, IntNode(1)},
@@ -89,10 +89,11 @@ func TestDefaultValue_Eval(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			v := NewJSONContext(tt.json)
 			expr, _ := ParseExpr(tt.expr) // Field expr
-			print()
-			if got := eval(v, expr); !reflect.DeepEqual(got, tt.want) {
+			//print()
+			got := eval(v, expr)
+			if got.Type() == tt.want.Type() && !reflect.DeepEqual(got.Raw(), tt.want.Raw()) {
 				t.Errorf("expr %v", expr)
-				t.Errorf("defaultEvalContext.Eval() = %v, want %v", got, tt.want)
+				t.Errorf("defaultEvalContext.Eval() \ngot=  %v \nwant= %v", got, tt.want)
 			}
 		})
 	}
@@ -105,10 +106,10 @@ func TestBoolExpr(t *testing.T) {
 		expr string
 		want interface{}
 	}{
-		//{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true`, true},
-		//{"bool", NewJSONContext(JSONRaw.SimpleJSON), `false`, false},
-		//{"bool", NewJSONContext(JSONRaw.SimpleJSON), `false and false`, false},
-		//{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and false`, false},
+		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true`, true},
+		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `false`, false},
+		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `false and false`, false},
+		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and false`, false},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and true`, true},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and true and false`, false},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `true  and true and true`, true},

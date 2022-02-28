@@ -16,7 +16,6 @@ limitations under the License.
 package tdtl
 
 import (
-	"github.com/tkeel-io/tdtl/pkg/json/gjson"
 	"regexp"
 	"strings"
 )
@@ -27,40 +26,22 @@ var (
 )
 
 type jsonContext struct {
-	raw string
+	raw *Collect
 }
 
 //NewJSONContext new context from json
 func NewJSONContext(jsonRaw string) Context {
 	return &jsonContext{
-		raw: jsonRaw,
+		raw: New(jsonRaw),
 	}
 }
 
 //Value get value from context
 func (c *jsonContext) Value(path string) Node {
 	if path == "" {
-		return New(c.raw)
+		return c.raw.Node()
 	}
-	ret := gjson.Get(c.raw, thePath(path))
-	switch ret.Type {
-	case gjson.True:
-		return BoolNode(true)
-	case gjson.False:
-		return BoolNode(false)
-	case gjson.String:
-		return StringNode(ret.Str)
-	case gjson.Number:
-		if strings.Index(ret.Raw, ".") != -1 {
-			return FloatNode(ret.Num)
-		}
-		return IntNode(ret.Num)
-	case gjson.JSON:
-		return newCollectFromGjsonResult(ret)
-	case gjson.Null:
-		return UNDEFINED_RESULT
-	}
-	return UNDEFINED_RESULT
+	return c.raw.Get(path).Node()
 }
 
 //Call call function from context
@@ -73,10 +54,4 @@ func thePath(path string) string {
 	path = strings.ReplaceAll(path, "[", ".")
 	path = strings.ReplaceAll(path, "]", "")
 	return path
-}
-
-//Value get value from context
-func (c *jsonContext) Range(path string) Node {
-	ret := gjson.Get(c.raw, thePath(path))
-	return _gjson2JsonNode(ret)
 }

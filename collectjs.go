@@ -12,12 +12,16 @@ var EmptyBytes = []byte("")
 
 type Collect = JSONNode
 
-func New(raw string) *Collect {
-	return newCollect(Byte(raw))
-}
-
-func ByteNew(raw []byte) *Collect {
-	return newCollect(raw)
+func New(raw interface{}) *Collect {
+	switch raw := raw.(type) {
+	case string:
+		return newCollect(Byte(raw))
+	case []byte:
+		return newCollect(raw)
+	case Result:
+		return newCollectFromJsonResult(raw)
+	}
+	return UNDEFINED_RESULT
 }
 
 func newCollect(data []byte) *Collect {
@@ -34,7 +38,7 @@ func newCollect(data []byte) *Collect {
 	return collect
 }
 
-func newCollectFromGjsonResult(ret Result) *Collect {
+func newCollectFromJsonResult(ret Result) *Collect {
 	collect := &Collect{}
 	collect.path = ""
 	collect.datatype = datetype(ret)
@@ -58,6 +62,10 @@ func newCollectFromJsonparserResult(dataType jsonparser.ValueType, value []byte)
 // GetError returns collect error.
 func (cc *Collect) GetError() error {
 	return cc.err
+}
+
+func (cc *Collect) Node() Node {
+	return cc.To(cc.datatype)
 }
 
 func (cc *Collect) Get(path ...string) *Collect {

@@ -134,10 +134,6 @@ type Node interface {
 	Error() error
 }
 
-func NewNode() {
-
-}
-
 type BoolNode bool
 
 func (r BoolNode) Type() Type   { return Bool }
@@ -254,7 +250,27 @@ type JSONNode struct {
 
 func (r JSONNode) Type() Type   { return r.datatype }
 func (r JSONNode) Error() error { return r.err }
-func (r JSONNode) To(typ Type) Node {
+func (cc JSONNode) To(typ Type) Node {
+	switch typ {
+	case JSON, Object, Array:
+		return cc
+	case Bool:
+		return cc.To(String).To(Bool)
+	case Number:
+		return cc.To(String).To(Number)
+	case Int:
+		return cc.To(String).To(Int)
+	case Float:
+		return cc.To(String).To(Float)
+	case String:
+		return StringNode(cc.String())
+	case Null:
+		return UNDEFINED_RESULT
+	case Undefined:
+		return UNDEFINED_RESULT
+	default:
+		return UNDEFINED_RESULT
+	}
 	return UNDEFINED_RESULT
 }
 func (r JSONNode) Raw() []byte {

@@ -143,7 +143,7 @@ var rawGroup = Byte(`[
 ]`)
 
 func Example_GroupBy() {
-	cc := ByteNew(rawGroup)
+	cc := New(rawGroup)
 	ret := cc.GroupBy("manufacturer") //node_memory_MemTotal_bytes
 	fmt.Println(ret.String(), ret.Error())
 
@@ -152,7 +152,7 @@ func Example_GroupBy() {
 }
 
 func Example_MergeBy() {
-	cc := ByteNew(rawGroup)
+	cc := New(rawGroup)
 	ret := cc.MergeBy("product", "manufacturer") //node_memory_MemTotal_bytes
 	fmt.Println(ret.String(), ret.Error())
 
@@ -161,7 +161,7 @@ func Example_MergeBy() {
 }
 
 func Example_KeyBy() {
-	cc := ByteNew(rawGroup)
+	cc := New(rawGroup)
 	ret := cc.KeyBy("manufacturer") //node_memory_MemTotal_bytes
 	fmt.Println(ret.String(), ret.Error())
 
