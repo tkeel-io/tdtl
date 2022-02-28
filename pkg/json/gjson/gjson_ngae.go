@@ -1,5 +1,5 @@
-//go:build !appengine && !js
-// +build !appengine,!js
+//+build !appengine
+//+build !js
 
 package gjson
 

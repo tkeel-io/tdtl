@@ -114,7 +114,7 @@ func Example_TQL() {
 //}
 
 func TestString(t *testing.T) {
-	tqlText := "insert into 4c1e33a1-6899-4643-a6b3-46cf37950b7f select 54cf69fc-78c3-4f79-9f6b-5d5e5bd8d3c0.sysField._spacePath  + '/4c1e33a1-6899-4643-a6b3-46cf37950b7f' as sysField._spacePath"
+	tqlText := "insert into SS4c1e33a1-6899-4643-a6b3-46cf37950b7f select 54cf69fc-78c3-4f79-9f6b-5d5e5bd8d3c0.sysField._spacePath  + '/4c1e33a1-6899-4643-a6b3-46cf37950b7f' as sysField._spacePath"
 	tqlIns, err := NewTDTL(tqlText, nil)
 	assert.Nil(t, err)
 	t.Log(tqlIns.Target())

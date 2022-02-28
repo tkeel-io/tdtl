@@ -104,23 +104,23 @@ func TestJson(t *testing.T) {
 		name    string
 		context Context
 		args    string
-		want    interface{}
+		want    Node
 	}{
 		{"", NewJSONContext(JSONRaw.JSON), `age`, IntNode(37)},
 		{"", NewJSONContext(JSONRaw.JSON), `age + 1`, IntNode(38)},
 		{"", NewJSONContext(JSONRaw.JSON), `(age + 1) * 2`, IntNode(76)},
 		{"", NewJSONContext(JSONRaw.JSON), `(1 + 1) * age`, IntNode(74)},
-		{"", NewJSONContext(JSONRaw.JSON), `name.first`, "Tom"},
-		{"1", NewJSONContext(JSONRaw.JSON), `movie.1111`, "[{\"1111\": \"Tom\", \"last\": \"Anderson\"}]"},
-		{"1", NewJSONContext(JSONRaw.JSON), `movie.1111[0].1111`, "Tom"},
-		{"1", NewJSONContext(JSONRaw.JSON), `movie.1111[#].1111`, "[\"Tom\"]"},
-		{"1", NewJSONContext(JSONRaw.JSON), `movie.1111[#]`, 1},
+		{"", NewJSONContext(JSONRaw.JSON), `name.first`, StringNode("Tom")},
+		{"1", NewJSONContext(JSONRaw.JSON), `movie.1111`, New("[{\"1111\": \"Tom\", \"last\": \"Anderson\"},{\"first\": \"Neo\"}]")},
+		{"1", NewJSONContext(JSONRaw.JSON), `movie.1111[0].1111`, StringNode("Tom")},
+		{"1", NewJSONContext(JSONRaw.JSON), `movie.1111[#].1111`, New("[\"Tom\"]")},
+		{"1", NewJSONContext(JSONRaw.JSON), `movie.1111[#]`, IntNode(2)},
 	}
 	for idx, tt := range tests {
 		Convey(fmt.Sprintf("Test Float [%d]%s", idx, tt.name), t, func() {
 			expr, err := ParseExpr(tt.args)
 			So(err, ShouldBeNil)
-			So(eval(tt.context, expr), ShouldEqual, tt.want)
+			So(string(eval(tt.context, expr).Raw()), ShouldEqual, string(tt.want.Raw()))
 		})
 	}
 }

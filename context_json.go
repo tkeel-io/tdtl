@@ -16,10 +16,9 @@ limitations under the License.
 package tdtl
 
 import (
+	"github.com/tkeel-io/tdtl/pkg/json/gjson"
 	"regexp"
 	"strings"
-
-	"github.com/tkeel-io/tdtl/json/gjson"
 )
 
 var (
@@ -40,8 +39,8 @@ func NewJSONContext(jsonRaw string) Context {
 
 //Value get value from context
 func (c *jsonContext) Value(path string) Node {
-	if path == "*" {
-		return JSONNode(c.raw)
+	if path == "" {
+		return New(c.raw)
 	}
 	ret := gjson.Get(c.raw, thePath(path))
 	switch ret.Type {
@@ -57,7 +56,7 @@ func (c *jsonContext) Value(path string) Node {
 		}
 		return IntNode(ret.Num)
 	case gjson.JSON:
-		return JSONNode(ret.Raw)
+		return newCollectFromGjsonResult(ret)
 	case gjson.Null:
 		return UNDEFINED_RESULT
 	}
@@ -78,26 +77,6 @@ func thePath(path string) string {
 
 //Value get value from context
 func (c *jsonContext) Range(path string) Node {
-	if path == "*" {
-		return JSONNode(c.raw)
-	}
 	ret := gjson.Get(c.raw, thePath(path))
-	switch ret.Type {
-	case gjson.True:
-		return BoolNode(true)
-	case gjson.False:
-		return BoolNode(false)
-	case gjson.String:
-		return StringNode(ret.Str)
-	case gjson.Number:
-		if strings.Index(ret.Raw, ".") != -1 {
-			return FloatNode(ret.Num)
-		}
-		return IntNode(ret.Num)
-	case gjson.JSON:
-		return JSONNode(ret.Raw)
-	case gjson.Null:
-		return UNDEFINED_RESULT
-	}
-	return UNDEFINED_RESULT
+	return _gjson2JsonNode(ret)
 }

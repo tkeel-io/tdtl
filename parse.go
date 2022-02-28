@@ -295,6 +295,54 @@ func (l *TDTLListener) ExitIdentifierWithTOPICITEM(c *parser.IdentifierWithTOPIC
 	//fmt.Println("IdentifierWithTOPICITEM", c.GetText())
 }
 
+
+//
+
+func (l *TDTLListener) ExitFilter_condition(c *parser.Filter_conditionContext) {
+	//fmt.Println("ExitFliter_condition", c.GetText(), c.AllAND())
+	level := len(c.AllAND())
+	left := l.pop()
+	for level > 0 {
+		right := l.pop()
+		left = &BinaryExpr{
+			Op:  parser.TDTLLexerAND,
+			LHS: left,
+			RHS: right,
+		}
+		level--
+	}
+	l.push(left)
+}
+
+func (l *TDTLListener) ExitFilter_condition_or(c *parser.Filter_condition_orContext) {
+	//fmt.Println("ExitFilter_condition_or", c.GetText(), c.AllOR())
+	level := len(c.AllOR())
+	left := l.pop()
+	for level > 0 {
+		right := l.pop()
+		left = &BinaryExpr{
+			Op:  parser.TDTLLexerOR,
+			LHS: left,
+			RHS: right,
+		}
+		level--
+	}
+	l.push(left)
+}
+
+func (l *TDTLListener) ExitFilter_condition_not(c *parser.Filter_condition_notContext) {
+	//fmt.Println("ExitFilter_condition_not", c.GetText())
+	if c.NOT() != nil {
+		right := l.pop()
+		l.push(&BinaryExpr{
+			Op:  parser.TDTLLexerNOT,
+			LHS: nil,
+			RHS: right,
+		})
+	}
+}
+
+
 func (l *TDTLListener) SyntaxError(recognizer antlr.Recognizer, offendingSymbol interface{}, line, column int, msg string, e antlr.RecognitionException) {
 	//fmt.Println("SyntaxError", recognizer, offendingSymbol, line, column, msg, e)
 	l.errors = append(l.errors, fmt.Sprintf("[%d:%d]%s", line, column, msg))

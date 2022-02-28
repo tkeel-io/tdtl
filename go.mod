@@ -29,6 +29,5 @@ require (
 	github.com/jtolds/gls v4.20.0+incompatible // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/smartystreets/assertions v1.2.0 // indirect
-	github.com/tidwall/gjson v1.12.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
 )
