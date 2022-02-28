@@ -127,8 +127,8 @@ func TestCollect_Del(t *testing.T) {
 }
 
 func Example_Combine() {
-	collection := []byte(`["name", "number"]`)
-	collection2 := []byte(`["Mohamed Salah", 11]`)
+	collection := New(`["name", "number"]`)
+	collection2 := New(`["Mohamed Salah", 11]`)
 	combine, _ := Combine(collection, collection2)
 	fmt.Println(string(combine))
 
@@ -143,37 +143,56 @@ var rawGroup = Byte(`[
 ]`)
 
 func Example_GroupBy() {
-	ret, _ := GroupBy(rawGroup, "manufacturer") //node_memory_MemTotal_bytes
-	fmt.Println(string(ret))
+	cc := ByteNew(rawGroup)
+	ret := cc.GroupBy("manufacturer") //node_memory_MemTotal_bytes
+	fmt.Println(ret.String(), ret.Error())
 
 	// Output:
-	// {"IKEA":[{"count": "1","product": "Chair","manufacturer": "IKEA"},{"sum": "10","product": "Desk","manufacturer": "IKEA"}],"Herman Miller":[{"product": "Chair","manufacturer": "Herman Miller"}]}
+	// {"IKEA":[{"count": "1","product": "Chair","manufacturer": "IKEA"},{"sum": "10","product": "Desk","manufacturer": "IKEA"}],"Herman Miller":[{"product": "Chair","manufacturer": "Herman Miller"}]} <nil>
 }
 
 func Example_MergeBy() {
-	ret, _ := MergeBy(rawGroup, "product", "manufacturer") //node_memory_MemTotal_bytes
-	fmt.Println(string(ret))
+	cc := ByteNew(rawGroup)
+	ret := cc.MergeBy("product", "manufacturer") //node_memory_MemTotal_bytes
+	fmt.Println(ret.String(), ret.Error())
 
 	// Output:
-	// {"Chair+IKEA":{"count": "1","product": "Chair","manufacturer": "IKEA"},"Desk+IKEA":{"sum": "10","product": "Desk","manufacturer": "IKEA"},"Chair+Herman Miller":{"product": "Chair","manufacturer": "Herman Miller"}}
+	// {"Chair+IKEA":{"count": "1","product": "Chair","manufacturer": "IKEA"},"Desk+IKEA":{"sum": "10","product": "Desk","manufacturer": "IKEA"},"Chair+Herman Miller":{"product": "Chair","manufacturer": "Herman Miller"}} <nil>
 }
 
 func Example_KeyBy() {
-	ret, _ := KeyBy(rawGroup, "manufacturer") //node_memory_MemTotal_bytes
-	fmt.Println(string(ret))
+	cc := ByteNew(rawGroup)
+	ret := cc.KeyBy("manufacturer") //node_memory_MemTotal_bytes
+	fmt.Println(ret.String(), ret.Error())
 
 	// Output:
-	// {"IKEA":{"sum": "10","product": "Desk","manufacturer": "IKEA"},"Herman Miller":{"product": "Chair","manufacturer": "Herman Miller"}}
+	// {"IKEA":{"sum": "10","product": "Desk","manufacturer": "IKEA"},"Herman Miller":{"product": "Chair","manufacturer": "Herman Miller"}} <nil>
 }
 
 func Example_Merge() {
-	var rawObject1 = Byte(`{"id": 1,"price": 29}`)
-	var rawObject2 = Byte(`{"price": "229","discount": false}`)
-	ret, _ := Merge(rawObject1, rawObject2)
-	fmt.Println(string(ret))
+	var rawObject1 = New(`{"id": 1,"price": 29}`)
+	var rawObject2 = New(`{"price": "229","discount": false}`)
+	ret := rawObject1.Merge(rawObject2)
+	fmt.Println(rawObject1.String(), rawObject1.Error())
+	fmt.Println(ret.String(), ret.Error())
+
+	var rawObject3 = rawObject1.Get("__not_exist")
+	ret = rawObject3.Merge(rawObject2)
+	fmt.Println(rawObject3.Error())
+	fmt.Println(ret.String(), ret.Error())
+
+	var rawObject4 = rawObject1.Get("__not_exist")
+	ret = rawObject2.Merge(rawObject4)
+	fmt.Println(rawObject2.String(), rawObject2.Error())
+	fmt.Println(ret.String(), ret.Error())
 
 	// Output:
-	// {"id": 1,"price": "229","discount":false}
+	//{"id": 1,"price": "229","discount":false} <nil>
+	//{"id": 1,"price": "229","discount":false} <nil>
+	//<nil>
+	//{"price": "229","discount": false} <nil>
+	//{"price": "229","discount": false} <nil>
+	//{"price": "229","discount": false} <nil>
 }
 
 func Example_Demo() {
@@ -188,13 +207,13 @@ func Example_Demo() {
 		ret.Set("instance", c.Get("metric.instance"))
 		return ret
 	})
-	ret, _ := GroupBy(result.Raw(), "instance") //node_memory_MemTotal_bytes
+	ret := result.GroupBy("instance") //node_memory_MemTotal_bytes
 
 	metricValue := func(p1, p2 *Collect) bool {
 		return bytes.Compare(p1.Get("[0]").Raw(), p2.Get("[0]").Raw()) > 0
 	}
 
-	newCollect(ret).SortBy(metricValue)
+	ret.SortBy(metricValue)
 	fmt.Println(string(result.Raw()))
 
 	// Output:
@@ -214,7 +233,7 @@ func Example_Demo2() {
 		return ret
 	})
 
-	ret, _ := MergeBy(result.Raw(), "instance") //node_memory_MemTotal_bytes
+	sorted := result.MergeBy("instance") //node_memory_MemTotal_bytes
 
 	MemAvailable := func(p1, p2 *Collect) bool {
 		return bytes.Compare(p1.Get("node_memory_MemAvailable_bytes.value").Raw(), p2.Get("node_memory_MemAvailable_bytes.value").Raw()) > 0
@@ -223,7 +242,6 @@ func Example_Demo2() {
 		return bytes.Compare(p1.Get("node_memory_MemTotal_bytes.value").Raw(), p2.Get("node_memory_MemTotal_bytes.value").Raw()) < 0
 	}
 
-	sorted := newCollect(ret)
 	sorted.SortBy(MemTotal)
 	sorted.SortBy(MemAvailable)
 	fmt.Println(string(sorted.Raw()))

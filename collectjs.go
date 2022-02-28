@@ -1,7 +1,6 @@
 package tdtl
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
 	"strings"
@@ -100,15 +99,61 @@ func (cc *Collect) Map(handle MapHandle) {
 }
 
 func (cc *Collect) GroupBy(path string) *Collect {
-	value, err := GroupBy(cc.value, path)
-	cc = newCollect(value)
-	cc.err = err
-	return cc
+	if cc.datatype != Array {
+		cc.err = fmt.Errorf("datatype is not array")
+		return cc
+	}
+
+	ret := New("{}")
+	cc.Foreach(func(key []byte, value *Collect) {
+		keyValue := get(value.Raw(), path).String()
+		if len(keyValue) == 0 {
+			return
+		}
+		keyValue = strings.Replace(keyValue, ".", "_", -1)
+		ret.Append(keyValue, value)
+	})
+	return ret
+}
+
+func (c *Collect) MergeBy(paths ...string) *Collect {
+	if c.datatype != Array {
+		c.err = fmt.Errorf("MergeBy: datatype is not array")
+		return c
+	}
+
+	var err error
+	ret := New("{}")
+	c.Foreach(func(key []byte, value *Collect) {
+		keys := make([]string, 0, len(paths))
+		for _, path := range paths {
+			keyValueRaw := value.Get(path).String()
+			if len(keyValueRaw) == 0 {
+				break
+			}
+			keys = append(keys, keyValueRaw)
+		}
+
+		if len(keys) == 0 {
+			return
+		}
+
+		keyValue := strings.Join(keys, "+")
+		keyValue = strings.Replace(keyValue, ".", "_", -1)
+
+		nv := ret.Get(keyValue)
+		nv = nv.Merge(value)
+		if nv.err != nil {
+			ret.err = err
+		}
+		ret.Set(keyValue, nv)
+	})
+	return ret
 }
 
 func (cc *Collect) SortBy(fn func(p1 *Collect, p2 *Collect) bool) {
 	if cc.datatype != Array && cc.datatype != Object {
-		cc.err = errors.New("datatype is not array or object")
+		cc.err = errors.New("SortBy:datatype is not array or object")
 		return
 	}
 	carr := make([]*Collect, 0)
@@ -125,9 +170,59 @@ func (cc *Collect) SortBy(fn func(p1 *Collect, p2 *Collect) bool) {
 	cc.datatype = ret.datatype
 }
 
-func Combine(key []byte, value []byte) ([]byte, error) {
-	cKey := newCollect(key)
-	cValue := newCollect(value)
+func (c *Collect) KeyBy(path string) *Collect {
+	if c.datatype != Array {
+		c.err = errors.New("KeyBy:datatype is not array")
+	}
+
+	ret := New("{}")
+	c.Foreach(func(key []byte, value *Collect) {
+		keyValue := value.Get(path)
+		ret.Set(keyValue.String(), value)
+	})
+
+	return ret
+}
+
+func (cc *Collect) Merge(mc *Collect) *Collect {
+	if cc.datatype != Object && mc.datatype != Object {
+		cc.err = errors.New("datatype is not object")
+		return cc
+	}
+	if cc.datatype == Null {
+		return mc
+	}
+
+	mc.Foreach(func(key []byte, value *Collect) {
+		cc.Set(string(key), value)
+	})
+
+	return cc
+}
+
+//
+//func (c *Collect) Sort( path string) ([]byte, error) {
+//	if c.datatype != Array {
+//		c.err = errors.New("SortBy:datatype is not array")
+//		return nil, errors.New("datatype is not array")
+//	}
+//
+//	var err error
+//	ret := []byte("[]")
+//	c.Foreach(func(key []byte, value *Collect) {
+//		keyValue := get(value.Raw(), path).Raw()
+//		if keyValue[0] == '"' && keyValue[len(keyValue)-1] == '"' {
+//			keyValue = keyValue[1 : len(keyValue)-1]
+//		}
+//		if ret, err = jsonparser.Append(ret, value.Raw(), string(keyValue)); nil != err {
+//			c.err = err
+//		}
+//	})
+//
+//	return ret, c.err
+//}
+
+func Combine(cKey *Collect, cValue *Collect) ([]byte, error) {
 	if cKey.datatype != Array {
 		return nil, errors.New("datatype is not array")
 	} else if cValue.datatype != Array {
@@ -147,122 +242,4 @@ func Combine(key []byte, value []byte) ([]byte, error) {
 		idx++
 	})
 	return ret, cKey.err
-}
-
-func GroupBy(json []byte, path string) ([]byte, error) {
-	c := newCollect(json)
-	if c.datatype != Array {
-		return nil, errors.New("datatype is not array")
-	}
-
-	var err error
-	ret := []byte("{}")
-	c.Foreach(func(key []byte, value *Collect) {
-		keyValue := get(value.Raw(), path).String()
-		if len(keyValue) == 0 {
-			return
-		}
-		keys := path2JSONPARSER(string(keyValue))
-		if ret, err = jsonparser.Append(ret, value.Raw(), keys...); nil != err {
-			c.err = err
-		}
-	})
-	return ret, c.err
-}
-
-func MergeBy(json []byte, paths ...string) ([]byte, error) {
-	c := newCollect(json)
-	if c.datatype != Array {
-		return nil, errors.New("datatype is not array")
-	}
-
-	var err error
-	ret := New("{}")
-	c.Foreach(func(key []byte, value *Collect) {
-		keys := make([][]byte, 0, len(paths))
-		for _, path := range paths {
-			keyValueRaw := value.Get(path).String()
-			if len(keyValueRaw) == 0 {
-				break
-			}
-			keys = append(keys, []byte(keyValueRaw))
-		}
-
-		if len(keys) == 0 {
-			return
-		}
-
-		var newValue []byte
-		k := string(bytes.Join(keys, []byte("+")))
-		k = strings.Replace(k, ".", "_", -1)
-
-		oldValue := ret.Get(string(k))
-		if newValue, err = Merge(oldValue.Raw(), value.Raw()); nil != err {
-			ret.err = err
-		}
-		ov := ByteNew(newValue)
-		ret.Set(k, ov)
-	})
-	return ret.value, ret.err
-}
-
-func KeyBy(json []byte, path string) ([]byte, error) {
-	c := newCollect(json)
-	if c.datatype != Array {
-		return nil, errors.New("datatype is not array")
-	}
-
-	var err error
-	ret := []byte("{}")
-	c.Foreach(func(key []byte, value *Collect) {
-		keyValue := get(value.Raw(), path).Raw()
-		if keyValue[0] == '"' && keyValue[len(keyValue)-1] == '"' {
-			keyValue = keyValue[1 : len(keyValue)-1]
-		}
-		ret, err = jsonparser.Set(ret, value.Raw(), string(keyValue))
-	})
-	return ret, err
-}
-
-func Merge(oldValue []byte, mergeValue []byte) ([]byte, error) {
-	if len(oldValue) == 0 {
-		return mergeValue, nil
-	} else if len(mergeValue) == 0 {
-		return oldValue, nil
-	}
-
-	cc := newCollect(oldValue)
-	mc := newCollect(mergeValue)
-	if cc.datatype != Object {
-		return nil, errors.New("datatype is not object")
-	} else if mc.datatype != Object {
-		return nil, errors.New("datatype is not object")
-	}
-
-	mc.Foreach(func(key []byte, value *Collect) {
-		cc.Set(string(key), value)
-	})
-
-	return cc.value, cc.err
-}
-
-func Sort(json []byte, path string) ([]byte, error) {
-	c := newCollect(json)
-	if c.datatype != Array {
-		return nil, errors.New("datatype is not array")
-	}
-
-	var err error
-	ret := []byte("[]")
-	c.Foreach(func(key []byte, value *Collect) {
-		keyValue := get(value.Raw(), path).Raw()
-		if keyValue[0] == '"' && keyValue[len(keyValue)-1] == '"' {
-			keyValue = keyValue[1 : len(keyValue)-1]
-		}
-		if ret, err = jsonparser.Append(ret, value.Raw(), string(keyValue)); nil != err {
-			c.err = err
-		}
-	})
-
-	return ret, c.err
 }
