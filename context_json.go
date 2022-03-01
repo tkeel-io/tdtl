@@ -17,7 +17,6 @@ package tdtl
 
 import (
 	"regexp"
-	"strings"
 )
 
 var (
@@ -47,11 +46,4 @@ func (c *jsonContext) Value(path string) Node {
 //Call call function from context
 func (c *jsonContext) Call(expr *CallExpr, args []Node) Node {
 	return UNDEFINED_RESULT
-}
-
-func thePath(path string) string {
-	//return pattern.ReplaceAllString(path, template)
-	path = strings.ReplaceAll(path, "[", ".")
-	path = strings.ReplaceAll(path, "]", "")
-	return path
 }
