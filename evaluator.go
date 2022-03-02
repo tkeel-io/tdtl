@@ -92,8 +92,6 @@ func evalRuleQL(ctx Context, expr Expr) Node {
 		return expr
 	case JSONNode:
 		return expr
-	case DefaultNode:
-		return expr
 	}
 	return UNDEFINED_RESULT
 }
@@ -149,8 +147,6 @@ func eval(ctx Context, expr Expr) Node {
 		return expr
 	case *CallExpr:
 		return evalCallExpr(ctx, expr)
-	case DefaultNode:
-		return expr
 	}
 	return UNDEFINED_RESULT
 }
@@ -169,13 +165,14 @@ func evalSelect(ctx Context, expr Expr) Node {
 }
 
 func evalFieldListExpr(ctx Context, list FieldsExpr) Node {
-	v := JSONNode("{}")
+	v := New("{}")
 	for _, expr := range list {
 		ret := eval(ctx, expr.exp)
 		if expr.alias != "" {
-			val, err := v.Update(expr.alias, ret)
-			if err == nil {
-				v = JSONNode(val)
+			v.Set(expr.alias, ret)
+			if v.Error() != nil {
+				//fmt.Println("error in %v", v.Error())
+				continue
 			}
 		}
 	}
@@ -273,13 +270,13 @@ func evalBinary(op int, lhs, rhs Node) Node {
 			case BoolNode:
 				return evalBinaryBool(op, lhs, rhs)
 			}
-		case *DefaultNode:
+		case *JSONNode:
 			if isBooleanOP(op) {
 				return evalBinary(op, BoolNode(false), rhs)
 			}
 		}
 		return UNDEFINED_RESULT
-	case *DefaultNode:
+	case *JSONNode:
 		if isBooleanOP(op) {
 			return BoolNode(false)
 		}

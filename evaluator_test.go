@@ -19,7 +19,7 @@ func TestDefaultValue_Eval(t *testing.T) {
 		name string
 		json string
 		expr string
-		want interface{}
+		want Node
 	}{
 		{"number", JSONRaw.SimpleJSON, `(YX_0002 * 2 + YX_0003)`, IntNode(4)},
 		{"number", JSONRaw.SimpleJSON, `1`, IntNode(1)},
@@ -81,18 +81,19 @@ func TestDefaultValue_Eval(t *testing.T) {
 		{"json", JSONRaw.JSON, "temperature + 2.0 * (temperature + 2) * 3", FloatNode(362)},
 		{"json", JSONRaw.JSON, "temperature + 2.0 * (temperature + 2) * 3 > 362", BoolNode(false)},
 		{"json", JSONRaw.JSON, "temperature + 2.0 * (temperature + 2) * 3 < 363", BoolNode(true)},
-		{"json", JSONRaw.JSON, "friends[0]", JSONNode("{\"first\": \"Dale\", \"last\": \"Murphy\", \"age\": 44}")},
+		{"json", JSONRaw.JSON, "friends[0]", New("{\"first\": \"Dale\", \"last\": \"Murphy\", \"age\": 44}")},
 		{"json", JSONRaw.JSON, "friends[#]", IntNode(3)},
-		{"json", JSONRaw.JSON, "friends[#].first", JSONNode("[\"Dale\",\"Roger\",\"Jane\"]")},
+		{"json", JSONRaw.JSON, "friends[#].first", New("[\"Dale\",\"Roger\",\"Jane\"]")},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			v := NewJSONContext(tt.json)
 			expr, _ := ParseExpr(tt.expr) // Field expr
-			print()
-			if got := eval(v, expr); !reflect.DeepEqual(got, tt.want) {
+			//print()
+			got := eval(v, expr)
+			if got.Type() == tt.want.Type() && !reflect.DeepEqual(got.Raw(), tt.want.Raw()) {
 				t.Errorf("expr %v", expr)
-				t.Errorf("defaultEvalContext.Eval() = %v, want %v", got, tt.want)
+				t.Errorf("defaultEvalContext.Eval() \ngot=  %v \nwant= %v", got, tt.want)
 			}
 		})
 	}
@@ -168,15 +169,15 @@ func TestSQL(t *testing.T) {
 		name string
 		ctx  Context
 		expr string
-		want JSONNode
+		want *Collect
 	}{
-		{"sql", ctx, `insert into target1 select entity1.color`, JSONNode(`{}`)},
-		{"sql", ctx, `insert into target1 select entity1.*`, JSONNode(`{}`)},
-		{"sql", ctx, `insert into target1 select entity1.color as aaa`, JSONNode(`{"aaa":"red"}`)},
-		{"sql", ctx, `insert into target1 select entity1.temperature + 1 AS temp`, JSONNode(`{"temp":51}`)},
-		{"sql", ctx, `insert into target1 select entity1.temperature - 1 AS temp`, JSONNode(`{"temp":49}`)},
-		{"sql", ctx, `insert into target1 select entity1.temperature + '1' AS temp`, JSONNode(`{"temp":"501"}`)},
-		{"sql", ctx, `insert into target1  select entity1.temperature - '1' AS temp`, JSONNode(`{"temp":49}`)},
+		{"sql", ctx, `insert into target1 select entity1.color`, New(`{}`)},
+		{"sql", ctx, `insert into target1 select entity1.*`, New(`{}`)},
+		{"sql", ctx, `insert into target1 select entity1.color as aaa`, New(`{"aaa":"red"}`)},
+		{"sql", ctx, `insert into target1 select entity1.temperature + 1 AS temp`, New(`{"temp":51}`)},
+		{"sql", ctx, `insert into target1 select entity1.temperature - 1 AS temp`, New(`{"temp":49}`)},
+		{"sql", ctx, `insert into target1 select entity1.temperature + '1' AS temp`, New(`{"temp":"501"}`)},
+		{"sql", ctx, `insert into target1  select entity1.temperature - '1' AS temp`, New(`{"temp":49}`)},
 		//{"sql", ctx, `insert into select entity1.params.OPCUA#Lu1_Bottom_Waice_Temp.value - 20 AS temp`, JSONNode(`{"temp":103}`)},
 		//{"sql", ctx,
 		//	`insert into select * from a/b`,

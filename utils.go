@@ -17,10 +17,7 @@ package tdtl
 
 import (
 	"fmt"
-	"strings"
-
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/tkeel-io/tdtl/json/jsonparser"
 	"github.com/tkeel-io/tdtl/parser"
 )
 
@@ -76,12 +73,6 @@ func parse(expr string) (*parser.TDTLParser, *TDTLListener) {
 	var listener TDTLListener
 	parse.AddErrorListener(&listener)
 	return parse, &listener
-}
-
-func updateJSON(node JSONNode, xpath string, setValue StringNode) (string, error) {
-	keys := strings.Split(xpath, ".")
-	value, err := jsonparser.Set([]byte(node), []byte(setValue), keys...)
-	return string(value), err
 }
 
 func ParseFunc(x Expr) []*CallExpr {

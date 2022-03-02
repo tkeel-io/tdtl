@@ -94,9 +94,9 @@ var base64Func = func(args ...Node) Node {
 	node := ""
 	switch arg := arg.(type) {
 	case JSONNode:
-		node = string(arg)
+		node = arg.String()
 	case StringNode:
-		node = string(arg)
+		node = arg.String()
 	default:
 		fmt.Println(
 			"[-]ruleql type error",
@@ -139,7 +139,8 @@ type MutilContext []Context
 func (mc MutilContext) Value(key string) Node {
 	for _, v := range mc {
 		r := v.Value(key)
-		if r.Type() != Undefined {
+		t:= r.Type()
+		if t != Undefined {
 			return r
 		}
 	}

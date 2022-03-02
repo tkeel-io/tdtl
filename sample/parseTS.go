@@ -19,7 +19,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/tkeel-io/collectjs"
+	"github.com/tkeel-io/tdtl"
 	"github.com/tkeel-io/tdtl"
 )
 
@@ -47,7 +47,7 @@ func main() {
 			jsonRaw := args[0].String()
 			path := args[1].String()
 
-			cc := collectjs.New(jsonRaw)
+			cc := New(jsonRaw)
 			return tdtl.JSONNode(string(cc.Get(path).GetRaw()))
 		},
 		"telemetryV1": func(args ...tdtl.Node) tdtl.Node {
@@ -59,11 +59,11 @@ func main() {
 				return tdtl.NULL_RESULT
 			}
 
-			cc := collectjs.New(payload.String())
+			cc := New(payload.String())
 			ts := cc.Get("ts")
 			vals := cc.Get("values")
 			vals.Map(func(key []byte, value []byte) []byte {
-				val := collectjs.New("{}")
+				val := New("{}")
 				val.Set("timestamp", ts.GetRaw())
 				val.Set("value", value)
 				return val.GetRaw()

@@ -32,7 +32,7 @@ var (
   			"age":37, "temperature":50, 
   			"children": ["Sara","Alex","Jack"],
   			"fav.movie": "Deer Hunter",
-  			"movie": {"1111": [{"1111": "Tom", "last": "Anderson"}], "last": "Anderson"},
+  			"movie": {"1111": [{"1111": "Tom", "last": "Anderson"},{"first": "Neo"}], "last": "Anderson"},
   			"friends": [
   				{"first": "Dale", "last": "Murphy", "age": 44},
   				{"first": "Roger", "last": "Craig", "age": 68},
