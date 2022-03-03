@@ -37,7 +37,14 @@ func NewMapContext(values map[string]Node, functions map[string]ContextFunc) Con
 //Value get value from context
 func (c mapContext) Value(key string) Node {
 	if ret, ok := c.values[key]; ok {
-		return ret
+		switch ret := ret.(type) {
+		case JSONNode:
+			return ret.Node()
+		case *JSONNode:
+			return ret.Node()
+		default:
+			return ret
+		}
 	}
 	return UNDEFINED_RESULT
 }

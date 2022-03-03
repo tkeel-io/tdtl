@@ -12,15 +12,17 @@ This document is designed to explain the structure of a GJSON Path through examp
 - [Queries](#queries)
 - [Dot vs Pipe](#dot-vs-pipe)
 - [Modifiers](#modifiers)
+- [Multipaths](#multipaths)
+- [Literals](#literals)
 
-The definitive implemenation is [github.com/tidwall/gjson](https://github.com/tidwall/gjson).
-
+The definitive implemenation is [github.com/tidwall/gjson](https://github.com/tidwall/gjson).  
+Use the [GJSON Playground](https://gjson.dev) to experiment with the syntax online.
 
 ## Path structure
 
 A GJSON Path is intended to be easily expressed as a series of components seperated by a `.` character. 
 
-Along with `.` character, there are a few more that have special meaning, including `|`, `#`, `@`, `\`, `*`, and `?`.
+Along with `.` character, there are a few more that have special meaning, including `|`, `#`, `@`, `\`, `*`, `!`, and `?`.
 
 ## Example
 
@@ -33,9 +35,9 @@ Given this JSON
   "children": ["Sara","Alex","Jack"],
   "fav.movie": "Deer Hunter",
   "friends": [
-    {"first": "Dale", "last": "Murphy", "age": 44},
-    {"first": "Roger", "last": "Craig", "age": 68},
-    {"first": "Jane", "last": "Murphy", "age": 47}
+    {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb", "tw"]},
+    {"first": "Roger", "last": "Craig", "age": 68, "nets": ["fb", "tw"]},
+    {"first": "Jane", "last": "Murphy", "age": 47, "nets": ["ig", "tw"]}
   ]
 }
 ```
@@ -75,6 +77,20 @@ Special purpose characters, such as `.`, `*`, and `?` can be escaped with `\`.
 fav\.movie             "Deer Hunter"
 ```
 
+You'll also need to make sure that the `\` character is correctly escaped when hardcoding a path in your source code.
+
+```go
+// Go
+val := gjson.Get(json, "fav\\.movie")  // must escape the slash
+val := gjson.Get(json, `fav\.movie`)   // no need to escape the slash 
+```
+
+```rust
+// Rust
+let val = gjson::get(json, "fav\\.movie")     // must escape the slash
+let val = gjson::get(json, r#"fav\.movie"#)   // no need to escape the slash 
+```
+
 
 ### Arrays
 
@@ -89,25 +105,66 @@ friends.#.age         [44,68,47]
 
 ### Queries
 
-You can also query an array for the first match by  using `#[...]`, or find all matches with `#[...]#`. 
+You can also query an array for the first match by  using `#(...)`, or find all matches with `#(...)#`. 
 Queries support the `==`, `!=`, `<`, `<=`, `>`, `>=` comparison operators, 
 and the simple pattern matching `%` (like) and `!%` (not like) operators.
 
 ```go
-friends.#[last=="Murphy"].first     "Dale"
-friends.#[last=="Murphy"]#.first    ["Dale","Jane"]
-friends.#[age>45]#.last             ["Craig","Murphy"]
-friends.#[first%"D*"].last          "Murphy"
-friends.#[first!%"D*"].last         "Craig"
+friends.#(last=="Murphy").first     "Dale"
+friends.#(last=="Murphy")#.first    ["Dale","Jane"]
+friends.#(age>45)#.last             ["Craig","Murphy"]
+friends.#(first%"D*").last          "Murphy"
+friends.#(first!%"D*").last         "Craig"
 ```
 
 To query for a non-object value in an array, you can forgo the string to the right of the operator.
+
 ```go
-children.#[!%"*a*"]                 "Alex"
-children.#[%"*a*"]#                 ["Sara","Jack"]
+children.#(!%"*a*")                 "Alex"
+children.#(%"*a*")#                 ["Sara","Jack"]
 ```
 
+Nested queries are allowed.
 
+```go
+friends.#(nets.#(=="fb"))#.first  >> ["Dale","Roger"]
+```
+
+*Please note that prior to v1.3.0, queries used the `#[...]` brackets. This was
+changed in v1.3.0 as to avoid confusion with the new [multipath](#multipaths) 
+syntax. For backwards compatibility, `#[...]` will continue to work until the
+next major release.*
+
+The `~` (tilde) operator will convert a value to a boolean before comparison.
+
+For example, using the following JSON:
+
+```json
+{
+  "vals": [
+    { "a": 1, "b": true },
+    { "a": 2, "b": true },
+    { "a": 3, "b": false },
+    { "a": 4, "b": "0" },
+    { "a": 5, "b": 0 },
+    { "a": 6, "b": "1" },
+    { "a": 7, "b": 1 },
+    { "a": 8, "b": "true" },
+    { "a": 9, "b": false },
+    { "a": 10, "b": null },
+    { "a": 11 }
+  ]
+}
+```
+
+You can now query for all true(ish) or false(ish) values:
+
+```
+vals.#(b==~true)#.a    >> [1,2,6,7,8]
+vals.#(b==~false)#.a   >> [3,4,5,9,10,11]
+```
+
+The last value which was non-existent is treated as `false`
 
 ### Dot vs Pipe
 
@@ -124,18 +181,18 @@ friends.0|first                     "Dale"
 friends|0|first                     "Dale"
 friends|#                           3
 friends.#                           3
-friends.#[last="Murphy"]#           [{"first": "Dale", "last": "Murphy", "age": 44},{"first": "Jane", "last": "Murphy", "age": 47}]
-friends.#[last="Murphy"]#.first     ["Dale","Jane"]
-friends.#[last="Murphy"]#|first     <non-existent>
-friends.#[last="Murphy"]#.0         []
-friends.#[last="Murphy"]#|0         {"first": "Dale", "last": "Murphy", "age": 44}
-friends.#[last="Murphy"]#.#         []
-friends.#[last="Murphy"]#|#         2
+friends.#(last="Murphy")#           [{"first": "Dale", "last": "Murphy", "age": 44},{"first": "Jane", "last": "Murphy", "age": 47}]
+friends.#(last="Murphy")#.first     ["Dale","Jane"]
+friends.#(last="Murphy")#|first     <non-existent>
+friends.#(last="Murphy")#.0         []
+friends.#(last="Murphy")#|0         {"first": "Dale", "last": "Murphy", "age": 44}
+friends.#(last="Murphy")#.#         []
+friends.#(last="Murphy")#|#         2
 ```
 
 Let's break down a few of these.
 
-The path `friends.#[last="Murphy"]#` all by itself results in
+The path `friends.#(last="Murphy")#` all by itself results in
 
 ```json
 [{"first": "Dale", "last": "Murphy", "age": 44},{"first": "Jane", "last": "Murphy", "age": 47}]
@@ -170,11 +227,20 @@ children.@reverse                   ["Jack","Alex","Sara"]
 children.@reverse.0                 "Jack"
 ```
 
-There are currently three built-in modifiers:
+There are currently the following built-in modifiers:
 
 - `@reverse`: Reverse an array or the members of an object.
 - `@ugly`: Remove all whitespace from JSON.
 - `@pretty`: Make the JSON more human readable.
+- `@this`: Returns the current element. It can be used to retrieve the root element.
+- `@valid`: Ensure the json document is valid.
+- `@flatten`: Flattens an array.
+- `@join`: Joins multiple objects into a single object.
+- `@keys`: Returns an array of keys for an object.
+- `@values`: Returns an array of values for an object.
+- `@tostr`: Converts json to a string. Wraps a json string.
+- `@fromstr`: Converts a string from json. Unwraps a json string.
+- `@group`: Groups arrays of objects. See [e4fc67c](https://github.com/tidwall/gjson/commit/e4fc67c92aeebf2089fabc7872f010e340d105db).
 
 #### Modifier arguments
 
@@ -225,3 +291,52 @@ gjson.AddModifier("case", func(json, arg string) string {
 "children.@case:lower.@reverse"    ["jack","alex","sara"]
 ```
 
+*Note: Custom modifiers are not yet available in the Rust version*
+
+### Multipaths
+
+Starting with v1.3.0, GJSON added the ability to join multiple paths together
+to form new documents. Wrapping comma-separated paths between `[...]` or
+`{...}` will result in a new array or object, respectively.
+
+For example, using the given multipath:
+
+```
+{name.first,age,"the_murphys":friends.#(last="Murphy")#.first}
+```
+
+Here we selected the first name, age, and the first name for friends with the 
+last name "Murphy".
+
+You'll notice that an optional key can be provided, in this case 
+"the_murphys", to force assign a key to a value. Otherwise, the name of the 
+actual field will be used, in this case "first". If a name cannot be
+determined, then "_" is used.
+
+This results in
+
+```json
+{"first":"Tom","age":37,"the_murphys":["Dale","Jane"]}
+```
+
+### Literals
+
+Starting with v1.12.0, GJSON added support of json literals, which provides a way for constructing static blocks of json. This is can be particularly useful when constructing a new json document using [multipaths](#multipaths).  
+
+A json literal begins with the '!' declaration character. 
+
+For example, using the given multipath:
+
+```
+{name.first,age,"company":!"Happysoft","employed":!true}
+```
+
+Here we selected the first name and age. Then add two new fields, "company" and "employed".
+
+This results in 
+
+```json
+{"first":"Tom","age":37,"company":"Happysoft","employed":true}
+```
+
+*See issue [#249](https://github.com/tidwall/gjson/issues/249) for additional context on JSON Literals.*
