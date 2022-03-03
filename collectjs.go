@@ -15,7 +15,11 @@ type Collect = JSONNode
 func New(raw interface{}) *Collect {
 	switch raw := raw.(type) {
 	case string:
-		return newCollect(Byte(raw))
+		collect := &Collect{}
+		collect.path = ""
+		collect.value = []byte(raw)
+		collect.datatype = String
+		return collect
 	case []byte:
 		return newCollect(raw)
 	case Result:
