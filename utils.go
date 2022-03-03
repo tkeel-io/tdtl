@@ -33,7 +33,11 @@ func Parse(expr string) (Expr, error) {
 	parse, listener := parse(expr)
 	antlr.ParseTreeWalkerDefault.Walk(listener, parse.Root())
 
-	return listener.Expr(), listener.error()
+	err := listener.error()
+	if err != nil {
+		return nil, err
+	}
+	return listener.Expr(), nil
 }
 
 func ParseField(expr string) (Expr, error) {
@@ -53,7 +57,11 @@ func ParseFilter(expr string) (Expr, error) {
 func ParseExpr(expr string) (Expr, error) {
 	parse, listener := parse(expr)
 	antlr.ParseTreeWalkerDefault.Walk(listener, parse.Expr())
-	return listener.Expr(), listener.error()
+	err := listener.error()
+	if err != nil {
+		return nil, err
+	}
+	return listener.Expr(), nil
 }
 
 func parse(expr string) (*parser.TDTLParser, *TDTLListener) {
