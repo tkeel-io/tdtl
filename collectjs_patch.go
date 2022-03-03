@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/tkeel-io/tdtl/pkg/json/gjson"
 	"github.com/tkeel-io/tdtl/pkg/json/jsonparser"
+	"github.com/tkeel-io/tdtl/pkg/json/sjson"
 	"strings"
 )
 
@@ -35,6 +36,7 @@ func get(raw []byte, path string) *Collect {
 	ret := gjson.GetBytes(raw, path)
 	return New(ret)
 }
+
 //
 //func Get(raw []byte, path string) []byte {
 //	//keys := path2JSONPARSER(path)
@@ -51,10 +53,10 @@ func get(raw []byte, path string) *Collect {
 //	return []byte(ret.String())
 //}
 
-
 func set(raw []byte, path string, value []byte) ([]byte, error) {
-	keys := path2JSONPARSER(path)
-	return jsonparser.Set(raw, value, keys...)
+	//keys := path2JSONPARSER(path)
+	//return	jsonparser.Set(raw, value, keys...)
+	return sjson.SetRawBytes(raw, path, value)
 }
 func add(raw []byte, path string, value []byte) ([]byte, error) {
 	keys := path2JSONPARSER(path)

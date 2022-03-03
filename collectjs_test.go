@@ -10,6 +10,7 @@ import (
 var raw = Byte(`{"cpu":1,"mem": ["lo0", "eth1", "eth2"],"a":[{"v":0},{"v":1},{"v":2}],"b":[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}],"where": 10,"metadata": {"name": "Light1", "price": 11.05}}`)
 var rawArray = Byte(`[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}]`)
 var rawEmptyArray = Byte(`[]`)
+var rawEmptyObject = Byte(`{}`)
 
 func TestCollect_Get(t *testing.T) {
 	tests := []struct {
@@ -52,7 +53,8 @@ func TestCollect_Set(t *testing.T) {
 		value *Collect
 		want  interface{}
 	}{
-		//{"2", "cpu", StringNode("2"), `{"cpu":2,"mem": ["lo0", "eth1", "eth2"],"a":[{"v":0},{"v":1},{"v":2}],"b":[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}],"where": 10,"metadata": {"name": "Light1", "price": 11.05}}`},
+		{"1", "metadata.name", New(`"abc"`), `{"cpu":2,"mem": ["lo0", "eth1", "eth2"],"a":[{"v":0},{"v":1},{"v":2}],"b":[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}],"where": 10,"metadata": {"name": "Light1", "price": 11.05}}`},
+		{"2", "cpu", New("2"), `{"cpu":2,"mem": ["lo0", "eth1", "eth2"],"a":[{"v":0},{"v":1},{"v":2}],"b":[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}],"where": 10,"metadata": {"name": "Light1", "price": 11.05}}`},
 		{"3", "a", New(`{"v":0}`), `{"cpu":1,"mem": ["lo0", "eth1", "eth2"],"a":{"v":0},"b":[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}],"where": 10,"metadata": {"name": "Light1", "price": 11.05}}`},
 		{"4", "a[0]", New(`0`), `{"cpu":1,"mem": ["lo0", "eth1", "eth2"],"a":[0,{"v":1},{"v":2}],"b":[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}],"where": 10,"metadata": {"name": "Light1", "price": 11.05}}`},
 		{"5", "a[0].v", New(`{"v":0}`), `{"cpu":1,"mem": ["lo0", "eth1", "eth2"],"a":[{"v":{"v":0}},{"v":1},{"v":2}],"b":[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}],"where": 10,"metadata": {"name": "Light1", "price": 11.05}}`},
@@ -60,6 +62,26 @@ func TestCollect_Set(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			cc := newCollect(raw)
+			cc.Set(tt.path, tt.value)
+			if got := cc.Raw(); !reflect.DeepEqual(string(got), tt.want) {
+				t.Errorf("\nGet()  = %v\nWant() = %v", string(got), tt.want)
+			}
+		})
+	}
+}
+
+func TestCollect_Set2(t *testing.T) {
+	tests := []struct {
+		name  string
+		path  string
+		value *Collect
+		want  interface{}
+	}{
+		{"1", "metadata._name", New(`"abc"`), `{"metadata":{"_name":"abc"}}`},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			cc := newCollect(rawEmptyObject)
 			cc.Set(tt.path, tt.value)
 			if got := cc.Raw(); !reflect.DeepEqual(string(got), tt.want) {
 				t.Errorf("\nGet()  = %v\nWant() = %v", string(got), tt.want)

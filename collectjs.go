@@ -15,11 +15,7 @@ type Collect = JSONNode
 func New(raw interface{}) *Collect {
 	switch raw := raw.(type) {
 	case string:
-		collect := &Collect{}
-		collect.path = ""
-		collect.value = []byte(raw)
-		collect.datatype = String
-		return collect
+		return newCollect([]byte(raw))
 	case []byte:
 		return newCollect(raw)
 	case Result:
@@ -27,6 +23,8 @@ func New(raw interface{}) *Collect {
 	}
 	return UNDEFINED_RESULT
 }
+
+
 
 func newCollect(data []byte) *Collect {
 	collect := &Collect{}
@@ -36,6 +34,9 @@ func newCollect(data []byte) *Collect {
 	collect.value = value
 	if _, jtype, _, err := jsonparser.Get(data); err == nil {
 		collect.datatype = datetype(jtype)
+		if collect.datatype == String{
+			collect.value = collect.value[1:len(collect.value)-1]
+		}
 	} else {
 		collect.err = err
 	}
