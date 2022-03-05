@@ -24,7 +24,36 @@ func New(raw interface{}) *Collect {
 	return UNDEFINED_RESULT
 }
 
+func NewInt64(raw int64) *Collect {
+	str := fmt.Sprintf("%v", raw)
+	return &Collect{
+		value:    []byte(str),
+		datatype: Int,
+	}
+}
 
+func NewBool(raw bool) *Collect {
+	str := fmt.Sprintf("%v", raw)
+	return &Collect{
+		value:    []byte(str),
+		datatype: Bool,
+	}
+}
+
+func NewString(raw string) *Collect {
+	return &Collect{
+		value:    []byte(raw),
+		datatype: String,
+	}
+}
+
+func NewFloat64(raw float64) *Collect {
+	str := fmt.Sprintf("%.6f", raw)
+	return &Collect{
+		value:    []byte(str),
+		datatype: Float,
+	}
+}
 
 func newCollect(data []byte) *Collect {
 	collect := &Collect{}
@@ -34,8 +63,8 @@ func newCollect(data []byte) *Collect {
 	collect.value = value
 	if _, jtype, _, err := jsonparser.Get(data); err == nil {
 		collect.datatype = datetype(jtype)
-		if collect.datatype == String{
-			collect.value = collect.value[1:len(collect.value)-1]
+		if collect.datatype == String {
+			collect.value = collect.value[1 : len(collect.value)-1]
 		}
 	} else {
 		collect.err = err

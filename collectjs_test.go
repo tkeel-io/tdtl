@@ -12,6 +12,29 @@ var rawArray = Byte(`[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}]`)
 var rawEmptyArray = Byte(`[]`)
 var rawEmptyObject = Byte(`{}`)
 
+func TestCollect_New(t *testing.T) {
+	tests := []struct {
+		name string
+		path string
+		raw  *Collect
+		want string
+	}{
+		{"1", "", New(raw), "{}"},
+		{"2", "cpu", NewString("1"), `{"cpu":"1"}`},
+		{"2", "cpu", NewBool(true), `{"cpu":true}`},
+		{"2", "cpu", NewInt64(3456), `{"cpu":3456}`},
+		{"2", "cpu", NewFloat64(1 / 3.0), `{"cpu":0.333333}`},
+	}
+	for _, tt := range tests {
+		got := New("{}")
+		got.Set(tt.path, tt.raw)
+		t.Run(tt.name, func(t *testing.T) {
+			if  !reflect.DeepEqual(string(got.Raw()), tt.want) {
+				t.Errorf("Get() = %v, want %v", string(got.Raw()), tt.want)
+			}
+		})
+	}
+}
 func TestCollect_Get(t *testing.T) {
 	tests := []struct {
 		name string
