@@ -1,6 +1,7 @@
 package tdtl
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"strings"
@@ -117,6 +118,10 @@ func (cc *Collect) Set(path string, value Node) {
 
 func (cc *Collect) Append(path string, value Node) {
 	cc.value, cc.err = add(cc.value, path, value.Raw())
+	if errors.Is(cc.err, jsonparser.KeyPathNotFoundError) {
+		setValue := bytes.Join([][]byte{[]byte("["), value.Raw(), []byte("]")}, []byte{})
+		cc.value, cc.err = set(cc.value, path, setValue)
+	}
 }
 
 func (cc *Collect) Del(path ...string) {

@@ -805,8 +805,7 @@ func Append(data []byte, addValue []byte, keys ...string) (value []byte, err err
 	var setValue []byte
 	value, _, _, err = Get(data, keys...)
 	if err != nil {
-		setValue = bytes.Join([][]byte{[]byte("["), addValue, []byte("]")}, []byte{})
-		return Set(data, setValue, keys...)
+		return data, err
 	} else {
 		size := len(value)
 		if value[0] == []byte("[")[0] && value[size-1] == []byte("]")[0] {
