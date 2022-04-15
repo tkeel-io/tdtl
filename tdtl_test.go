@@ -121,3 +121,15 @@ func TestString(t *testing.T) {
 	t.Log(tqlIns.Target())
 
 }
+
+func TestExpr(t *testing.T) {
+	exprIns, err := NewExpr("device234.b + 20 as b", nil)
+	assert.Nil(t, err)
+	res, err := exprIns.Exec(map[string]Node{
+		"device123.a": NewInt64(20),
+		"device234.b": NewInt64(20),
+	})
+
+	assert.Nil(t, err)
+	t.Log(res)
+}

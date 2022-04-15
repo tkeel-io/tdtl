@@ -23,11 +23,11 @@ import (
 var _ TDTL = (*tdtl)(nil)
 
 type tdtl struct {
-	target    string
-	sources   map[string][]string
-	listener  *TDTLListener
-	extFunc   map[string]ContextFunc
-	fields    map[string]string
+	target   string
+	sources  map[string][]string
+	listener *TDTLListener
+	extFunc  map[string]ContextFunc
+	fields   map[string]string
 }
 
 type TDTL interface {
@@ -40,6 +40,22 @@ type TDTL interface {
 func NewTDTL(sql string, extFunc map[string]ContextFunc) (TDTL, error) {
 	parse, listener := parse(sql)
 	antlr.ParseTreeWalkerDefault.Walk(listener, parse.Root())
+	err := listener.error()
+	if err != nil {
+		return nil, err
+	}
+	return &tdtl{
+		listener: listener,
+		target:   listener.target,
+		sources:  listener.sources,
+		fields:   listener.fields,
+		extFunc:  extFunc,
+	}, nil
+}
+
+func NewExpr(sql string, extFunc map[string]ContextFunc) (TDTL, error) {
+	parse, listener := parse(sql)
+	antlr.ParseTreeWalkerDefault.Walk(listener, parse.Field_elem())
 	err := listener.error()
 	if err != nil {
 		return nil, err
