@@ -23,11 +23,11 @@ import (
 var _ TDTL = (*tdtl)(nil)
 
 type tdtl struct {
-	target    string
-	sources   map[string][]string
-	listener  *TDTLListener
-	extFunc   map[string]ContextFunc
-	fields    map[string]string
+	target   string
+	sources  map[string][]string
+	listener *TDTLListener
+	extFunc  map[string]ContextFunc
+	fields   map[string]string
 }
 
 type TDTL interface {
