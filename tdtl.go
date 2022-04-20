@@ -53,22 +53,6 @@ func NewTDTL(sql string, extFunc map[string]ContextFunc) (TDTL, error) {
 	}, nil
 }
 
-func NewExpr(sql string, extFunc map[string]ContextFunc) (TDTL, error) {
-	parse, listener := parse(sql)
-	antlr.ParseTreeWalkerDefault.Walk(listener, parse.Field_elem())
-	err := listener.error()
-	if err != nil {
-		return nil, err
-	}
-	return &tdtl{
-		listener: listener,
-		target:   listener.target,
-		sources:  listener.sources,
-		fields:   listener.fields,
-		extFunc:  extFunc,
-	}, nil
-}
-
 func (Q *tdtl) Target() string {
 	return Q.target
 }
