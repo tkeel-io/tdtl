@@ -20,7 +20,6 @@ import (
 	"fmt"
 
 	"github.com/tkeel-io/tdtl"
-	"github.com/tkeel-io/tdtl"
 )
 
 var input = `{

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var raw = Byte(`{"cpu":1,"mem": ["lo0", "eth1", "eth2"],"a":[{"v":0},{"v":1},{"v":2}],"b":[{"v":{"cv":1}},{"v":{"cv":2}},{"v":{"cv":3}}],"where": 10,"metadata": {"name": "Light1", "price": 11.05}}`)
@@ -29,7 +31,7 @@ func TestCollect_New(t *testing.T) {
 		got := New("{}")
 		got.Set(tt.path, tt.raw)
 		t.Run(tt.name, func(t *testing.T) {
-			if  !reflect.DeepEqual(string(got.Raw()), tt.want) {
+			if !reflect.DeepEqual(string(got.Raw()), tt.want) {
 				t.Errorf("Get() = %v, want %v", string(got.Raw()), tt.want)
 			}
 		})
@@ -101,6 +103,7 @@ func TestCollect_Set2(t *testing.T) {
 		want  interface{}
 	}{
 		{"1", "metadata._name", New(`"abc"`), `{"metadata":{"_name":"abc"}}`},
+		{"2", "metadata._name", New(`[20]`), `{"metadata":{"_name":[20]}}`},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -128,6 +131,7 @@ func TestCollect_Append(t *testing.T) {
 		{"4", raw, "a[0]", New(`0`), `Unknown value type`, raw},
 		{"5", raw, "a[0].v", New(`{"v":0}`), `Unknown value type`, raw},
 		{"5", rawEmptyArray, "", New(`{"v":0}`), nil, `[{"v":0}]`},
+		{"6", []byte(`{}`), "metrics.cpus", New(`20`), nil, `{"metrics":{"cpus":[20]}}`},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -147,6 +151,12 @@ func TestCollect_Append(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestCollect_Append2(t *testing.T) {
+	cc := New([]byte(`{}`))
+	cc.Append("metrics.cpus", New(`20`))
+	assert.Equal(t, `{"metrics":{"cpus":[20]}}`, cc.String())
 }
 
 func TestCollect_Del(t *testing.T) {
