@@ -45,7 +45,7 @@ func TestDefaultValue_Eval(t *testing.T) {
 		{"string", JSONRaw.SimpleJSON, `11111 + 'bbb'`, StringNode("11111bbb")},
 		{"string", JSONRaw.SimpleJSON, `11111 - 'bbb'`, UNDEFINED_RESULT},
 		{"string", JSONRaw.SimpleJSON, `11111 * 'bbb'`, UNDEFINED_RESULT},
-		{"string", JSONRaw.SimpleJSON, `11111 / 'b'bb'`, UNDEFINED_RESULT},
+		{"string", JSONRaw.SimpleJSON, `11111 / 'bbb'`, UNDEFINED_RESULT},
 		{"string", JSONRaw.SimpleJSON, `11111 % 'bbb'`, UNDEFINED_RESULT},
 		{"string", JSONRaw.SimpleJSON, `'111' + 11`, StringNode("11111")},
 		{"string", JSONRaw.SimpleJSON, `'111' - 11`, IntNode(100)},
@@ -91,9 +91,9 @@ func TestDefaultValue_Eval(t *testing.T) {
 			expr, _ := ParseExpr(tt.expr) // Field expr
 			//print()
 			got := eval(v, expr)
-			if got.Type() == tt.want.Type() && !reflect.DeepEqual(got.Raw(), tt.want.Raw()) {
+			if got.Type() != tt.want.Type() || !reflect.DeepEqual(got.Raw(), tt.want.Raw()) {
 				t.Errorf("expr %v", expr)
-				t.Errorf("defaultEvalContext.Eval() \ngot=  %v \nwant= %v", got, tt.want)
+				t.Errorf("defaultEvalContext.Eval() \ngot=  %v (type=%v)\nwant= %v (type=%v)", got, got.Type(), tt.want, tt.want.Type())
 			}
 		})
 	}
@@ -134,7 +134,7 @@ func TestBoolExpr(t *testing.T) {
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `'2' <= '2'`, true},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `'2' <> '2'`, false},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `'2' != '2'`, false},
-		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `'20" = '3'`, false},
+		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `'20' = '3'`, false},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `'20' > '3'`, false},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `'20' >= '3'`, false},
 		{"bool", NewJSONContext(JSONRaw.SimpleJSON), `'20' <  '3'`, true},
@@ -163,7 +163,7 @@ func TestBoolExpr(t *testing.T) {
 }
 
 func TestSQL(t *testing.T) {
-	jsonRaw := `{"entity1":{"color":"red", "temperature":50,{name": "Light1", "price": 11.05},"params": {"OPCUA#Lu1_Bottom_Waice_Temp": {"value":123}}}`
+	jsonRaw := `{"entity1":{"color":"red", "temperature":50,"metadata": {"name": "Light1", "price": 11.05},"params": {"OPCUA#Lu1_Bottom_Waice_Temp": {"value":123}}}}`
 	ctx := NewJSONContext(jsonRaw)
 	tests := []struct {
 		name string

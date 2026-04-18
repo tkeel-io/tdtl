@@ -169,7 +169,6 @@ func (c *Collect) MergeBy(paths ...string) *Collect {
 		return c
 	}
 
-	var err error
 	ret := New("{}")
 	c.Foreach(func(key []byte, value *Collect) {
 		keys := make([]string, 0, len(paths))
@@ -191,7 +190,7 @@ func (c *Collect) MergeBy(paths ...string) *Collect {
 		nv := ret.Get(keyValue)
 		nv = nv.Merge(value)
 		if nv.err != nil {
-			ret.err = err
+			ret.err = nv.err
 		}
 		ret.Set(keyValue, nv)
 	})
