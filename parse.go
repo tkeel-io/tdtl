@@ -87,6 +87,9 @@ func (l *TDTLListener) pop() Expr {
 
 //Expr expr
 func (l *TDTLListener) Expr() Expr {
+	if len(l.stack) == 0 {
+		return nil
+	}
 	return l.stack[len(l.stack)-1]
 }
 
@@ -219,6 +222,9 @@ func (l *TDTLListener) ExitBoolean(c *parser.BooleanContext) {
 func (l *TDTLListener) ExitXpath_name(c *parser.Xpath_nameContext) {
 	// fmt.Println("ExitXpath_name", c.GetText())
 	str := c.GetText()
+	if len(str) == 0 {
+		return
+	}
 	expr := ""
 	if str[0] != '"' {
 		expr = str

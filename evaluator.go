@@ -326,6 +326,9 @@ func evalBinaryInt(op int, lhs, rhs IntNode) Node {
 		}
 		return lhs / rhs
 	case parser.TDTLParserMOD:
+		if rhs == 0 {
+			return UNDEFINED_RESULT
+		}
 		return lhs % rhs
 	case parser.TDTLLexerEQ:
 		return BoolNode(lhs == rhs)
@@ -357,6 +360,9 @@ func evalBinaryFloat(op int, lhs, rhs FloatNode) Node {
 		}
 		return lhs / rhs
 	case parser.TDTLParserMOD:
+		if rhs == 0 {
+			return UNDEFINED_RESULT
+		}
 		return FloatNode(math.Mod(float64(lhs), float64(rhs)))
 	case parser.TDTLLexerEQ:
 		return BoolNode(lhs == rhs)
@@ -433,7 +439,8 @@ func isBooleanOP(op int) bool {
 		parser.TDTLParserGT,
 		parser.TDTLParserLT,
 		parser.TDTLParserGTE,
-		parser.TDTLParserLTE:
+		parser.TDTLParserLTE,
+		parser.TDTLParserNE:
 		return true
 	}
 	return false

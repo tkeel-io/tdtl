@@ -77,7 +77,7 @@ var absFuncHandle = func(args ...Node) Node {
 			}
 			return arg
 		case FloatNode:
-			if int64(arg) < 0 {
+			if float64(arg) < 0 {
 				return -1 * arg
 			}
 			return arg

@@ -29,7 +29,7 @@ type SortHandle func(p1 *Collect, p2 *Collect) bool
 
 var (
 	UNDEFINED_RESULT = &JSONNode{datatype: Undefined}
-	NULL_RESULT      = &JSONNode{datatype: Undefined}
+	NULL_RESULT      = &JSONNode{datatype: Null}
 )
 
 // result represents a json value that is returned from Get().
