@@ -67,7 +67,9 @@ func ParseExpr(expr string) (Expr, error) {
 func parse(expr string) (*parser.TDTLParser, *TDTLListener) {
 	//expr = strings.ReplaceAll(expr, "\n", " ")
 	// Setup the input
-	is := antlr.NewInputStream(expr)
+	// Prepend a space so CASE keyword (which requires surrounding whitespace in the grammar)
+	// works even when the expression starts with CASE.
+	is := antlr.NewInputStream(" " + expr)
 
 	// Create the Lexer
 	lexer := parser.NewTDTLLexer(is)

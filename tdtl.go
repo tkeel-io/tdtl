@@ -20,6 +20,22 @@ import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
+// CompiledExpr is an immutable, goroutine-safe expression produced by Compile.
+// It can be evaluated concurrently by multiple goroutines via Eval.
+type CompiledExpr = Expr
+
+// Compile parses an expression string once and returns an immutable CompiledExpr.
+// Prefer Compile over ParseExpr for production use: parse once, eval many times.
+func Compile(exprStr string) (CompiledExpr, error) {
+	return ParseExpr(exprStr)
+}
+
+// Eval evaluates a compiled expression against the provided context.
+// DefaultValue built-ins (abs, base64, sum, avg, min, max, count) are always available.
+func Eval(ctx Context, expr CompiledExpr) Node {
+	return eval(MutilContext{DefaultValue, ctx}, expr)
+}
+
 var _ TDTL = (*tdtl)(nil)
 
 type tdtl struct {

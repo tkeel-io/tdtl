@@ -168,7 +168,7 @@ func (l *TDTLListener) ExitTargetAsElem(c *parser.TargetAsElemContext) {
 		})
 		l.addFields(alias, c.Expr().GetText())
 	} else {
-		panic("path could not nil")
+		l.appendErrorf("target_name could not be nil")
 	}
 }
 
@@ -196,7 +196,9 @@ func (l *TDTLListener) ExitInteger(c *parser.IntegerContext) {
 	//fmt.Println("ExitInteger", c.GetText())
 	i, err := strconv.ParseInt(c.GetText(), 10, 64)
 	if err != nil {
-		panic(err.Error())
+		l.appendErrorf("invalid integer literal: %s", c.GetText())
+		l.push(IntNode(0))
+		return
 	}
 	l.push(IntNode(i))
 }
@@ -205,7 +207,9 @@ func (l *TDTLListener) ExitFloat(c *parser.FloatContext) {
 	//fmt.Println("ExitFloat", c.GetText())
 	i, err := strconv.ParseFloat(c.GetText(), 64)
 	if err != nil {
-		panic(err.Error())
+		l.appendErrorf("invalid float literal: %s", c.GetText())
+		l.push(FloatNode(0))
+		return
 	}
 	l.push(FloatNode(i))
 }
@@ -214,7 +218,9 @@ func (l *TDTLListener) ExitBoolean(c *parser.BooleanContext) {
 	//fmt.Println("ExitBoolean", c.GetText())
 	i, err := strconv.ParseBool(strings.ToLower(c.GetText()))
 	if err != nil {
-		panic(err.Error())
+		l.appendErrorf("invalid boolean literal: %s", c.GetText())
+		l.push(BoolNode(false))
+		return
 	}
 	l.push(BoolNode(i))
 }
@@ -351,6 +357,10 @@ func (l *TDTLListener) ExitFilter_condition_not(c *parser.Filter_condition_notCo
 
 func (l *TDTLListener) SyntaxError(recognizer antlr.Recognizer, offendingSymbol interface{}, line, column int, msg string, e antlr.RecognitionException) {
 	//fmt.Println("SyntaxError", recognizer, offendingSymbol, line, column, msg, e)
+	// Subtract 1 from column on line 1 to compensate for the leading space prepended in parse().
+	if line == 1 && column > 0 {
+		column--
+	}
 	l.errors = append(l.errors, fmt.Sprintf("[%d:%d]%s", line, column, msg))
 
 	return
