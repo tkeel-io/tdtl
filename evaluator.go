@@ -272,7 +272,8 @@ func evalBinary(op int, lhs, rhs Node) Node {
 			}
 		case *JSONNode:
 			if isBooleanOP(op) {
-				return evalBinary(op, BoolNode(false), rhs)
+				// Treat *JSONNode (undefined/null) as false for boolean comparisons.
+				return evalBinaryBool(op, lhs, BoolNode(false))
 			}
 		}
 		return UNDEFINED_RESULT
