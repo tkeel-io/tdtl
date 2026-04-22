@@ -18,6 +18,8 @@ package tdtl
 import (
 	"encoding/base64"
 	"fmt"
+
+	"github.com/tkeel-io/tdtl/pkg/json/gjson"
 )
 
 //ContextValuable  eval context
@@ -49,6 +51,11 @@ var DefaultValue = &value{
 	functions: map[string]ContextFunc{
 		"abs":    absFunc,
 		"base64": base64Func,
+		"sum":    aggFuncHandle(sumAgg),
+		"avg":    aggFuncHandle(avgAgg),
+		"min":    aggFuncHandle(minAgg),
+		"max":    aggFuncHandle(maxAgg),
+		"count":  countFunc,
 	},
 }
 
@@ -111,6 +118,77 @@ var base64Func = func(args ...Node) Node {
 	}
 	decodeBytes := base64.StdEncoding.EncodeToString([]byte(node))
 	return StringNode(decodeBytes)
+}
+
+// aggFuncHandle wraps a numeric aggregation over a JSON array argument.
+func aggFuncHandle(agg func([]float64) Node) ContextFunc {
+	return func(args ...Node) Node {
+		if len(args) != 1 {
+			return UNDEFINED_RESULT
+		}
+		result := gjson.ParseBytes(args[0].Raw())
+		if !result.IsArray() {
+			return UNDEFINED_RESULT
+		}
+		arr := result.Array()
+		nums := make([]float64, 0, len(arr))
+		for _, r := range arr {
+			if r.Type == gjson.Number {
+				nums = append(nums, r.Num)
+			}
+		}
+		if len(nums) == 0 {
+			return UNDEFINED_RESULT
+		}
+		return agg(nums)
+	}
+}
+
+var countFunc = func(args ...Node) Node {
+	if len(args) != 1 {
+		return UNDEFINED_RESULT
+	}
+	result := gjson.ParseBytes(args[0].Raw())
+	if !result.IsArray() {
+		return IntNode(1)
+	}
+	return IntNode(int64(len(result.Array())))
+}
+
+func sumAgg(nums []float64) Node {
+	var total float64
+	for _, n := range nums {
+		total += n
+	}
+	return FloatNode(total)
+}
+
+func avgAgg(nums []float64) Node {
+	var total float64
+	for _, n := range nums {
+		total += n
+	}
+	return FloatNode(total / float64(len(nums)))
+}
+
+func minAgg(nums []float64) Node {
+	m := nums[0]
+	for _, n := range nums[1:] {
+		if n < m {
+			m = n
+		}
+	}
+	return FloatNode(m)
+}
+
+func maxAgg(nums []float64) Node {
+	m := nums[0]
+	for _, n := range nums[1:] {
+		if n > m {
+			m = n
+		}
+	}
+	return FloatNode(m)
 }
 
 type value struct {
