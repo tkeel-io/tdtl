@@ -11,3 +11,4 @@ script/
 tests/
 .dev/
 .claude/
+coverage.out
